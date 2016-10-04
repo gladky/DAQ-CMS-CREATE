@@ -10,44 +10,50 @@
  * Link implementation
  */
 
-Link::Link(int length, int step, int offset, std::vector<uint32_t> &leds):AnimatedObject(offset,leds){
+Link::Link(int _length, int _step, int _offset, std::vector<uint32_t> &leds):AnimatedObject(_offset,leds){
 
-    length = length;
-    step = step;
+    length = _length;
+    //offset = _offset;
+    step = _step;
     i = 0;
-    state = 1;
+    state = 0;
 }
 
 bool Link::animateInsert(){
 
     counter = 0;
-    leds[0] = colorOff;
-    leds[1] = colorOff;
+    //leds[0] = colorOff;
+    //leds[1] = colorOff;
     return true;
 }
 
 bool Link::animateProcess(){
 
+    int eventLen = 4;
 
-    Serial.print("Before animation first element ");
-    Serial.println(leds[0]);
-    leds[0] = color1;
-    leds[1] = color1;
+
+    //Serial.print("Before animation first element ");
+    //Serial.println(leds[0]);
+    //leds[0] = color1;
+    //leds[1] = colorOff;
 
     Serial.print("Processing in link with counter: ");
-    Serial.println(counter);
+    Serial.print(counter);
+    Serial.print(", length: ");
+    Serial.print(length);
 
-    leds[counter] = color1; 
-    if(counter - length >=0){
-        leds[counter - length] = colorOff;
+    if(counter < length){
+        leds[counter + offset] = color1; 
     }
-    if(state > 5){
+    if(counter - eventLen >=0){
+        leds[counter - eventLen + offset] = colorOff;
+    }
+    if(counter > length+eventLen){
+        Serial.println("");
+        Serial.println("Finished here");
         return true;
     }
 
-
-    Serial.print("After animation first element ");
-    Serial.println((unsigned int)leds[0]);
 
 
     counter++;

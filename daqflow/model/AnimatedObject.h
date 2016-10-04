@@ -10,6 +10,7 @@ class AnimatedObject;
 
 #include <Arduino.h>
 #include <vector>
+#include "Event.h"
 
 class AnimatedObject {
 public: 
@@ -28,11 +29,15 @@ public:
 
     std::vector<uint32_t> &leds;
 
+    Event *event;
+    bool newEvent = false;
+
     AnimatedObject(int offset, std::vector<uint32_t> &leds);
 
     virtual bool animateInsert() {};
     virtual bool animateExit() {};
     virtual bool animateProcess() {};
+    void insert(Event *event);
     void animate();
 
 };

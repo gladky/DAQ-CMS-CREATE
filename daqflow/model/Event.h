@@ -8,7 +8,10 @@
 
 class Event {
 public: 
-    void interesting;
+    bool interesting;
+
+    int colors[]; //[0,1,2,3] for 4 fragments
+
 };
 
 #endif //_EVENT_H

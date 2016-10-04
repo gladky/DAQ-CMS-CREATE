@@ -9,9 +9,13 @@
 
 #include "model/Model.cpp"
 #include "model/Model.h"
+
+
+#include "model/Event.cpp"
+#include "model/Event.h"
 #include <vector>
 
-#define NUMPIXELS 10
+#define NUMPIXELS 69
 
 #define DATAPIN    4
 #define CLOCKPIN   5
@@ -30,10 +34,9 @@ void setup() {
   strip.show();  // Turn all LEDs off ASAP
   
   Serial.begin(9600);
-  delay(4000);
+  delay(2000);
 
   model = new Model(result_leds);
-  Serial.println(model->top1->length);
 
   
   printModel();
@@ -70,12 +73,6 @@ void loop() {
 
   //strip.setPixelColor(tail, 0);     // 'Off' pixel at tail
   strip.show();                     // Refresh strip
-  delay(2000);                        // Pause 20 milliseconds (~50 FPS)
+  delay(1000);                        // Pause 20 milliseconds (~50 FPS)
 
-  if (++head >= NUMPIXELS) {        // Increment head index.  Off end of strip?
-    head = 0;                       //  Yes, reset head index to start
-    if ((color >>= 8) == 0)         //  Next color (R->G->B) ... past blue now?
-      color = 0xFF0000;             //   Yes, reset to red
-  }
-  if (++tail >= NUMPIXELS) tail = 0; // Increment, reset tail index
 }
