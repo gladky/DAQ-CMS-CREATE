@@ -13,6 +13,7 @@ class Link: public AnimatedObject {
 public: 
     int length;
     int step;
+    int i;
 
     Link(int length, int step, int offset, uint32_t *leds);
 };

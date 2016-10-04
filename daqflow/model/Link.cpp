@@ -13,10 +13,20 @@ Link::Link(int length, int step, int offset,uint32_t *leds):AnimatedObject(offse
 
     length = length;
     step = step;
+    i = 0;
+    state = 0;
 }
 
-void animateProcess(){
+bool AnimatedObject::animateInsert(){
+    uint32_t v = 0xFF0000;
+    leds[++counter] = &v; 
+    return false;
+}
+
+bool AnimatedObject::animateProcess(){
     
+    return false;
     
 }
+
 
