@@ -6,8 +6,9 @@
 #ifndef _MODEL_H
 #define _MODEL_H
 
-
+#include <Arduino.h>
 #include "Link.h"
+#include <vector>
 
 class Model {
 
@@ -17,12 +18,9 @@ public:
     Link *top3;
     Link *top4;
 
-    /** example value 0xFF0000*/
-    uint32_t leds[60];
+    Model(std::vector<uint32_t> &leds);
 
-    Model();
-
-    uint32_t* animate();
+    void animate();
 
 };
 

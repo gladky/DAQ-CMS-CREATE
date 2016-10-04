@@ -7,6 +7,10 @@ class AnimatedObject;
 #ifndef _ANIMATEDOBJECT_H
 #define _ANIMATEDOBJECT_H
 
+
+#include <Arduino.h>
+#include <vector>
+
 class AnimatedObject {
 public: 
     int exitDuration;
@@ -22,9 +26,9 @@ public:
     uint32_t color1 = 0xFF0000;
     uint32_t colorOff = 0;
 
-    uint32_t *leds[];
+    std::vector<uint32_t> &leds;
 
-    AnimatedObject(int offset, uint32_t *leds);
+    AnimatedObject(int offset, std::vector<uint32_t> &leds);
 
     virtual bool animateInsert() {};
     virtual bool animateExit() {};

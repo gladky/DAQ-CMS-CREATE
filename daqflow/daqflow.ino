@@ -9,8 +9,9 @@
 
 #include "model/Model.cpp"
 #include "model/Model.h"
+#include <vector>
 
-#define NUMPIXELS 60
+#define NUMPIXELS 10
 
 #define DATAPIN    4
 #define CLOCKPIN   5
@@ -18,7 +19,7 @@ Adafruit_DotStar strip = Adafruit_DotStar(
                            NUMPIXELS, DATAPIN, CLOCKPIN, DOTSTAR_BRG);
 
                            
-uint32_t result_leds[NUMPIXELS];
+std::vector<uint32_t> result_leds(NUMPIXELS,0);
 Model *model;
 
 void setup() {
@@ -27,11 +28,30 @@ void setup() {
   #endif
   strip.begin(); // Initialize pins for output
   strip.show();  // Turn all LEDs off ASAP
-
-  model = new Model();
+  
   Serial.begin(9600);
+  delay(4000);
+
+  model = new Model(result_leds);
   Serial.println(model->top1->length);
+
+  
+  printModel();
+
   //model->start();
+}
+
+void printModel(){
+
+  Serial.println("####### CURRENT MODEL ########");
+  for(int i = 0; i<result_leds.size(); i++){
+    
+      strip.setPixelColor(i,result_leds[i]); // 'On' pixel at head
+      Serial.print(result_leds[i]);
+      Serial.print(",");
+  }
+  Serial.println("");
+  Serial.println("############");
 }
 
 // Runs 10 LEDs at a time along strip, cycling through red, green and blue.
@@ -43,16 +63,14 @@ uint32_t color = 0xFF0000;      // 'On' color (starts red)
 
 void loop() {
 
-  *result_leds = *model->animate();
 
-  for(int i = 0; i<(sizeof(result_leds)/sizeof(*result_leds)); i++){
-    
-      strip.setPixelColor(i, result_leds[i]); // 'On' pixel at head
-  }
+  model->animate();
+
+  printModel();
 
   //strip.setPixelColor(tail, 0);     // 'Off' pixel at tail
   strip.show();                     // Refresh strip
-  delay(200);                        // Pause 20 milliseconds (~50 FPS)
+  delay(2000);                        // Pause 20 milliseconds (~50 FPS)
 
   if (++head >= NUMPIXELS) {        // Increment head index.  Off end of strip?
     head = 0;                       //  Yes, reset head index to start
