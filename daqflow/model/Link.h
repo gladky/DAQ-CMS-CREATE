@@ -16,6 +16,11 @@ public:
     int i;
 
     Link(int length, int step, int offset, uint32_t *leds);
+
+    
+    bool animateProcess();
+    bool animateExit();
+    bool animateInsert();
 };
 
 #endif //_LINK_H
