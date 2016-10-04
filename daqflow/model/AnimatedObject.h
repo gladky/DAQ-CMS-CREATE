@@ -17,8 +17,9 @@ public:
 
     int offset;
     
+    uint32_t *leds[];
 
-    AnimatedObject(int offset);
+    AnimatedObject(int offset, uint32_t *leds);
 
     void animateInsert();
     

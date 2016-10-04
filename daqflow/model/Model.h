@@ -18,7 +18,7 @@ public:
     Link *top4;
 
     /** example value 0xFF0000*/
-    uint32_t leds [60];
+    uint32_t leds[60];
 
     Model();
 

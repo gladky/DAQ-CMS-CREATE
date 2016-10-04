@@ -22,6 +22,7 @@ void AnimatedObject::animateProcess() {
 
 }
 
-AnimatedObject::AnimatedObject(int offset){
+AnimatedObject::AnimatedObject(int offset, uint32_t *leds){
     offset=offset;
+    leds = leds;
 }

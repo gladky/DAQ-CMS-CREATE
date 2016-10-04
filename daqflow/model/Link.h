@@ -14,7 +14,7 @@ public:
     int length;
     int step;
 
-    Link(int length, int step, int offset);
+    Link(int length, int step, int offset, uint32_t *leds);
 };
 
 #endif //_LINK_H
