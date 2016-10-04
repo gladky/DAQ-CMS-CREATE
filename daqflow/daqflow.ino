@@ -1,21 +1,32 @@
-
 #include <Adafruit_DotStar.h>
 #include <SPI.h>
+
+#include "model/AnimatedObject.cpp"
+#include "model/AnimatedObject.h"
+
+#include "model/Link.cpp"
+#include "model/Link.h"
+
+#include "model/Model.cpp"
+#include "model/Model.h"
 
 #define NUMPIXELS 60
 
 #define DATAPIN    4
 #define CLOCKPIN   5
 Adafruit_DotStar strip = Adafruit_DotStar(
-  NUMPIXELS, DATAPIN, CLOCKPIN, DOTSTAR_BRG);
+                           NUMPIXELS, DATAPIN, CLOCKPIN, DOTSTAR_BRG);
 void setup() {
-
-#if defined(__AVR_ATtiny85__) && (F_CPU == 16000000L)
-  clock_prescale_set(clock_div_1); // Enable 16 MHz on Trinket
-#endif
-
+  #if defined(__AVR_ATtiny85__) && (F_CPU == 16000000L)
+    clock_prescale_set(clock_div_1); // Enable 16 MHz on Trinket
+  #endif
   strip.begin(); // Initialize pins for output
   strip.show();  // Turn all LEDs off ASAP
+
+  Model *model = new Model();
+  Serial.begin(9600);
+  Serial.println(model->top1->length);
+  //model->start();
 }
 
 // Runs 10 LEDs at a time along strip, cycling through red, green and blue.
@@ -31,10 +42,10 @@ void loop() {
   strip.show();                     // Refresh strip
   delay(200);                        // Pause 20 milliseconds (~50 FPS)
 
-  if(++head >= NUMPIXELS) {         // Increment head index.  Off end of strip?
+  if (++head >= NUMPIXELS) {        // Increment head index.  Off end of strip?
     head = 0;                       //  Yes, reset head index to start
-    if((color >>= 8) == 0)          //  Next color (R->G->B) ... past blue now?
+    if ((color >>= 8) == 0)         //  Next color (R->G->B) ... past blue now?
       color = 0xFF0000;             //   Yes, reset to red
   }
-  if(++tail >= NUMPIXELS) tail = 0; // Increment, reset tail index
+  if (++tail >= NUMPIXELS) tail = 0; // Increment, reset tail index
 }
