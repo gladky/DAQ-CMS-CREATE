@@ -47,6 +47,7 @@ bool Link::animateProcess(){
     }
     if(counter - eventLen >=0){
         leds[counter - eventLen + offset] = colorOff;
+	
     }
     if(counter > length+eventLen){
         Serial.println("");

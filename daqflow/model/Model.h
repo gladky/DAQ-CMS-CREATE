@@ -23,7 +23,7 @@ public:
 
     void animate();
 
-    //void insert(Event event);
+    void insert(Event* event);
 
 };
 

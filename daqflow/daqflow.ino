@@ -63,6 +63,8 @@ void printModel(){
 int      head  = 0, tail = -10; // Index of first 'on' and 'off' pixels
 uint32_t color = 0xFF0000;      // 'On' color (starts red)
 
+int counter = 0;
+
 
 void loop() {
 
@@ -73,6 +75,13 @@ void loop() {
 
   //strip.setPixelColor(tail, 0);     // 'Off' pixel at tail
   strip.show();                     // Refresh strip
-  delay(1000);                        // Pause 20 milliseconds (~50 FPS)
+  delay(10);                        // Pause 20 milliseconds (~50 FPS)
+
+  if(counter%100 == 0){
+    
+    Event* e1 = new Event();
+    model->insert(e1);
+  }
+  counter++;
 
 }
