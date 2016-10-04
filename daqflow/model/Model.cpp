@@ -18,11 +18,11 @@ Model::Model(std::vector<uint32_t> &leds)
 
     Serial.println("Initializing model");
 
-    //  length | step | offset
-    top1 = new Link(6,1,8,leds);
-    top2 = new Link(6,1,16,leds);
-    top3 = new Link(6,1,24,leds);
-    top4 = new Link(6,1,42,leds);
+    //  length | step | offset | event size
+    top1 = new Link(6,1,8, 1,leds);
+    top2 = new Link(6,1,16,4, leds);
+    top3 = new Link(6,1,24,1,leds);
+    top4 = new Link(6,1,60,4,leds);
 
 
 

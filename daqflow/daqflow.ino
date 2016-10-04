@@ -15,7 +15,7 @@
 #include "model/Event.h"
 #include <vector>
 
-#define NUMPIXELS 69
+#define NUMPIXELS 100
 
 #define DATAPIN    4
 #define CLOCKPIN   5
@@ -75,7 +75,7 @@ void loop() {
 
   //strip.setPixelColor(tail, 0);     // 'Off' pixel at tail
   strip.show();                     // Refresh strip
-  delay(10);                        // Pause 20 milliseconds (~50 FPS)
+  delay(100);                        // Pause 20 milliseconds (~50 FPS)
 
   if(counter%100 == 0){
     

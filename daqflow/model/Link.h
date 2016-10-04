@@ -16,8 +16,9 @@ public:
     int length;
     int step;
     int i;
+    int eventLen;
 
-    Link(int length, int step, int offset, std::vector<uint32_t> &leds);
+    Link(int length, int step, int offset, int eventLen, std::vector<uint32_t> &leds);
 
     
     bool animateProcess();

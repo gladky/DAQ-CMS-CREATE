@@ -10,9 +10,11 @@
  * Link implementation
  */
 
-Link::Link(int _length, int _step, int _offset, std::vector<uint32_t> &leds):AnimatedObject(_offset,leds){
+Link::Link(int _length, int _step, int _offset, int eventLen_, std::vector<uint32_t> &leds):AnimatedObject(_offset,leds){
 
     length = _length;
+
+    eventLen = eventLen_;
     //offset = _offset;
     step = _step;
     i = 0;
@@ -29,7 +31,6 @@ bool Link::animateInsert(){
 
 bool Link::animateProcess(){
 
-    int eventLen = 4;
 
 
     //Serial.print("Before animation first element ");
