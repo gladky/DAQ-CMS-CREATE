@@ -22,6 +22,8 @@ public:
 
     Model();
 
+    uint32_t* animate();
+
 };
 
 

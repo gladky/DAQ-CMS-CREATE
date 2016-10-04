@@ -16,6 +16,11 @@
 #define CLOCKPIN   5
 Adafruit_DotStar strip = Adafruit_DotStar(
                            NUMPIXELS, DATAPIN, CLOCKPIN, DOTSTAR_BRG);
+
+                           
+uint32_t result_leds[NUMPIXELS];
+Model *model;
+
 void setup() {
   #if defined(__AVR_ATtiny85__) && (F_CPU == 16000000L)
     clock_prescale_set(clock_div_1); // Enable 16 MHz on Trinket
@@ -23,7 +28,7 @@ void setup() {
   strip.begin(); // Initialize pins for output
   strip.show();  // Turn all LEDs off ASAP
 
-  Model *model = new Model();
+  model = new Model();
   Serial.begin(9600);
   Serial.println(model->top1->length);
   //model->start();
@@ -35,10 +40,17 @@ void setup() {
 int      head  = 0, tail = -10; // Index of first 'on' and 'off' pixels
 uint32_t color = 0xFF0000;      // 'On' color (starts red)
 
+
 void loop() {
 
-  strip.setPixelColor(head, color); // 'On' pixel at head
-  strip.setPixelColor(tail, 0);     // 'Off' pixel at tail
+  *result_leds = *model->animate();
+
+  for(int i = 0; i<(sizeof(result_leds)/sizeof(*result_leds)); i++){
+    
+      strip.setPixelColor(i, result_leds[i]); // 'On' pixel at head
+  }
+
+  //strip.setPixelColor(tail, 0);     // 'Off' pixel at tail
   strip.show();                     // Refresh strip
   delay(200);                        // Pause 20 milliseconds (~50 FPS)
 

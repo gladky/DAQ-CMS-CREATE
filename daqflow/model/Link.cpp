@@ -29,4 +29,8 @@ bool AnimatedObject::animateProcess(){
     
 }
 
-
+bool AnimatedObject::animateExit(){
+    
+    return false;
+    
+}

@@ -19,3 +19,9 @@ Model::Model()
      top4 = new Link(10,1,30,leds);
 
 }
+
+uint32_t* Model::animate(){
+    top1->animate();
+
+    return leds;
+}
