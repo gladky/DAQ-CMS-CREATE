@@ -19,15 +19,15 @@ Model::Model(std::vector<uint32_t> &leds)
     Serial.println("Initializing model");
 
     //  length | step | offset | event size
-    top1 = new Link(6,1,8, 1,leds);
-    top2 = new Link(6,1,16,4, leds);
-    top3 = new Link(6,1,24,1,leds);
-    top4 = new Link(6,1,60,4,leds);
+    top1 = new Link(22,1,0, 1,leds);
+    top2 = new Link(16,1,23,1, leds);
+    top3 = new Link(7,1,38,1,leds);
+    top4 = new Link(40,1,45,4,leds);
 
 
 
     top1->successor = top2;
-    //top2->successor = top3;
+    top2->successor = top3;
     top3->successor = top4;
 
 
@@ -49,7 +49,7 @@ void Model::animate(){
 
 void Model::insert(Event *e1){
     top1->insert(e1);
-    top3->insert(e1);
+    //top3->insert(e1);
     Serial.println("Inserted");
 }
 

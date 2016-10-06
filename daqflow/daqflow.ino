@@ -34,7 +34,7 @@ void setup() {
   strip.show();  // Turn all LEDs off ASAP
   
   Serial.begin(9600);
-  delay(2000);
+  delay(100);
 
   model = new Model(result_leds);
 
@@ -75,9 +75,9 @@ void loop() {
 
   //strip.setPixelColor(tail, 0);     // 'Off' pixel at tail
   strip.show();                     // Refresh strip
-  delay(100);                        // Pause 20 milliseconds (~50 FPS)
+  delay(50);                        // Pause 20 milliseconds (~50 FPS)
 
-  if(counter%100 == 0){
+  if(counter%40 == 0){
     
     Event* e1 = new Event();
     model->insert(e1);
