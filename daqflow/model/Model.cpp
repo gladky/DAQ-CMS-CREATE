@@ -22,7 +22,7 @@ Model::Model(std::vector<uint32_t> &leds)
     top1 = new Link(22,1,0, 1,leds);
     top2 = new Link(16,1,23,1, leds);
     top3 = new Link(7,1,38,1,leds);
-    top4 = new Link(40,1,45,4,leds);
+    top4 = new Link(620,1,45,4,leds);
 
 
 

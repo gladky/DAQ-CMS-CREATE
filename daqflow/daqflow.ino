@@ -15,7 +15,7 @@
 #include "model/Event.h"
 #include <vector>
 
-#define NUMPIXELS 100
+#define NUMPIXELS 655
 
 #define DATAPIN    4
 #define CLOCKPIN   5
@@ -34,7 +34,7 @@ void setup() {
   strip.show();  // Turn all LEDs off ASAP
   
   Serial.begin(9600);
-  delay(100);
+  delay(10);
 
   model = new Model(result_leds);
 
@@ -75,9 +75,9 @@ void loop() {
 
   //strip.setPixelColor(tail, 0);     // 'Off' pixel at tail
   strip.show();                     // Refresh strip
-  delay(50);                        // Pause 20 milliseconds (~50 FPS)
+  //delay(10);                        // Pause 20 milliseconds (~50 FPS)
 
-  if(counter%40 == 0){
+  if(counter%400 == 0){
     
     Event* e1 = new Event();
     model->insert(e1);
