@@ -2,22 +2,16 @@
 
 #pragma once
 
-#include <fwd-cms.flipper.hpp>
-#include <java/util/fwd-cms.flipper.hpp>
-#include <java/lang/Object.hpp>
 
-struct default_init_tag;
+#include "FlipperObject.hpp"
+#include "Button.hpp"
 
 class GameController
-    : public virtual ::java::lang::Object
 {
 
-public:
-    typedef ::java::lang::Object super;
-
 private:
-    ::java::util::List* flipperObjects {  };
-    ::java::util::Set* buttons {  };
+    std::vector<FlipperObject> flipperObjects {  };
+    std::vector<Button> buttons {  };
     Dispatcher* dispatcher {  };
     SoundPlayer* soundPlayer {  };
 
@@ -35,13 +29,5 @@ public:
 
     // Generated
     GameController();
-protected:
-    GameController(const ::default_init_tag&);
-
-
-public:
-    static ::java::lang::Class *class_();
-
-private:
-    virtual ::java::lang::Class* getClass0();
-};
+}
+;

@@ -2,17 +2,14 @@
 
 #pragma once
 
-#include <fwd-cms.flipper.hpp>
-#include <java/lang/Object.hpp>
 
-struct default_init_tag;
+
+#include "GameController.hpp"
+#include "FlipperObjectFactory.hpp"
 
 class FlipperGame
-    : public virtual ::java::lang::Object
 {
 
-public:
-    typedef ::java::lang::Object super;
 
 private:
     GameController* controller {  };
@@ -114,13 +111,6 @@ public:
     // Generated
     FlipperGame();
     FlipperGame(FlipperObjectFactory* factory);
-protected:
-    FlipperGame(const ::default_init_tag&);
 
 
-public:
-    static ::java::lang::Class *class_();
-
-private:
-    virtual ::java::lang::Class* getClass0();
 };

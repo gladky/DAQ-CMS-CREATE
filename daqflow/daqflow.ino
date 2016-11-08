@@ -1,18 +1,7 @@
 #include <Adafruit_DotStar.h>
 #include <SPI.h>
 
-#include "model/AnimatedObject.cpp"
-#include "model/AnimatedObject.h"
-
-#include "model/Link.cpp"
-#include "model/Link.h"
-
-#include "model/Model.cpp"
-#include "model/Model.h"
-
-
-#include "model/Event.cpp"
-#include "model/Event.h"
+#include "flipper/FlipperGame.cpp"
 #include <vector>
 
 #define NUMPIXELS 100
@@ -24,6 +13,8 @@ Adafruit_DotStar strip = Adafruit_DotStar(
 
                            
 std::vector<uint32_t> result_leds(NUMPIXELS,0);
+
+
 Model *model;
 
 void setup() {
@@ -43,25 +34,6 @@ void setup() {
 
   //model->start();
 }
-
-void printModel(){
-
-  Serial.println("####### CURRENT MODEL ########");
-  for(int i = 0; i<result_leds.size(); i++){
-    
-      strip.setPixelColor(i,result_leds[i]); // 'On' pixel at head
-      Serial.print(result_leds[i]);
-      Serial.print(",");
-  }
-  Serial.println("");
-  Serial.println("############");
-}
-
-// Runs 10 LEDs at a time along strip, cycling through red, green and blue.
-// This requires about 200 mA for all the 'on' pixels + 1 mA per 'off' pixel.
-
-int      head  = 0, tail = -10; // Index of first 'on' and 'off' pixels
-uint32_t color = 0xFF0000;      // 'On' color (starts red)
 
 int counter = 0;
 

@@ -4,14 +4,8 @@
 #include <Button.hpp>
 #include <Data.hpp>
 #include <SimpleFifoQueue.hpp>
-#include <java/lang/NullPointerException.hpp>
 
-template<typename T>
-static T* npc(T* t)
-{
-    if(!t) throw new ::java::lang::NullPointerException();
-    return t;
-}
+
 
 Clickable::Clickable(const ::default_init_tag&)
     : super(*static_cast< ::default_init_tag* >(0))

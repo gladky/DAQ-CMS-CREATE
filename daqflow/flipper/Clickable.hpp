@@ -2,9 +2,7 @@
 
 #pragma once
 
-#include <fwd-cms.flipper.hpp>
-#include <java/lang/fwd-cms.flipper.hpp>
-#include <IndividualPogressObject.hpp>
+#include "IndividualPogressObject.hpp"
 
 struct default_init_tag;
 

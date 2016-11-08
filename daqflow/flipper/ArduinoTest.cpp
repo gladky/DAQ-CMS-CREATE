@@ -6,34 +6,7 @@
 #include <FlowObserver.hpp>
 #include <GameController.hpp>
 #include <SimpleFifoQueue.hpp>
-#include <java/io/PrintStream.hpp>
-#include <java/lang/NullPointerException.hpp>
-#include <java/lang/String.hpp>
-#include <java/lang/StringBuilder.hpp>
-#include <java/lang/System.hpp>
 
-template<typename ComponentType, typename... Bases> struct SubArray;
-namespace java
-{
-    namespace io
-    {
-typedef ::SubArray< ::java::io::Serializable, ::java::lang::ObjectArray > SerializableArray;
-    } // io
-
-    namespace lang
-    {
-typedef ::SubArray< ::java::lang::CharSequence, ObjectArray > CharSequenceArray;
-typedef ::SubArray< ::java::lang::Comparable, ObjectArray > ComparableArray;
-typedef ::SubArray< ::java::lang::String, ObjectArray, ::java::io::SerializableArray, ComparableArray, CharSequenceArray > StringArray;
-    } // lang
-} // java
-
-template<typename T>
-static T* npc(T* t)
-{
-    if(!t) throw new ::java::lang::NullPointerException();
-    return t;
-}
 
 ArduinoTest::ArduinoTest(const ::default_init_tag&)
     : super(*static_cast< ::default_init_tag* >(0))

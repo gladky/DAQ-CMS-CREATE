@@ -2,9 +2,7 @@
 
 #pragma once
 
-#include <fwd-cms.flipper.hpp>
-#include <java/util/fwd-cms.flipper.hpp>
-#include <NamedObject.hpp>
+#include "NamedObject.hpp"
 
 struct default_init_tag;
 

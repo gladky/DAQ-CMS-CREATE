@@ -2,9 +2,6 @@
 
 #pragma once
 
-#include <fwd-cms.flipper.hpp>
-#include <java/lang/Object.hpp>
-
 struct default_init_tag;
 
 class FragmentGenerator

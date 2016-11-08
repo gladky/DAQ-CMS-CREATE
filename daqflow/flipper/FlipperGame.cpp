@@ -1,46 +1,16 @@
 // Generated from /cms.flipper/src/main/java/FlipperGame.java
-#include <FlipperGame.hpp>
+#include "FlipperGame.hpp"
 
-#include <Buffer.hpp>
-#include <Button.hpp>
-#include <DataObserver.hpp>
-#include <Dispatcher.hpp>
-#include <FlipperObject.hpp>
-#include <FlipperObjectFactory.hpp>
-#include <FragmentGenerator.hpp>
-#include <GameController.hpp>
-#include <SoundPlayer.hpp>
-#include <java/lang/NullPointerException.hpp>
-#include <java/lang/Object.hpp>
-#include <java/lang/String.hpp>
-#include <java/util/Arrays.hpp>
-#include <java/util/List.hpp>
-#include <ObjectArray.hpp>
+#include "Buffer.hpp"
+#include "Button.hpp"
+#include "DataObserver.hpp"
+#include "Dispatcher.hpp"
+#include "FlipperObject.hpp"
+#include "FlipperObjectFactory.hpp"
+#include "FragmentGenerator.hpp"
+#include "GameController.hpp"
+#include "SoundPlayer.hpp"
 
-template<typename T>
-static T* npc(T* t)
-{
-    if(!t) throw new ::java::lang::NullPointerException();
-    return t;
-}
-
-FlipperGame::FlipperGame(const ::default_init_tag&)
-    : super(*static_cast< ::default_init_tag* >(0))
-{
-    clinit();
-}
-
-FlipperGame::FlipperGame() 
-    : FlipperGame(*static_cast< ::default_init_tag* >(0))
-{
-    ctor();
-}
-
-FlipperGame::FlipperGame(FlipperObjectFactory* factory) 
-    : FlipperGame(*static_cast< ::default_init_tag* >(0))
-{
-    ctor(factory);
-}
 
 constexpr int32_t FlipperGame::linkBoost;
 
@@ -53,49 +23,49 @@ void FlipperGame::ctor(FlipperObjectFactory* factory)
 {
     super::ctor();
     this->factory = factory;
-    this->controller = npc(factory)->getController();
-    buttonL1 = npc(factory)->createButton(u"Lv1 btn"_j);
-    buttonHLT_L1 = npc(factory)->createButton(u"L1 btn"_j);
-    buttonHLT_L2 = npc(factory)->createButton(u"L2 btn"_j);
-    buttonHLT_L3 = npc(factory)->createButton(u"L3 btn"_j);
-    buttonHLT_R1 = npc(factory)->createButton(u"R1 btn"_j);
-    buttonHLT_R2 = npc(factory)->createButton(u"R2 btn"_j);
-    buttonHLT_R3 = npc(factory)->createButton(u"R3 btn"_j);
-    link11 = npc(factory)->createLink(u"11"_j, int32_t(20) / linkBoost);
-    link12 = npc(factory)->createLink(u"12"_j, int32_t(20) / linkBoost);
-    link13 = npc(factory)->createLink(u"13"_j, int32_t(20) / linkBoost);
-    link14 = npc(factory)->createLink(u"14"_j, int32_t(20) / linkBoost);
-    buffer1 = npc(factory)->createBuffer(u"buf1"_j, buttonL1, true);
-    buffer2 = npc(factory)->createBuffer(u"buf2"_j, buttonL1, true);
-    buffer3 = npc(factory)->createBuffer(u"buf3"_j, buttonL1, true);
-    buffer4 = npc(factory)->createBuffer(u"buf4"_j, buttonL1, false);
-    link21 = npc(factory)->createLink(u"21"_j, int32_t(20) / linkBoost);
-    link22 = npc(factory)->createLink(u"22"_j, int32_t(20) / linkBoost);
-    link23 = npc(factory)->createLink(u"23"_j, int32_t(20) / linkBoost);
-    link24 = npc(factory)->createLink(u"24"_j, int32_t(20) / linkBoost);
-    switch_ = npc(factory)->createSwitch(u"switch"_j);
-    link31 = npc(factory)->createLink(u"31"_j, int32_t(13) / linkBoost);
-    link32 = npc(factory)->createLink(u"32"_j, int32_t(17) / linkBoost);
-    link33 = npc(factory)->createLink(u"33"_j, int32_t(34) / linkBoost);
-    link34 = npc(factory)->createLink(u"34"_j, int32_t(13) / linkBoost);
-    link35 = npc(factory)->createLink(u"35"_j, int32_t(17) / linkBoost);
-    link36 = npc(factory)->createLink(u"36"_j, int32_t(34) / linkBoost);
-    bufuR1 = npc(factory)->createBUFU(u"R1BF"_j, buttonHLT_R1);
-    bufuL1 = npc(factory)->createBUFU(u"L1BF"_j, buttonHLT_L1);
-    bufuR2 = npc(factory)->createBUFU(u"R2BF"_j, buttonHLT_R2);
-    bufuL2 = npc(factory)->createBUFU(u"L2BF"_j, buttonHLT_L2);
-    bufuR3 = npc(factory)->createBUFU(u"R3BF"_j, buttonHLT_R3);
-    bufuL3 = npc(factory)->createBUFU(u"L3BF"_j, buttonHLT_L3);
-    link41 = npc(factory)->createLink(u"41"_j, int32_t(10) / linkBoost);
-    link42 = npc(factory)->createLink(u"42"_j, int32_t(4) / linkBoost);
-    link43 = npc(factory)->createLink(u"43"_j, int32_t(13) / linkBoost);
-    link44 = npc(factory)->createLink(u"44"_j, int32_t(25) / linkBoost);
-    link45 = npc(factory)->createLink(u"45"_j, int32_t(10) / linkBoost);
-    link46 = npc(factory)->createLink(u"46"_j, int32_t(4) / linkBoost);
-    link47 = npc(factory)->createLink(u"47"_j, int32_t(13) / linkBoost);
-    link48 = npc(factory)->createLink(u"48"_j, int32_t(25) / linkBoost);
-    storage = npc(factory)->createStorage();
-    dispatcher = npc(factory)->createDispatcher(::java::util::Arrays::asList(new ::java::lang::ObjectArray({static_cast< ::java::lang::Object* >(bufuL1), static_cast< ::java::lang::Object* >(bufuL2), static_cast< ::java::lang::Object* >(bufuL3), static_cast< ::java::lang::Object* >(bufuR1), static_cast< ::java::lang::Object* >(bufuR2), static_cast< ::java::lang::Object* >(bufuR3)})), ::java::util::Arrays::asList(new ::java::lang::ObjectArray({static_cast< ::java::lang::Object* >(link31), static_cast< ::java::lang::Object* >(link32), static_cast< ::java::lang::Object* >(link33), static_cast< ::java::lang::Object* >(link34), static_cast< ::java::lang::Object* >(link35), static_cast< ::java::lang::Object* >(link36)})));
+    this->controller = factory->getController();
+    buttonL1 = factory->createButton(u"Lv1 btn"_j);
+    buttonHLT_L1 = factory->createButton(u"L1 btn"_j);
+    buttonHLT_L2 = factory->createButton(u"L2 btn"_j);
+    buttonHLT_L3 = factory->createButton(u"L3 btn"_j);
+    buttonHLT_R1 = factory->createButton(u"R1 btn"_j);
+    buttonHLT_R2 = factory->createButton(u"R2 btn"_j);
+    buttonHLT_R3 = factory->createButton(u"R3 btn"_j);
+    link11 = factory->createLink(u"11"_j, int32_t(20) / linkBoost);
+    link12 = factory->createLink(u"12"_j, int32_t(20) / linkBoost);
+    link13 = factory->createLink(u"13"_j, int32_t(20) / linkBoost);
+    link14 = factory->createLink(u"14"_j, int32_t(20) / linkBoost);
+    buffer1 = factory->createBuffer(u"buf1"_j, buttonL1, true);
+    buffer2 = factory->createBuffer(u"buf2"_j, buttonL1, true);
+    buffer3 = factory->createBuffer(u"buf3"_j, buttonL1, true);
+    buffer4 = factory->createBuffer(u"buf4"_j, buttonL1, false);
+    link21 = factory->createLink(u"21"_j, int32_t(20) / linkBoost);
+    link22 = factory->createLink(u"22"_j, int32_t(20) / linkBoost);
+    link23 = factory->createLink(u"23"_j, int32_t(20) / linkBoost);
+    link24 = factory->createLink(u"24"_j, int32_t(20) / linkBoost);
+    switch_ = factory->createSwitch(u"switch"_j);
+    link31 = factory->createLink(u"31"_j, int32_t(13) / linkBoost);
+    link32 = factory->createLink(u"32"_j, int32_t(17) / linkBoost);
+    link33 = factory->createLink(u"33"_j, int32_t(34) / linkBoost);
+    link34 = factory->createLink(u"34"_j, int32_t(13) / linkBoost);
+    link35 = factory->createLink(u"35"_j, int32_t(17) / linkBoost);
+    link36 = factory->createLink(u"36"_j, int32_t(34) / linkBoost);
+    bufuR1 = factory->createBUFU(u"R1BF"_j, buttonHLT_R1);
+    bufuL1 = factory->createBUFU(u"L1BF"_j, buttonHLT_L1);
+    bufuR2 = factory->createBUFU(u"R2BF"_j, buttonHLT_R2);
+    bufuL2 = factory->createBUFU(u"L2BF"_j, buttonHLT_L2);
+    bufuR3 = factory->createBUFU(u"R3BF"_j, buttonHLT_R3);
+    bufuL3 = factory->createBUFU(u"L3BF"_j, buttonHLT_L3);
+    link41 = factory->createLink(u"41"_j, int32_t(10) / linkBoost);
+    link42 = factory->createLink(u"42"_j, int32_t(4) / linkBoost);
+    link43 = factory->createLink(u"43"_j, int32_t(13) / linkBoost);
+    link44 = factory->createLink(u"44"_j, int32_t(25) / linkBoost);
+    link45 = factory->createLink(u"45"_j, int32_t(10) / linkBoost);
+    link46 = factory->createLink(u"46"_j, int32_t(4) / linkBoost);
+    link47 = factory->createLink(u"47"_j, int32_t(13) / linkBoost);
+    link48 = factory->createLink(u"48"_j, int32_t(25) / linkBoost);
+    storage = factory->createStorage();
+    dispatcher = factory->createDispatcher(::java::util::Arrays::asList(new ::java::lang::ObjectArray({static_cast< ::java::lang::Object* >(bufuL1), static_cast< ::java::lang::Object* >(bufuL2), static_cast< ::java::lang::Object* >(bufuL3), static_cast< ::java::lang::Object* >(bufuR1), static_cast< ::java::lang::Object* >(bufuR2), static_cast< ::java::lang::Object* >(bufuR3)})), ::java::util::Arrays::asList(new ::java::lang::ObjectArray({static_cast< ::java::lang::Object* >(link31), static_cast< ::java::lang::Object* >(link32), static_cast< ::java::lang::Object* >(link33), static_cast< ::java::lang::Object* >(link34), static_cast< ::java::lang::Object* >(link35), static_cast< ::java::lang::Object* >(link36)})));
     npc(buffer1)->setDispatcher(dispatcher);
     npc(buffer2)->setDispatcher(dispatcher);
     npc(buffer3)->setDispatcher(dispatcher);
@@ -144,42 +114,42 @@ void FlipperGame::ctor(FlipperObjectFactory* factory)
 
 void FlipperGame::generateNewFragments()
 {
-    npc(fragmentGenerator)->generateAndInsertFragments();
+    fragmentGenerator->generateAndInsertFragments();
 }
 
 void FlipperGame::pressButtonLevel1()
 {
-    npc(buttonL1)->press();
+    buttonL1->press();
 }
 
 void FlipperGame::pressButtonHLT_L1()
 {
-    npc(buttonHLT_L1)->press();
+    buttonHLT_L1->press();
 }
 
 void FlipperGame::pressButtonHLT_L2()
 {
-    npc(buttonHLT_L2)->press();
+    buttonHLT_L2->press();
 }
 
 void FlipperGame::pressButtonHLT_L3()
 {
-    npc(buttonHLT_L3)->press();
+    buttonHLT_L3->press();
 }
 
 void FlipperGame::pressButtonHLT_R1()
 {
-    npc(buttonHLT_R1)->press();
+    buttonHLT_R1->press();
 }
 
 void FlipperGame::pressButtonHLT_R2()
 {
-    npc(buttonHLT_R2)->press();
+    buttonHLT_R2->press();
 }
 
 void FlipperGame::pressButtonHLT_R3()
 {
-    npc(buttonHLT_R3)->press();
+    buttonHLT_R3->press();
 }
 
 GameController* FlipperGame::getController()
@@ -189,13 +159,13 @@ GameController* FlipperGame::getController()
 
 void FlipperGame::doStep()
 {
-    npc(controller)->doStep();
+    controller->doStep();
 }
 
 void FlipperGame::doSteps(int32_t steps)
 {
     for (auto i = int32_t(0); i < steps; i++) {
-        npc(controller)->doStep();
+        controller->doStep();
     }
 }
 
@@ -261,19 +231,7 @@ Buffer* FlipperGame::getBuffer4()
 
 SoundPlayer* FlipperGame::getSoundPlayer()
 {
-    return npc(factory)->getSoundPlayer();
+    return factory->getSoundPlayer();
 }
 
-extern java::lang::Class *class_(const char16_t *c, int n);
-
-java::lang::Class* FlipperGame::class_()
-{
-    static ::java::lang::Class* c = ::class_(u"FlipperGame", 11);
-    return c;
-}
-
-java::lang::Class* FlipperGame::getClass0()
-{
-    return class_();
-}
 

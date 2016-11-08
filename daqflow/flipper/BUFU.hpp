@@ -2,8 +2,6 @@
 
 #pragma once
 
-#include <fwd-cms.flipper.hpp>
-#include <java/lang/fwd-cms.flipper.hpp>
 #include <Clickable.hpp>
 
 struct default_init_tag;

@@ -2,9 +2,7 @@
 
 #pragma once
 
-#include <fwd-cms.flipper.hpp>
-#include <java/lang/fwd-cms.flipper.hpp>
-#include <FlowObserver.hpp>
+#include "FlowObserver.hpp"
 
 struct default_init_tag;
 

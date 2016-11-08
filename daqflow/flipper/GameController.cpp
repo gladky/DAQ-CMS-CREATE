@@ -16,28 +16,6 @@
 #include <java/util/ListIterator.hpp>
 #include <java/util/Set.hpp>
 
-template<typename T, typename U>
-static T java_cast(U* u)
-{
-    if(!u) return static_cast<T>(nullptr);
-    auto t = dynamic_cast<T>(u);
-    if(!t) throw new ::java::lang::ClassCastException();
-    return t;
-}
-
-template<typename T>
-static T* npc(T* t)
-{
-    if(!t) throw new ::java::lang::NullPointerException();
-    return t;
-}
-
-GameController::GameController(const ::default_init_tag&)
-    : super(*static_cast< ::default_init_tag* >(0))
-{
-    clinit();
-}
-
 GameController::GameController() 
     : GameController(*static_cast< ::default_init_tag* >(0))
 {
@@ -90,18 +68,5 @@ void GameController::setDispatcher(Dispatcher* dispatcher)
 void GameController::setSoundPlayer(SoundPlayer* soundPlayer)
 {
     this->soundPlayer = soundPlayer;
-}
-
-extern java::lang::Class *class_(const char16_t *c, int n);
-
-java::lang::Class* GameController::class_()
-{
-    static ::java::lang::Class* c = ::class_(u"GameController", 14);
-    return c;
-}
-
-java::lang::Class* GameController::getClass0()
-{
-    return class_();
 }
 
