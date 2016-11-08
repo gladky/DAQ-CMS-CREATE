@@ -5,30 +5,12 @@
 struct default_init_tag;
 
 class NamedObject
-    : public virtual ::java::lang::Object
 {
 
 public:
-    typedef ::java::lang::Object super;
+    virtual string getName();
 
-public: /* protected */
-    ::java::lang::String* name {  };
-protected:
-    void ctor(::java::lang::String* name);
-
-public:
-    virtual ::java::lang::String* getName();
-    ::java::lang::String* toString() override;
-
-    // Generated
-    NamedObject(::java::lang::String* name);
-protected:
-    NamedObject(const ::default_init_tag&);
+    NamedObject(string name);
 
 
-public:
-    static ::java::lang::Class *class_();
-
-private:
-    virtual ::java::lang::Class* getClass0();
 };

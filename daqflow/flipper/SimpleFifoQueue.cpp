@@ -2,58 +2,25 @@
 #include <SimpleFifoQueue.hpp>
 
 #include <Data.hpp>
-#include <java/lang/ClassCastException.hpp>
-#include <java/lang/NullPointerException.hpp>
-#include <java/lang/Object.hpp>
-#include <java/lang/String.hpp>
-#include <java/util/ArrayList.hpp>
-#include <java/util/List.hpp>
-#include <Array.hpp>
 
-template<typename T, typename U>
-static T java_cast(U* u)
+
+
+SimpleFifoQueue::SimpleFifoQueue(int32_t capacity_) 
 {
-    if(!u) return static_cast<T>(nullptr);
-    auto t = dynamic_cast<T>(u);
-    if(!t) throw new ::java::lang::ClassCastException();
-    return t;
+    capacity= capacity_;
+    queue(capacity_);
+    tailIndex = 0;
 }
 
-template<typename T>
-static T* npc(T* t)
-{
-    if(!t) throw new ::java::lang::NullPointerException();
-    return t;
-}
-
-SimpleFifoQueue::SimpleFifoQueue(const ::default_init_tag&)
-    : super(*static_cast< ::default_init_tag* >(0))
-{
-    clinit();
-}
-
-SimpleFifoQueue::SimpleFifoQueue(int32_t capacity) 
-    : SimpleFifoQueue(*static_cast< ::default_init_tag* >(0))
-{
-    ctor(capacity);
-}
-
-void SimpleFifoQueue::ctor(int32_t capacity)
-{
-    super::ctor();
-    this->capacity = capacity;
-    this->queue = new ::java::util::ArrayList(capacity);
-    this->tailIndex = 0;
-}
 
 Data* SimpleFifoQueue::peek()
 {
-    return java_cast< Data* >(npc(queue)->get(0));
+    return queue->get(0);
 }
 
 Data* SimpleFifoQueue::poll()
 {
-    auto result = java_cast< Data* >(npc(queue)->remove(int32_t(0)));
+    Data result = queue->erase(0);
     tailIndex--;
     return result;
 }
@@ -63,7 +30,7 @@ bool SimpleFifoQueue::add(Data* data)
     if(tailIndex >= capacity)
         return false;
 
-    npc(queue)->add(tailIndex, data);
+    queue->insert(tailIndex, data);
     tailIndex++;
     return true;
 }
@@ -73,9 +40,13 @@ int32_t SimpleFifoQueue::size()
     return tailIndex;
 }
 
-java::lang::String* SimpleFifoQueue::toString()
+string SimpleFifoQueue::toString()
 {
-    return npc(queue)->toString();
+    string result = "";
+    for (it=queue.begin(); it<queue.end(); it++)
+        result.append(*it);
+        result.append(",")
+    return result;
 }
 
 bool SimpleFifoQueue::isEmpty()
@@ -88,18 +59,18 @@ bool SimpleFifoQueue::isEmpty()
 
 Data* SimpleFifoQueue::get(int32_t index)
 {
-    return java_cast< Data* >(npc(queue)->get(index));
+    return queue->get(index);
 }
 
 void SimpleFifoQueue::clear()
 {
     tailIndex = 0;
-    npc(queue)->clear();
+    queue->clear();
 }
 
-int32_tArray* SimpleFifoQueue::getProgress()
+int[] SimpleFifoQueue::getProgress()
 {
-    if(npc(queue)->size() == 0) {
+    if(queue->size() == 0) {
         return new ::int32_tArray({int32_t(0)});
     }
     auto progressArray_ = new ::int32_tArray(npc(queue)->size());
@@ -107,18 +78,5 @@ int32_tArray* SimpleFifoQueue::getProgress()
         (*progressArray_)[i] = npc(java_cast< Data* >(npc(queue)->get(i)))->getProgress();
     }
     return progressArray_;
-}
-
-extern java::lang::Class *class_(const char16_t *c, int n);
-
-java::lang::Class* SimpleFifoQueue::class_()
-{
-    static ::java::lang::Class* c = ::class_(u"SimpleFifoQueue", 15);
-    return c;
-}
-
-java::lang::Class* SimpleFifoQueue::getClass0()
-{
-    return class_();
 }
 

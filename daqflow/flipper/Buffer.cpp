@@ -7,36 +7,24 @@
 #include <SimpleFifoQueue.hpp>
 #include <Sound.hpp>
 #include <SoundPlayer.hpp>
-#include <java/lang/NullPointerException.hpp>
 
-template<typename T>
-static T* npc(T* t)
-{
-    if(!t) throw new ::java::lang::NullPointerException();
-    return t;
-}
 
-Buffer::Buffer(const ::default_init_tag&)
-    : super(*static_cast< ::default_init_tag* >(0))
-{
-    clinit();
-}
 
-Buffer::Buffer(::java::lang::String* name, int32_t capacity, int32_t progressStep, int32_t timeoutStep, Button* button, SoundPlayer* soundPlayer, bool soundMasked) 
-    : Buffer(*static_cast< ::default_init_tag* >(0))
-{
-    ctor(name,capacity,progressStep,timeoutStep,button,soundPlayer,soundMasked);
-}
 
-void Buffer::ctor(::java::lang::String* name, int32_t capacity, int32_t progressStep, int32_t timeoutStep, Button* button, SoundPlayer* soundPlayer, bool soundMasked)
+void Buffer::Buffer(string name, int32_t capacity, int32_t progressStep, int32_t timeoutStep, Button* button, SoundPlayer* soundPlayer, bool soundMasked)
 {
-    super::ctor(name, capacity, progressStep, timeoutStep, button, soundPlayer);
+    this->name = name;
+    this->capacity = capacity;
+    this->progressStep = progressStep;
+    this->timeoutStep = timeoutStep;
+    this->button = button;
+    this->soundPlayer = soundPlayer;
     this->soundMasked = soundMasked;
 }
 
 bool Buffer::backpressure()
 {
-    auto backpressure = npc(dispatcher)->isBackpressure();
+    bool backpressure = dispatcher->isBackpressure();
     return backpressure;
 }
 

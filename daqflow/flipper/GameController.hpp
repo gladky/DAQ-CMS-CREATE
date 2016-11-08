@@ -21,9 +21,9 @@ protected:
     void ctor();
 
 public:
-    virtual ::java::util::List* getFlipperObjects();
+    virtual std::vector<FlipperObject> getFlipperObjects();
     virtual void doStep();
-    virtual ::java::util::Set* getButtons();
+    virtual std::vector<Button> getButtons();
     virtual void setDispatcher(Dispatcher* dispatcher);
     virtual void setSoundPlayer(SoundPlayer* soundPlayer);
 

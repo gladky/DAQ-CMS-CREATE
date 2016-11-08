@@ -3,40 +3,21 @@
 
 #include <Data.hpp>
 #include <SimpleFifoQueue.hpp>
-#include <java/lang/NullPointerException.hpp>
-#include <Array.hpp>
 
-template<typename T>
-static T* npc(T* t)
+
+IndividualPogressObject::IndividualPogressObject(string name, int capacity, int progressStep, SoundPlayer* soundPlayer) 
+    : FlipperObject(name,capacity,progressStep,soundPlayer)
 {
-    if(!t) throw new ::java::lang::NullPointerException();
-    return t;
 }
 
-IndividualPogressObject::IndividualPogressObject(const ::default_init_tag&)
-    : super(*static_cast< ::default_init_tag* >(0))
-{
-    clinit();
-}
+constexpr int IndividualPogressObject::fakeInf;
 
-IndividualPogressObject::IndividualPogressObject(::java::lang::String* name, int32_t capacity, int32_t progressStep, SoundPlayer* soundPlayer) 
-    : IndividualPogressObject(*static_cast< ::default_init_tag* >(0))
-{
-    ctor(name,capacity,progressStep,soundPlayer);
-}
-
-constexpr int32_t IndividualPogressObject::fakeInf;
-
-void IndividualPogressObject::ctor(::java::lang::String* name, int32_t capacity, int32_t progressStep, SoundPlayer* soundPlayer)
-{
-    super::ctor(name, capacity, progressStep, soundPlayer);
-}
 
 void IndividualPogressObject::performInsert(Data* data)
 {
-    npc(data)->setProgress(0);
-    npc(data)->setTimeOutProgress(0);
-    npc(queue)->add(data);
+    data->setProgress(0);
+    data->setTimeOutProgress(0);
+    queue->add(data);
     acceptedThisCycle = true;
 }
 
@@ -45,31 +26,31 @@ bool IndividualPogressObject::canAccept()
     if(acceptedThisCycle) {
         return false;
     }
-    return super::canAccept();
+    return IndividualPogressObject::canAccept();
 }
 
-int32_tArray* IndividualPogressObject::getProgress()
+int arr[] IndividualPogressObject::getProgress()
 {
-    return npc(queue)->getProgress();
+    return queue->getProgress();
 }
 
-int32_t IndividualPogressObject::stepImplementation(Data* current)
+int IndividualPogressObject::stepImplementation(Data* current)
 {
-    auto newProgress = npc(current)->getProgress() + progressStep;
-    npc(current)->setProgress(newProgress);
+    int newProgress = current->getProgress() + progressStep;
+    current->setProgress(newProgress);
     return newProgress;
 }
 
 void IndividualPogressObject::doStep()
 {
-    if(!npc(queue)->isEmpty()) {
-        auto localProgressLimit = fakeInf;
-        auto initialSize = npc(queue)->size();
-        auto recentSize = initialSize;
-        for (auto i = int32_t(0); i < recentSize; i++) {
-            auto current = npc(queue)->get(i);
-            if(npc(current)->getProgress() + progressStep < localProgressLimit) {
-                auto progress = stepImplementation(current);
+    if(!queue->isEmpty()) {
+        int localProgressLimit = fakeInf;
+        int32_t initialSize = queue->size();
+        int32_t recentSize = initialSize;
+        for (int32_t i = 0; i < recentSize; i++) {
+            Data current = queue->get(i);
+            if(current->getProgress() + progressStep < localProgressLimit) {
+                int progress = stepImplementation(current);
                 if(progress < localProgressLimit) {
                     localProgressLimit = progress;
                 }
@@ -80,15 +61,15 @@ void IndividualPogressObject::doStep()
                     }
                 }
             } else {
-                if(npc(current)->getProgress() < localProgressLimit) {
-                    localProgressLimit = npc(current)->getProgress();
+                if(current->getProgress() < localProgressLimit) {
+                    localProgressLimit = current->getProgress();
                 }
             }
             if(localProgressLimit > 100) {
                 localProgressLimit = 100;
             }
-            if(recentSize != npc(queue)->size()) {
-                recentSize = npc(queue)->size();
+            if(recentSize != queue->size()) {
+                recentSize = queue->size();
                 i--;
             }
         }
@@ -101,16 +82,4 @@ void IndividualPogressObject::finished()
     return;
 }
 
-extern java::lang::Class *class_(const char16_t *c, int n);
-
-java::lang::Class* IndividualPogressObject::class_()
-{
-    static ::java::lang::Class* c = ::class_(u"IndividualPogressObject", 23);
-    return c;
-}
-
-java::lang::Class* IndividualPogressObject::getClass0()
-{
-    return class_();
-}
 
