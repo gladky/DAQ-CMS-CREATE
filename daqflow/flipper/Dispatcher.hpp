@@ -27,7 +27,7 @@ public:
     virtual int getResult();
 
     // Generated
-    Dispatcher(vector<FlipperObject> targets, vector<FlipperObject> linksToTargets, SoundPlayer* soundPlayer);
+    Dispatcher(vector<FlipperObject*> targets, vector<FlipperObject*> linksToTargets, SoundPlayer* soundPlayer);
 
 
 };

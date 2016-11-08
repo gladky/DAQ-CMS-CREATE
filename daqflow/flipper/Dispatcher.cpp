@@ -6,7 +6,7 @@
 #include <SoundPlayer.hpp>
 
 
-Dispatcher::Dispatcher(vector<FlipperObject> targets_, vector<FlipperObject> linksToTargets_, SoundPlayer* soundPlayer_) : NamedObject("Dispatcher")
+Dispatcher::Dispatcher(vector<FlipperObject*> targets_, vector<FlipperObject*> linksToTargets_, SoundPlayer* soundPlayer_) : NamedObject("Dispatcher")
 {
     targets = targets_;
     linksToTarget = linksToTargets_;

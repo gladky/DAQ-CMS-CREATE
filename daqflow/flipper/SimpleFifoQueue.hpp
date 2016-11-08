@@ -11,7 +11,7 @@ class SimpleFifoQueue
 {
 
 public:
-    vector<Data> queue;
+    vector<Data*> queue;
 
 private:
     int tailIndex;

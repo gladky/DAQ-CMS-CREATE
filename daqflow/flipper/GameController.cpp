@@ -1,17 +1,23 @@
 // Generated from /cms.flipper/src/main/java/GameController.java
+
+
+/*
+THis class is reduced for testing. Just uncomment elements
+*/
+
 #include <GameController.hpp>
 
-#include <Button.hpp>
-#include <Dispatcher.hpp>
+//#include <Button.hpp>
+//#include <Dispatcher.hpp>
 #include <FlipperObject.hpp>
 //#include <FlowObserver.hpp>
-#include <SoundPlayer.hpp>
+//#include <SoundPlayer.hpp>
 
 
 void GameController::GameController()
 {
     flipperObjects; //vector should be initialized
-    buttons ; // the same
+//   buttons ; // the same
 //    observer = nullptr;
 }
 
@@ -30,13 +36,15 @@ void GameController::doStep()
     //    observer->persist();
     //}
 
+ /*
     for (vector<Button>::iterator it = buttons.begin() ; it != buttons.end(); ++it){
         it->doStep();
     }
     dispatcher->invalidate();
-    soundPlayer->flush();
+    soundPlayer->flush();*/
 }
 
+/*
 vector<Button> GameController::getButtons()
 {
     return buttons;
@@ -50,5 +58,5 @@ void GameController::setDispatcher(Dispatcher* dispatcher)
 void GameController::setSoundPlayer(SoundPlayer* soundPlayer)
 {
     this->soundPlayer = soundPlayer;
-}
+}*/
 

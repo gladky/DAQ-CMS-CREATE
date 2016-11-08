@@ -13,7 +13,7 @@ FlipperObject::FlipperObject(string name_, int32_t capacity_, int progressStep_,
     : NamedObject(name_)
 {
     progressStep = progressStep_;
-    successors = vector;
+    //successors = vector; // they sey should be initialized by default constructor
     capacity = capacity_;
     queue = new SimpleFifoQueue(capacity_);
     reserved = false;
@@ -44,7 +44,7 @@ bool FlipperObject::canAccept()
     bool existsNonLinkSuccessorsCanAccept = false;
     if(dynamic_cast< Link* >(this) != nullptr) {
         for (bool _i = successors->iterator(); _i->hasNext(); ) {
-            FlipperObject* successor = java_cast< FlipperObject* >(_i->next());
+            FlipperObject* successor = _i->next();
             {
                 bool canAccept = successor->canAccept();
                 if(canAccept == true) {
@@ -91,7 +91,7 @@ void FlipperObject::sendData()
     }
 }
 
-vector<FlipperObject> FlipperObject::getSuccessors()
+vector<FlipperObject*> FlipperObject::getSuccessors()
 {
     return successors;
 }

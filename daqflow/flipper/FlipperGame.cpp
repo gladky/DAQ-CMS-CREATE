@@ -1,15 +1,15 @@
 // Generated from /cms.flipper/src/main/java/FlipperGame.java
 #include "FlipperGame.hpp"
 
-#include "Buffer.hpp"
-#include "Button.hpp"
+//#include "Buffer.hpp"
+//#include "Button.hpp"
 //#include "DataObserver.hpp"
-#include "Dispatcher.hpp"
+//#include "Dispatcher.hpp"
 #include "FlipperObject.hpp"
 #include "FlipperObjectFactory.hpp"
 #include "FragmentGenerator.hpp"
 #include "GameController.hpp"
-#include "SoundPlayer.hpp"
+//#include "SoundPlayer.hpp"
 
 
 int FlipperGame::linkBoost =4;
@@ -33,10 +33,10 @@ FlipperGame::FlipperGame(FlipperObjectFactory* factory_)
     buttonHLT_R2 = factory->createButton("R2 btn");
     buttonHLT_R3 = factory->createButton("R3 btn");
 */
-    link11 = factory->createLink("11", int32_t(20) / linkBoost);
-    link12 = factory->createLink("12", int32_t(20) / linkBoost);
-    link13 = factory->createLink("13", int32_t(20) / linkBoost);
-    link14 = factory->createLink("14", int32_t(20) / linkBoost);
+    link11 = factory->createLink("11", 20 / linkBoost);
+    link12 = factory->createLink("12", 20 / linkBoost);
+    link13 = factory->createLink("13", 20 / linkBoost);
+    link14 = factory->createLink("14", 20 / linkBoost);
 
 /*
     buffer1 = factory->createBuffer("buf1", buttonL1, true);

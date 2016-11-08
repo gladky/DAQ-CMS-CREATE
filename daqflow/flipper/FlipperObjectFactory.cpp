@@ -1,16 +1,21 @@
 // Generated from /cms.flipper/src/main/java/FlipperObjectFactory.java
 #include <FlipperObjectFactory.hpp>
 
-#include <BUFU.hpp>
-#include <Buffer.hpp>
-#include <Button.hpp>
-#include <Dispatcher.hpp>
+
+/*
+This class is reduced, uncomment to introduce new elements
+*/
+
+//#include <BUFU.hpp>
+//#include <Buffer.hpp>
+//#include <Button.hpp>
+//#include <Dispatcher.hpp>
 #include <FlipperObject.hpp>
 #include <GameController.hpp>
 #include <Link.hpp>
-#include <SoundPlayer.hpp>
-#include <Storage.hpp>
-#include <Switch.hpp>
+//#include <SoundPlayer.hpp>
+//#include <Storage.hpp>
+//#include <Switch.hpp>
 
 
 
@@ -48,6 +53,7 @@ FlipperObject* FlipperObjectFactory::createLink(string name, int logicalLength)
     return link;
 }
 
+/*
 FlipperObject* FlipperObjectFactory::createBUFU(string name, Button* button)
 {
     string uniqueName = getShortName(name);
@@ -64,10 +70,6 @@ FlipperObject* FlipperObjectFactory::createSwitch(string name)
     return switch_;
 }
 
-string FlipperObjectFactory::getShortName(string name)
-{
-    return name;
-}
 
 FlipperObject* FlipperObjectFactory::createStorage()
 {
@@ -100,6 +102,12 @@ Button* FlipperObjectFactory::createButton(string name)
     return button;
 }
 
+*/
+string FlipperObjectFactory::getShortName(string name)
+{
+    return name;
+}
+
 GameController* FlipperObjectFactory::getController()
 {
     return controller;
@@ -125,9 +133,11 @@ void FlipperObjectFactory::setBufuTimeoutStep(int bufuTimeoutStep_)
     bufuTimeoutStep = bufuTimeoutStep_;
 }
 
+/*
+
 SoundPlayer* FlipperObjectFactory::getSoundPlayer()
 {
     return soundPlayer;
-}
+}*/
 
 
