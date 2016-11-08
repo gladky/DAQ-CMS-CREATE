@@ -2,12 +2,12 @@
 
 #pragma once
 
+#include "Data.hpp"
 #include "NamedObject.hpp"
 
 #include "SimpleFifoQueue.hpp"
 #include "SoundPlayer.hpp"
 
-#include "Data.hpp"
 
 #include <vector>
 

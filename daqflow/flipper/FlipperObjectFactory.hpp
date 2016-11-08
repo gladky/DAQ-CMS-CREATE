@@ -14,10 +14,10 @@ class FlipperObjectFactory
 
 private:
     GameController* controller ;
-    static int DEFAULT_BUFFER_PROCESSING_STEP { 8 };
-    static int DEFAULT_BUFFER_TIMEOUT_STEP { 25 };
-    static int DEFAULT_BUFU_PROCESSING_STEP {10 };
-    static int DEFAULT_BUFU_TIMEOUT_STEP { 25 };
+    static int DEFAULT_BUFFER_PROCESSING_STEP ;
+    static int DEFAULT_BUFFER_TIMEOUT_STEP ;
+    static int DEFAULT_BUFU_PROCESSING_STEP;
+    static int DEFAULT_BUFU_TIMEOUT_STEP;
     int bufferProcessingStep ;
     int bufferTimeoutStep ;
     int bufuProcessingStep;

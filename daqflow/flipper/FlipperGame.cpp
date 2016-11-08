@@ -12,13 +12,19 @@
 #include "SoundPlayer.hpp"
 
 
-int FlipperGame::linkBoost;
+int FlipperGame::linkBoost =4;
 
 
-void FlipperGame::FlipperGame(FlipperObjectFactory* factory_)
+
+/*
+THis class is reduced for testing. Just uncomment elements
+*/
+
+FlipperGame::FlipperGame(FlipperObjectFactory* factory_)
 {
     factory = factory_;
     controller = factory_->getController();
+/*
     buttonL1 = factory->createButton("Lv1 btn");
     buttonHLT_L1 = factory->createButton("L1 btn");
     buttonHLT_L2 = factory->createButton("L2 btn");
@@ -26,10 +32,13 @@ void FlipperGame::FlipperGame(FlipperObjectFactory* factory_)
     buttonHLT_R1 = factory->createButton("R1 btn");
     buttonHLT_R2 = factory->createButton("R2 btn");
     buttonHLT_R3 = factory->createButton("R3 btn");
+*/
     link11 = factory->createLink("11", int32_t(20) / linkBoost);
     link12 = factory->createLink("12", int32_t(20) / linkBoost);
     link13 = factory->createLink("13", int32_t(20) / linkBoost);
     link14 = factory->createLink("14", int32_t(20) / linkBoost);
+
+/*
     buffer1 = factory->createBuffer("buf1", buttonL1, true);
     buffer2 = factory->createBuffer("buf2", buttonL1, true);
     buffer3 = factory->createBuffer("buf3", buttonL1, true);
@@ -61,7 +70,7 @@ void FlipperGame::FlipperGame(FlipperObjectFactory* factory_)
     link48 = factory->createLink("48", int32_t(25) / linkBoost);
     storage = factory->createStorage();
 
-    vector<FlipperObject> targetsList;
+    vector<FlipperObject*> targetsList;
     targets.push_back(bufuL1);
     targets.push_back(bufuL2);
     targets.push_back(bufuL3);
@@ -69,7 +78,7 @@ void FlipperGame::FlipperGame(FlipperObjectFactory* factory_)
     targets.push_back(bufuR2);
     targets.push_back(bufuR3);
 
-    vector<FlipperObject> linksList;
+    vector<FlipperObject*> linksList;
     linksList.push_back(link31);
     linksList.push_back(link32);
     linksList.push_back(link33);
@@ -82,44 +91,44 @@ void FlipperGame::FlipperGame(FlipperObjectFactory* factory_)
     buffer2->setDispatcher(dispatcher);
     buffer3->setDispatcher(dispatcher);
     buffer4->setDispatcher(dispatcher);
-    link11->getSuccessors()->add(buffer1);
-    link12->getSuccessors()->add(buffer2);
-    link13->getSuccessors()->add(buffer3);
-    link14->getSuccessors()->add(buffer4);
-    buffer1->getSuccessors()->add(link21);
-    buffer2->getSuccessors()->add(link22);
-    buffer3->getSuccessors()->add(link23);
-    buffer4->getSuccessors()->add(link24);
-    link21->getSuccessors()->add(switch_);
-    link22->getSuccessors()->add(switch_);
-    link23->getSuccessors()->add(switch_);
-    link24->getSuccessors()->add(switch_);
-    switch_->getSuccessors()->add(link31);
-    switch_->getSuccessors()->add(link32);
-    switch_->getSuccessors()->add(link33);
-    switch_->getSuccessors()->add(link34);
-    switch_->getSuccessors()->add(link35);
-    switch_->getSuccessors()->add(link36);
-    link31->getSuccessors()->add(bufuL1);
-    link32->getSuccessors()->add(bufuL2);
-    link33->getSuccessors()->add(bufuL3);
-    link34->getSuccessors()->add(bufuR1);
-    link35->getSuccessors()->add(bufuR2);
-    link36->getSuccessors()->add(bufuR3);
-    bufuL1->getSuccessors()->add(link41);
-    link41->getSuccessors()->add(link43);
-    bufuL2->getSuccessors()->add(link42);
-    bufuL3->getSuccessors()->add(link44);
-    link42->getSuccessors()->add(link43);
-    link43->getSuccessors()->add(link44);
-    bufuR1->getSuccessors()->add(link45);
-    link45->getSuccessors()->add(link47);
-    bufuR2->getSuccessors()->add(link46);
-    bufuR3->getSuccessors()->add(link48);
-    link46->getSuccessors()->add(link47);
-    link47->getSuccessors()->add(link48);
-    link44->getSuccessors()->add(storage);
-    link48->getSuccessors()->add(storage);
+    link11->getSuccessors().push_back(buffer1);
+    link12->getSuccessors().push_back(buffer2);
+    link13->getSuccessors().push_back(buffer3);
+    link14->getSuccessors().push_back(buffer4);
+    buffer1->getSuccessors().push_back(link21);
+    buffer2->getSuccessors().push_back(link22);
+    buffer3->getSuccessors().push_back(link23);
+    buffer4->getSuccessors().push_back(link24);
+    link21->getSuccessors().push_back(switch_);
+    link22->getSuccessors().push_back(switch_);
+    link23->getSuccessors().push_back(switch_);
+    link24->getSuccessors().push_back(switch_);
+    switch_->getSuccessors().push_back(link31);
+    switch_->getSuccessors().push_back(link32);
+    switch_->getSuccessors().push_back(link33);
+    switch_->getSuccessors().push_back(link34);
+    switch_->getSuccessors().push_back(link35);
+    switch_->getSuccessors().push_back(link36);
+    link31->getSuccessors().push_back(bufuL1);
+    link32->getSuccessors().push_back(bufuL2);
+    link33->getSuccessors().push_back(bufuL3);
+    link34->getSuccessors().push_back(bufuR1);
+    link35->getSuccessors().push_back(bufuR2);
+    link36->getSuccessors().push_back(bufuR3);
+    bufuL1->getSuccessors().push_back(link41);
+    link41->getSuccessors().push_back(link43);
+    bufuL2->getSuccessors().push_back(link42);
+    bufuL3->getSuccessors().push_back(link44);
+    link42->getSuccessors().push_back(link43);
+    link43->getSuccessors().push_back(link44);
+    bufuR1->getSuccessors().push_back(link45);
+    link45->getSuccessors().push_back(link47);
+    bufuR2->getSuccessors().push_back(link46);
+    bufuR3->getSuccessors().push_back(link48);
+    link46->getSuccessors().push_back(link47);
+    link47->getSuccessors().push_back(link48);
+    link44->getSuccessors().push_back(storage);
+    link48->getSuccessors().push_back(storage);*/
     //controller->observer = new DataObserver(this);
     fragmentGenerator = new FragmentGenerator(link11, link12, link13, link14);
 }
@@ -128,7 +137,7 @@ void FlipperGame::generateNewFragments()
 {
     fragmentGenerator->generateAndInsertFragments();
 }
-
+/*
 void FlipperGame::pressButtonLevel1()
 {
     buttonL1->press();
@@ -162,7 +171,7 @@ void FlipperGame::pressButtonHLT_R2()
 void FlipperGame::pressButtonHLT_R3()
 {
     buttonHLT_R3->press();
-}
+}*/
 
 GameController* FlipperGame::getController()
 {
@@ -180,7 +189,7 @@ void FlipperGame::doSteps(int steps)
         controller->doStep();
     }
 }
-
+/*
 FlipperObject* FlipperGame::getStorage()
 {
     return storage;
@@ -244,6 +253,6 @@ Buffer* FlipperGame::getBuffer4()
 SoundPlayer* FlipperGame::getSoundPlayer()
 {
     return factory->getSoundPlayer();
-}
+}*/
 
 

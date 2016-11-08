@@ -10,7 +10,7 @@ IndividualPogressObject::IndividualPogressObject(string name, int capacity, int 
 {
 }
 
-int IndividualPogressObject::fakeInf;
+int IndividualPogressObject::fakeInf =100000 ;
 
 
 void IndividualPogressObject::performInsert(Data* data)

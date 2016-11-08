@@ -2,11 +2,13 @@
 
 #pragma once
 
-
-#include <iostream>
 #include "FlipperObject.hpp"
 
-//using namespace std;
+#include <iostream>
+
+using namespace std;
+
+class FlipperObject;
 
 class Data
 {

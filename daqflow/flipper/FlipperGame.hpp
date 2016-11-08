@@ -4,6 +4,12 @@
 
 #include "GameController.hpp"
 #include "FlipperObjectFactory.hpp"
+#include "FragmentGenerator.hpp"
+
+
+/*
+THis class is reduced for testing. Just uncomment elements
+*/
 
 class FlipperGame
 {
@@ -13,6 +19,7 @@ private:
     GameController* controller {  };
     FlipperObjectFactory* factory {  };
 
+/*
 public:
     Button* buttonL1 {  };
     Button* buttonHLT_L1 {  };
@@ -21,9 +28,13 @@ public:
     Button* buttonHLT_R1 {  };
     Button* buttonHLT_R2 {  };
     Button* buttonHLT_R3 {  };
+*/
 
+/*
 private:
     FlipperObject* storage {  };
+
+*/
 
 public:
     FlipperObject* link11 {  };
@@ -31,12 +42,16 @@ public:
     FlipperObject* link13 {  };
     FlipperObject* link14 {  };
 
+
+/*
 private:
     Buffer* buffer1 {  };
     Buffer* buffer2 {  };
     Buffer* buffer3 {  };
     Buffer* buffer4 {  };
+*/
 
+/*
 public:
     FlipperObject* link21 {  };
     FlipperObject* link22 {  };
@@ -67,41 +82,45 @@ public:
     FlipperObject* link47 {  };
     FlipperObject* link48 {  };
 
+*/
+
 private:
-    FlipperObject* switch_ {  };
+    //FlipperObject* switch_ {  };
     FragmentGenerator* fragmentGenerator {  };
 
 public:
-    static int linkBoost { 4 };
+    static int linkBoost ;
 
-public: /* protected */
+/*
+public:
     Dispatcher* dispatcher {  };
+*/
 
 public:
     virtual void generateNewFragments();
-    virtual void pressButtonLevel1();
-    virtual void pressButtonHLT_L1();
-    virtual void pressButtonHLT_L2();
-    virtual void pressButtonHLT_L3();
-    virtual void pressButtonHLT_R1();
-    virtual void pressButtonHLT_R2();
-    virtual void pressButtonHLT_R3();
+    //virtual void pressButtonLevel1();
+    //virtual void pressButtonHLT_L1();
+    //virtual void pressButtonHLT_L2();
+    //virtual void pressButtonHLT_L3();
+    //virtual void pressButtonHLT_R1();
+    //virtual void pressButtonHLT_R2();
+    //virtual void pressButtonHLT_R3();
     virtual GameController* getController();
     virtual void doStep();
     virtual void doSteps(int steps);
-    virtual FlipperObject* getStorage();
-    virtual FlipperObject* getSwitch();
-    virtual FlipperObject* getBufuL1();
-    virtual FlipperObject* getBufuL2();
-    virtual FlipperObject* getBufuL3();
-    virtual FlipperObject* getBufuR1();
-    virtual FlipperObject* getBufuR2();
-    virtual FlipperObject* getBufuR3();
-    virtual Buffer* getBuffer1();
-    virtual Buffer* getBuffer2();
-    virtual Buffer* getBuffer3();
-    virtual Buffer* getBuffer4();
-    virtual SoundPlayer* getSoundPlayer();
+    //virtual FlipperObject* getStorage();
+    //virtual FlipperObject* getSwitch();
+    //virtual FlipperObject* getBufuL1();
+    //virtual FlipperObject* getBufuL2();
+    //virtual FlipperObject* getBufuL3();
+    //virtual FlipperObject* getBufuR1();
+    //virtual FlipperObject* getBufuR2();
+    //virtual FlipperObject* getBufuR3();
+    //virtual Buffer* getBuffer1();
+    //virtual Buffer* getBuffer2();
+    //virtual Buffer* getBuffer3();
+    //virtual Buffer* getBuffer4();
+    //virtual SoundPlayer* getSoundPlayer();
 
     // Generated
     FlipperGame();

@@ -25,13 +25,13 @@ FlipperObjectFactory::FlipperObjectFactory()
     controller->setSoundPlayer(soundPlayer);
 }
 
-constexpr int FlipperObjectFactory::DEFAULT_BUFFER_PROCESSING_STEP;
+constexpr int FlipperObjectFactory::DEFAULT_BUFFER_PROCESSING_STEP = 8;
 
-constexpr int FlipperObjectFactory::DEFAULT_BUFFER_TIMEOUT_STEP;
+constexpr int FlipperObjectFactory::DEFAULT_BUFFER_TIMEOUT_STEP=25;
 
-constexpr int FlipperObjectFactory::DEFAULT_BUFU_PROCESSING_STEP;
+constexpr int FlipperObjectFactory::DEFAULT_BUFU_PROCESSING_STEP=10;
 
-constexpr int FlipperObjectFactory::DEFAULT_BUFU_TIMEOUT_STEP;
+constexpr int FlipperObjectFactory::DEFAULT_BUFU_TIMEOUT_STEP=25;
 
 
 FlipperObject* FlipperObjectFactory::createLink(string name, int logicalLength)

@@ -12,7 +12,7 @@ class IndividualPogressObject
 
 private:
     bool acceptedThisCycle;
-    static int fakeInf { 100000 };
+    static int fakeInf ;
 
 public: /* protected */
     void performInsert(Data* data) override;
