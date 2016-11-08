@@ -2,6 +2,10 @@
 
 #pragma once
 
+#include "Data.hpp"
+#include <vector>
+
+using namespace std;
 
 class SimpleFifoQueue
 {
@@ -10,23 +14,20 @@ public:
     vector<Data> queue;
 
 private:
-    int32_t tailIndex;
-    int32_t capacity;
+    int tailIndex;
+    int capacity;
 
 public:
     virtual Data* peek();
     virtual Data* poll();
     virtual bool add(Data* data);
-    virtual int32_t size();
+    virtual int size();
     virtual bool isEmpty();
-    virtual Data* get(int32_t index);
+    virtual Data* get(int index);
     virtual void clear();
-    virtual int[] getProgress();
+    virtual vector<int> getProgress();
 
     // Generated
-    SimpleFifoQueue(int32_t capacity);
-protected:
-    SimpleFifoQueue(const ::default_init_tag&);
-
+    SimpleFifoQueue(int capacity);
 
 };

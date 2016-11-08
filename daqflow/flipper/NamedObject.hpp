@@ -2,7 +2,9 @@
 
 #pragma once
 
-struct default_init_tag;
+#include <iostream>
+using namespace std;
+
 
 class NamedObject
 {

@@ -5,51 +5,21 @@
 #include <Link.hpp>
 #include <SimpleFifoQueue.hpp>
 #include <SoundPlayer.hpp>
-#include <java/lang/ClassCastException.hpp>
-#include <java/lang/NullPointerException.hpp>
-#include <java/lang/Object.hpp>
-#include <java/util/ArrayList.hpp>
-#include <java/util/Iterator.hpp>
-#include <java/util/List.hpp>
 
-template<typename T, typename U>
-static T java_cast(U* u)
+
+
+
+FlipperObject::FlipperObject(string name_, int32_t capacity_, int progressStep_, SoundPlayer* soundPlayer_) 
+    : NamedObject(name_)
 {
-    if(!u) return static_cast<T>(nullptr);
-    auto t = dynamic_cast<T>(u);
-    if(!t) throw new ::java::lang::ClassCastException();
-    return t;
+    progressStep = progressStep_;
+    successors = vector;
+    capacity = capacity_;
+    queue = new SimpleFifoQueue(capacity_);
+    reserved = false;
+    soundPlayer = soundPlayer_;
 }
 
-template<typename T>
-static T* npc(T* t)
-{
-    if(!t) throw new ::java::lang::NullPointerException();
-    return t;
-}
-
-FlipperObject::FlipperObject(const ::default_init_tag&)
-    : super(*static_cast< ::default_init_tag* >(0))
-{
-    clinit();
-}
-
-FlipperObject::FlipperObject(::java::lang::String* name, int32_t capacity, int32_t progressStep, SoundPlayer* soundPlayer) 
-    : FlipperObject(*static_cast< ::default_init_tag* >(0))
-{
-    ctor(name,capacity,progressStep,soundPlayer);
-}
-
-void FlipperObject::ctor(::java::lang::String* name, int32_t capacity, int32_t progressStep, SoundPlayer* soundPlayer)
-{
-    super::ctor(name);
-    this->progressStep = progressStep;
-    this->successors = new ::java::util::ArrayList();
-    this->capacity = capacity;
-    this->queue = new SimpleFifoQueue(capacity);
-    this->setBusy(false);
-    this->soundPlayer = soundPlayer;
-}
 
 bool FlipperObject::insert(Data* data)
 {
@@ -71,12 +41,12 @@ bool FlipperObject::canAccept()
     } else {
         iAmAbleToAccept = true;
     }
-    auto existsNonLinkSuccessorsCanAccept = false;
+    bool existsNonLinkSuccessorsCanAccept = false;
     if(dynamic_cast< Link* >(this) != nullptr) {
-        for (auto _i = npc(successors)->iterator(); _i->hasNext(); ) {
+        for (bool _i = successors->iterator(); _i->hasNext(); ) {
             FlipperObject* successor = java_cast< FlipperObject* >(_i->next());
             {
-                auto canAccept = npc(successor)->canAccept();
+                bool canAccept = successor->canAccept();
                 if(canAccept == true) {
                     existsNonLinkSuccessorsCanAccept = true;
                 }
@@ -94,11 +64,10 @@ bool FlipperObject::canAccept()
 
 bool FlipperObject::canSend()
 {
-    auto allDirectAccept = true;
-    for (auto _i = npc(successors)->iterator(); _i->hasNext(); ) {
-        FlipperObject* successor = java_cast< FlipperObject* >(_i->next());
+    bool allDirectAccept = true;
+    for(auto const& successor: successors) {
         {
-            auto accept = npc(successor)->canAccept();
+            bool accept = successor->canAccept();
             if(!accept) {
                 allDirectAccept = false;
             }
@@ -113,16 +82,16 @@ bool FlipperObject::canSend()
 
 void FlipperObject::sendData()
 {
-    auto data = npc(queue)->poll();
-    for (auto _i = npc(successors)->iterator(); _i->hasNext(); ) {
-        FlipperObject* successor = java_cast< FlipperObject* >(_i->next());
+    Data data = queue->poll();
+    
+    for(auto const& successor: successors) {
         {
-            npc(successor)->insert(data);
+            successor->insert(data);
         }
     }
 }
 
-java::util::List* FlipperObject::getSuccessors()
+vector<FlipperObject> FlipperObject::getSuccessors()
 {
     return successors;
 }
@@ -140,18 +109,5 @@ void FlipperObject::setBusy(bool busy)
 SimpleFifoQueue* FlipperObject::getQueue()
 {
     return queue;
-}
-
-extern java::lang::Class *class_(const char16_t *c, int n);
-
-java::lang::Class* FlipperObject::class_()
-{
-    static ::java::lang::Class* c = ::class_(u"FlipperObject", 13);
-    return c;
-}
-
-java::lang::Class* FlipperObject::getClass0()
-{
-    return class_();
 }
 

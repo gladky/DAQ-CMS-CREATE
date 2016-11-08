@@ -4,22 +4,17 @@
 
 #include "NamedObject.hpp"
 
-struct default_init_tag;
 
 class Button
     : public NamedObject
 {
 
-public:
-    typedef NamedObject super;
 
 private:
-    bool enabled {  };
-    bool pressed {  };
-    bool disableRequest {  };
-    SoundPlayer* soundPlayer {  };
-protected:
-    void ctor(::java::lang::String* name, SoundPlayer* soundPlayer);
+    bool enabled;
+    bool pressed;
+    bool disableRequest;
+    SoundPlayer* soundPlayer;
 
 public:
     virtual void enable();
@@ -30,14 +25,6 @@ public:
     virtual void doStep();
 
     // Generated
-    Button(::java::lang::String* name, SoundPlayer* soundPlayer);
-protected:
-    Button(const ::default_init_tag&);
+    Button(string name, SoundPlayer* soundPlayer);
 
-
-public:
-    static ::java::lang::Class *class_();
-
-private:
-    virtual ::java::lang::Class* getClass0();
 };

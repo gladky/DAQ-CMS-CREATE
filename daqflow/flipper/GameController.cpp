@@ -6,56 +6,38 @@
 #include <FlipperObject.hpp>
 #include <FlowObserver.hpp>
 #include <SoundPlayer.hpp>
-#include <java/lang/ClassCastException.hpp>
-#include <java/lang/NullPointerException.hpp>
-#include <java/lang/Object.hpp>
-#include <java/util/ArrayList.hpp>
-#include <java/util/Iterator.hpp>
-#include <java/util/LinkedHashSet.hpp>
-#include <java/util/List.hpp>
-#include <java/util/ListIterator.hpp>
-#include <java/util/Set.hpp>
 
-GameController::GameController() 
-    : GameController(*static_cast< ::default_init_tag* >(0))
+
+void GameController::GameController()
 {
-    ctor();
+    flipperObjects; //vector should be initialized
+    buttons ; // the same
+    observer = nullptr;
 }
 
-void GameController::ctor()
-{
-    super::ctor();
-    this->flipperObjects = new ::java::util::ArrayList();
-    this->buttons = new ::java::util::LinkedHashSet();
-    this->observer = nullptr;
-}
-
-java::util::List* GameController::getFlipperObjects()
+vector<FlipperObject> GameController::getFlipperObjects()
 {
     return flipperObjects;
 }
 
 void GameController::doStep()
 {
-    auto li = npc(flipperObjects)->listIterator(npc(flipperObjects)->size());
-    while (npc(li)->hasPrevious()) {
-        auto flipperObject = java_cast< FlipperObject* >(npc(li)->previous());
-        npc(flipperObject)->doStep();
+    
+    for (vector<FlipperObject>::reverse_iterator i = flipperObjects.rbegin(); i != flipperObjects.rend(); ++i ) {
+        i->doStep();
     }
     if(observer != nullptr) {
-        npc(observer)->persist();
+        observer->persist();
     }
-    for (auto _i = npc(buttons)->iterator(); _i->hasNext(); ) {
-        Button* button = java_cast< Button* >(_i->next());
-        {
-            npc(button)->doStep();
-        }
+
+    for (vector<Button>::iterator it = buttons.begin() ; it != buttons.end(); ++it){
+        it->doStep();
     }
-    npc(dispatcher)->invalidate();
-    npc(soundPlayer)->flush();
+    dispatcher->invalidate();
+    soundPlayer->flush();
 }
 
-java::util::Set* GameController::getButtons()
+vector<Button> GameController::getButtons()
 {
     return buttons;
 }

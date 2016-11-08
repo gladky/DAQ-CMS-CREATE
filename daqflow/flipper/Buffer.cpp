@@ -30,11 +30,11 @@ bool Buffer::backpressure()
 
 void Buffer::dispatch()
 {
-    if(!npc(npc(queue)->peek())->isDispatched()) {
-        auto choosenIndex = npc(dispatcher)->findAvailableTarget();
-        if(!npc(dispatcher)->isBackpressure()) {
-            npc(npc(queue)->peek())->setDispatched(true);
-            npc(npc(queue)->peek())->setTargetIndex(choosenIndex);
+    if(!queue->peek()->isDispatched()) {
+        int choosenIndex = dispatcher->findAvailableTarget();
+        if(!dispatcher->isBackpressure()) {
+            queue->peek()->setDispatched(true);
+            queue->peek()->setTargetIndex(choosenIndex);
         }
     }
 }
@@ -53,9 +53,9 @@ void Buffer::registerAcceptedSound(bool interesting)
 {
     if(!soundMasked) {
         if(interesting) {
-            npc(soundPlayer)->register_(Sound::AcceptedInterestingFragments);
+            soundPlayer->register_(Sound::AcceptedInterestingFragments);
         } else {
-            npc(soundPlayer)->register_(Sound::AcceptedNonInterestingFragments);
+            soundPlayer->register_(Sound::AcceptedNonInterestingFragments);
         }
     }
 }

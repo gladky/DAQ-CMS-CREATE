@@ -2,52 +2,22 @@
 #include <Data.hpp>
 
 #include <FlipperObject.hpp>
-#include <java/lang/NullPointerException.hpp>
-#include <java/lang/String.hpp>
-#include <java/lang/StringBuilder.hpp>
 
-template<typename T>
-static T* npc(T* t)
+Data::Data(string name_, bool isFragment, bool isInteresting) 
 {
-    if(!t) throw new ::java::lang::NullPointerException();
-    return t;
+    isFragment_ = isFragment;
+    isInteresting_ = isInteresting;
+    name = name_;
 }
 
-Data::Data(const ::default_init_tag&)
-    : super(*static_cast< ::default_init_tag* >(0))
-{
-    clinit();
-}
-
-Data::Data(::java::lang::String* name, bool isFragment, bool isInteresting) 
-    : Data(*static_cast< ::default_init_tag* >(0))
-{
-    ctor(name,isFragment,isInteresting);
-}
-
-void Data::ctor(::java::lang::String* name, bool isFragment, bool isInteresting)
-{
-    super::ctor();
-    this->isFragment_ = isFragment;
-    this->isInteresting_ = isInteresting;
-    ::java::lang::String* modifiedName;
-    if(this->isInteresting_ && !this->isFragment_) {
-        modifiedName = npc(name)->toUpperCase();
-    } else {
-        modifiedName = name;
-    }
-    this->name = modifiedName;
-}
-
-java::lang::String* Data::getName()
+string Data::getName()
 {
     return name;
 }
 
-java::lang::String* Data::toString()
+string Data::toString()
 {
-    return ::java::lang::StringBuilder().append(u"Data [name="_j)->append(name)
-        ->append(u"]"_j)->toString();
+    return name
 }
 
 FlipperObject* Data::getTarget()
@@ -55,9 +25,9 @@ FlipperObject* Data::getTarget()
     return target;
 }
 
-void Data::setTarget(FlipperObject* target)
+void Data::setTarget(FlipperObject* target_)
 {
-    this->target = target;
+    target = target_;
 }
 
 bool Data::isDispatched()
@@ -65,19 +35,19 @@ bool Data::isDispatched()
     return dispatched;
 }
 
-void Data::setDispatched(bool dispatched)
+void Data::setDispatched(bool dispatched_)
 {
-    this->dispatched = dispatched;
+    dispatched = dispatched_;
 }
 
-int32_t Data::getProgress()
+int Data::getProgress()
 {
     return progress;
 }
 
-void Data::setProgress(int32_t progress)
+void Data::setProgress(int progress_)
 {
-    this->progress = progress;
+    progress = progress_;
 }
 
 bool Data::isInteresting()
@@ -90,36 +60,23 @@ bool Data::isFragment()
     return isFragment_;
 }
 
-int32_t Data::getTimeOutProgress()
+int Data::getTimeOutProgress()
 {
     return timeOutProgress;
 }
 
-void Data::setTimeOutProgress(int32_t timeOutProgress)
+void Data::setTimeOutProgress(int timeOutProgress_)
 {
-    this->timeOutProgress = timeOutProgress;
+    timeOutProgress = timeOutProgress_;
 }
 
-int32_t Data::getTargetIndex()
+int Data::getTargetIndex()
 {
     return targetIndex;
 }
 
-void Data::setTargetIndex(int32_t targetIndex)
+void Data::setTargetIndex(int targetIndex_)
 {
-    this->targetIndex = targetIndex;
-}
-
-extern java::lang::Class *class_(const char16_t *c, int n);
-
-java::lang::Class* Data::class_()
-{
-    static ::java::lang::Class* c = ::class_(u"Data", 4);
-    return c;
-}
-
-java::lang::Class* Data::getClass0()
-{
-    return class_();
+    targetIndex = targetIndex_;
 }
 

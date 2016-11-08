@@ -5,7 +5,7 @@
 
 
 
-SimpleFifoQueue::SimpleFifoQueue(int32_t capacity_) 
+SimpleFifoQueue::SimpleFifoQueue(int capacity_) 
 {
     capacity= capacity_;
     queue(capacity_);
@@ -57,7 +57,7 @@ bool SimpleFifoQueue::isEmpty()
         return false;
 }
 
-Data* SimpleFifoQueue::get(int32_t index)
+Data* SimpleFifoQueue::get(int index)
 {
     return queue->get(index);
 }
@@ -68,7 +68,7 @@ void SimpleFifoQueue::clear()
     queue->clear();
 }
 
-int[] SimpleFifoQueue::getProgress()
+vector<int> SimpleFifoQueue::getProgress()
 {
     if(queue->size() == 0) {
         return new ::int32_tArray({int32_t(0)});

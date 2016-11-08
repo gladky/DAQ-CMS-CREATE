@@ -1,9 +1,6 @@
 // Generated from /cms.flipper/src/main/java/NamedObject.java
 #include <NamedObject.hpp>
 
-#include <java/lang/String.hpp>
-#include <java/lang/StringBuilder.hpp>
-
 
 NamedObject::NamedObject(string name_) 
 {

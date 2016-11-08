@@ -2,8 +2,6 @@
 
 #pragma once
 
-
-
 #include "GameController.hpp"
 #include "FlipperObjectFactory.hpp"
 
