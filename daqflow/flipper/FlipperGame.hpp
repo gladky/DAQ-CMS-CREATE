@@ -72,13 +72,10 @@ private:
     FragmentGenerator* fragmentGenerator {  };
 
 public:
-    static constexpr int32_t linkBoost { int32_t(4) };
+    static int linkBoost { 4 };
 
 public: /* protected */
     Dispatcher* dispatcher {  };
-protected:
-    void ctor();
-    void ctor(FlipperObjectFactory* factory);
 
 public:
     virtual void generateNewFragments();
@@ -91,7 +88,7 @@ public:
     virtual void pressButtonHLT_R3();
     virtual GameController* getController();
     virtual void doStep();
-    virtual void doSteps(int32_t steps);
+    virtual void doSteps(int steps);
     virtual FlipperObject* getStorage();
     virtual FlipperObject* getSwitch();
     virtual FlipperObject* getBufuL1();

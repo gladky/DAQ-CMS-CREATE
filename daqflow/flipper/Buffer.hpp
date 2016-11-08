@@ -9,14 +9,10 @@ class Buffer
     : public Clickable
 {
 
-public:
-    typedef Clickable super;
 
 private:
-    bool soundMasked {  };
-    Dispatcher* dispatcher {  };
-protected:
-    void ctor(::java::lang::String* name, int32_t capacity, int32_t progressStep, int32_t timeoutStep, Button* button, SoundPlayer* soundPlayer, bool soundMasked);
+    bool soundMasked ;
+    Dispatcher* dispatcher ;
 
 public: /* protected */
     bool backpressure() override;
@@ -34,14 +30,7 @@ public: /* protected */
     // Generated
 
 public:
-    Buffer(::java::lang::String* name, int32_t capacity, int32_t progressStep, int32_t timeoutStep, Button* button, SoundPlayer* soundPlayer, bool soundMasked);
-protected:
-    Buffer(const ::default_init_tag&);
+    Buffer(string name, int capacity, int progressStep, int timeoutStep, Button* button, SoundPlayer* soundPlayer, bool soundMasked);
 
 
-public:
-    static ::java::lang::Class *class_();
-
-private:
-    virtual ::java::lang::Class* getClass0();
 };

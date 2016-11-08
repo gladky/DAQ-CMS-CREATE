@@ -3,22 +3,18 @@
 #pragma once
 
 
-struct default_init_tag;
 
 class FlowObserver
-    : public virtual ::java::lang::Object
 {
 
-public:
-    typedef ::java::lang::Object super;
 
 private:
-    int32_t MIN_WIDTH {  };
-    int32_t WIDTH {  };
-    int32_t SWITCH_WIDTH {  };
-    int32_t STORAGE_WIDTH {  };
-    int32_t SOUND_WIDTH {  };
-    int32_t BUFFER_WIDTH {  };
+    int MIN_WIDTH {  };
+    int WIDTH {  };
+    int SWITCH_WIDTH {  };
+    int STORAGE_WIDTH {  };
+    int SOUND_WIDTH {  };
+    int BUFFER_WIDTH {  };
     static ::java::lang::String* empty_;
     ::java::util::List* observedObjects {  };
     ::java::util::List* states {  };

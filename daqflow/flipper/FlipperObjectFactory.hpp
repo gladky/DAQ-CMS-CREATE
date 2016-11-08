@@ -2,6 +2,10 @@
 
 #pragma once
 
+#include "Buffer.hpp"
+#include "GameController.hpp"
+#include "SoundPlayer.hpp"
+#include "FlipperObject.hpp"
 
 
 class FlipperObjectFactory
@@ -10,10 +14,10 @@ class FlipperObjectFactory
 
 private:
     GameController* controller ;
-    static constexpr int32_t DEFAULT_BUFFER_PROCESSING_STEP { 8 };
-    static constexpr int32_t DEFAULT_BUFFER_TIMEOUT_STEP { 25 };
-    static constexpr int32_t DEFAULT_BUFU_PROCESSING_STEP {10 };
-    static constexpr int32_t DEFAULT_BUFU_TIMEOUT_STEP { 25 };
+    static int DEFAULT_BUFFER_PROCESSING_STEP { 8 };
+    static int DEFAULT_BUFFER_TIMEOUT_STEP { 25 };
+    static int DEFAULT_BUFU_PROCESSING_STEP {10 };
+    static int DEFAULT_BUFU_TIMEOUT_STEP { 25 };
     int bufferProcessingStep ;
     int bufferTimeoutStep ;
     int bufuProcessingStep;

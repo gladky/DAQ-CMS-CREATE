@@ -4,21 +4,16 @@
 
 #include "IndividualPogressObject.hpp"
 
-struct default_init_tag;
 
 class Clickable
     : public IndividualPogressObject
 {
 
-public:
-    typedef IndividualPogressObject super;
 
 private:
-    int32_t timeoutStep {  };
-    Button* button {  };
-    bool accepted {  };
-protected:
-    void ctor(::java::lang::String* name, int32_t capacity, int32_t progressStep, int32_t timeoutStep, Button* button, SoundPlayer* soundPlayer);
+    int timeoutStep;
+    Button* button ;
+    bool accepted;
 
 public: /* protected */
     bool canSend() override;
@@ -32,14 +27,7 @@ public: /* protected */
     // Generated
 
 public:
-    Clickable(::java::lang::String* name, int32_t capacity, int32_t progressStep, int32_t timeoutStep, Button* button, SoundPlayer* soundPlayer);
-protected:
-    Clickable(const ::default_init_tag&);
+    Clickable(string name, int capacity, int progressStep, int timeoutStep, Button* button, SoundPlayer* soundPlayer);
 
 
-public:
-    static ::java::lang::Class *class_();
-
-private:
-    virtual ::java::lang::Class* getClass0();
 };

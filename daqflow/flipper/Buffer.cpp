@@ -11,15 +11,10 @@
 
 
 
-void Buffer::Buffer(string name, int32_t capacity, int32_t progressStep, int32_t timeoutStep, Button* button, SoundPlayer* soundPlayer, bool soundMasked)
+void Buffer::Buffer(string name, int capacity, int progressStep, int timeoutStep, Button* button, SoundPlayer* soundPlayer, bool soundMasked_):
+Clickable( name, capacity,  progressStep, timeoutStep, button, soundPlayer)
 {
-    this->name = name;
-    this->capacity = capacity;
-    this->progressStep = progressStep;
-    this->timeoutStep = timeoutStep;
-    this->button = button;
-    this->soundPlayer = soundPlayer;
-    this->soundMasked = soundMasked;
+    soundMasked = soundMasked_;
 }
 
 bool Buffer::backpressure()
@@ -64,33 +59,19 @@ void Buffer::registerMissedSound(bool interesting)
 {
     if(!soundMasked) {
         if(interesting) {
-            npc(soundPlayer)->register_(Sound::MissedInterestingFragments);
+            soundPlayer->register_(Sound::MissedInterestingFragments);
         } else {
-            npc(soundPlayer)->register_(Sound::MissedNotInterestingFragments);
+            soundPlayer->register_(Sound::MissedNotInterestingFragments);
         }
     }
 }
 
 void Buffer::reserve()
 {
-    auto data = npc(queue)->peek();
-    auto reservedIndex = npc(data)->getTargetIndex();
-    auto target = npc(dispatcher)->getTarget(reservedIndex);
-    auto link = npc(dispatcher)->getLink(reservedIndex);
-    npc(target)->setBusy(true);
-    npc(data)->setTarget(link);
+    Data data = queue->peek();
+    int reservedIndex = npc(data)->getTargetIndex();
+    FlipperObject target = dispatcher->getTarget(reservedIndex);
+    FlipperObject link = dispatcher->getLink(reservedIndex);
+    target->setBusy(true);
+    data->setTarget(link);
 }
-
-extern java::lang::Class *class_(const char16_t *c, int n);
-
-java::lang::Class* Buffer::class_()
-{
-    static ::java::lang::Class* c = ::class_(u"Buffer", 6);
-    return c;
-}
-
-java::lang::Class* Buffer::getClass0()
-{
-    return class_();
-}
-

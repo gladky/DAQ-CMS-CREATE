@@ -7,50 +7,38 @@
 
 
 
-Clickable::Clickable(const ::default_init_tag&)
-    : super(*static_cast< ::default_init_tag* >(0))
-{
-    clinit();
-}
 
-Clickable::Clickable(::java::lang::String* name, int32_t capacity, int32_t progressStep, int32_t timeoutStep, Button* button, SoundPlayer* soundPlayer) 
-    : Clickable(*static_cast< ::default_init_tag* >(0))
+Clickable::Clickable(string name, int capacity, int progressStep, int timeoutStep_, Button* button_, SoundPlayer* soundPlayer):IndividualPogressObject(name, capacity, progressStep, soundPlayer) 
 {
-    ctor(name,capacity,progressStep,timeoutStep,button,soundPlayer);
-}
-
-void Clickable::ctor(::java::lang::String* name, int32_t capacity, int32_t progressStep, int32_t timeoutStep, Button* button, SoundPlayer* soundPlayer)
-{
-    super::ctor(name, capacity, progressStep, soundPlayer);
-    this->timeoutStep = timeoutStep;
-    this->button = button;
-    this->accepted = false;
+    timeoutStep = timeoutStep_;
+    button = button_;
+    accepted = false;
 }
 
 bool Clickable::canSend()
 {
     dispatch();
-    if(!npc(button)->isEnabled() && !backpressure() && !accepted) {
-        npc(button)->enable();
+    if(!button->isEnabled() && !backpressure() && !accepted) {
+        button->enable();
     }
-    auto pressed = npc(button)->isPressed();
+    bool pressed = button->isPressed();
     if(pressed || accepted) {
-        auto data = npc(this->queue)->peek();
+        Data data = this->queue->peek();
         if(!accepted) {
             accepted = true;
-            registerAcceptedSound(npc(data)->isInteresting());
-            npc(this->button)->disable();
+            registerAcceptedSound(data->isInteresting());
+            this->button->disable();
         }
-        auto canSend = super::canSend();
+        bool canSend = IndividualPogressObject::canSend();
         return canSend;
     } else {
-        auto data = npc(this->queue)->peek();
-        auto timeoutProgress = npc(data)->getTimeOutProgress() + timeoutStep;
-        npc(data)->setTimeOutProgress(timeoutProgress);
+        Data data = this->queue->peek();
+        int timeoutProgress = data->getTimeOutProgress() + timeoutStep;
+        data->setTimeOutProgress(timeoutProgress);
         if(timeoutProgress > 99) {
-            npc(this->queue)->poll();
-            npc(button)->disable();
-            registerMissedSound(npc(data)->isInteresting());
+            this->queue->poll();
+            button->disable();
+            registerMissedSound(data->isInteresting());
         }
         return false;
     }
@@ -68,24 +56,11 @@ void Clickable::dispatch()
 void Clickable::sendData()
 {
     reserve();
-    super::sendData();
+    IndividualPogressObject::sendData();
     this->accepted = false;
 }
 
 void Clickable::reserve()
 {
-}
-
-extern java::lang::Class *class_(const char16_t *c, int n);
-
-java::lang::Class* Clickable::class_()
-{
-    static ::java::lang::Class* c = ::class_(u"Clickable", 9);
-    return c;
-}
-
-java::lang::Class* Clickable::getClass0()
-{
-    return class_();
 }
 

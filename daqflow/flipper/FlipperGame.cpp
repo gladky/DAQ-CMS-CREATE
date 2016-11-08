@@ -3,7 +3,7 @@
 
 #include "Buffer.hpp"
 #include "Button.hpp"
-#include "DataObserver.hpp"
+//#include "DataObserver.hpp"
 #include "Dispatcher.hpp"
 #include "FlipperObject.hpp"
 #include "FlipperObjectFactory.hpp"
@@ -12,103 +12,115 @@
 #include "SoundPlayer.hpp"
 
 
-constexpr int32_t FlipperGame::linkBoost;
+int FlipperGame::linkBoost;
 
-void FlipperGame::ctor()
-{
-    ctor(new FlipperObjectFactory());
-}
 
-void FlipperGame::ctor(FlipperObjectFactory* factory)
+void FlipperGame::FlipperGame(FlipperObjectFactory* factory_)
 {
-    super::ctor();
-    this->factory = factory;
-    this->controller = factory->getController();
-    buttonL1 = factory->createButton(u"Lv1 btn"_j);
-    buttonHLT_L1 = factory->createButton(u"L1 btn"_j);
-    buttonHLT_L2 = factory->createButton(u"L2 btn"_j);
-    buttonHLT_L3 = factory->createButton(u"L3 btn"_j);
-    buttonHLT_R1 = factory->createButton(u"R1 btn"_j);
-    buttonHLT_R2 = factory->createButton(u"R2 btn"_j);
-    buttonHLT_R3 = factory->createButton(u"R3 btn"_j);
-    link11 = factory->createLink(u"11"_j, int32_t(20) / linkBoost);
-    link12 = factory->createLink(u"12"_j, int32_t(20) / linkBoost);
-    link13 = factory->createLink(u"13"_j, int32_t(20) / linkBoost);
-    link14 = factory->createLink(u"14"_j, int32_t(20) / linkBoost);
-    buffer1 = factory->createBuffer(u"buf1"_j, buttonL1, true);
-    buffer2 = factory->createBuffer(u"buf2"_j, buttonL1, true);
-    buffer3 = factory->createBuffer(u"buf3"_j, buttonL1, true);
-    buffer4 = factory->createBuffer(u"buf4"_j, buttonL1, false);
-    link21 = factory->createLink(u"21"_j, int32_t(20) / linkBoost);
-    link22 = factory->createLink(u"22"_j, int32_t(20) / linkBoost);
-    link23 = factory->createLink(u"23"_j, int32_t(20) / linkBoost);
-    link24 = factory->createLink(u"24"_j, int32_t(20) / linkBoost);
-    switch_ = factory->createSwitch(u"switch"_j);
-    link31 = factory->createLink(u"31"_j, int32_t(13) / linkBoost);
-    link32 = factory->createLink(u"32"_j, int32_t(17) / linkBoost);
-    link33 = factory->createLink(u"33"_j, int32_t(34) / linkBoost);
-    link34 = factory->createLink(u"34"_j, int32_t(13) / linkBoost);
-    link35 = factory->createLink(u"35"_j, int32_t(17) / linkBoost);
-    link36 = factory->createLink(u"36"_j, int32_t(34) / linkBoost);
-    bufuR1 = factory->createBUFU(u"R1BF"_j, buttonHLT_R1);
-    bufuL1 = factory->createBUFU(u"L1BF"_j, buttonHLT_L1);
-    bufuR2 = factory->createBUFU(u"R2BF"_j, buttonHLT_R2);
-    bufuL2 = factory->createBUFU(u"L2BF"_j, buttonHLT_L2);
-    bufuR3 = factory->createBUFU(u"R3BF"_j, buttonHLT_R3);
-    bufuL3 = factory->createBUFU(u"L3BF"_j, buttonHLT_L3);
-    link41 = factory->createLink(u"41"_j, int32_t(10) / linkBoost);
-    link42 = factory->createLink(u"42"_j, int32_t(4) / linkBoost);
-    link43 = factory->createLink(u"43"_j, int32_t(13) / linkBoost);
-    link44 = factory->createLink(u"44"_j, int32_t(25) / linkBoost);
-    link45 = factory->createLink(u"45"_j, int32_t(10) / linkBoost);
-    link46 = factory->createLink(u"46"_j, int32_t(4) / linkBoost);
-    link47 = factory->createLink(u"47"_j, int32_t(13) / linkBoost);
-    link48 = factory->createLink(u"48"_j, int32_t(25) / linkBoost);
+    factory = factory_;
+    controller = factory_->getController();
+    buttonL1 = factory->createButton("Lv1 btn");
+    buttonHLT_L1 = factory->createButton("L1 btn");
+    buttonHLT_L2 = factory->createButton("L2 btn");
+    buttonHLT_L3 = factory->createButton("L3 btn");
+    buttonHLT_R1 = factory->createButton("R1 btn");
+    buttonHLT_R2 = factory->createButton("R2 btn");
+    buttonHLT_R3 = factory->createButton("R3 btn");
+    link11 = factory->createLink("11", int32_t(20) / linkBoost);
+    link12 = factory->createLink("12", int32_t(20) / linkBoost);
+    link13 = factory->createLink("13", int32_t(20) / linkBoost);
+    link14 = factory->createLink("14", int32_t(20) / linkBoost);
+    buffer1 = factory->createBuffer("buf1", buttonL1, true);
+    buffer2 = factory->createBuffer("buf2", buttonL1, true);
+    buffer3 = factory->createBuffer("buf3", buttonL1, true);
+    buffer4 = factory->createBuffer("buf4", buttonL1, false);
+    link21 = factory->createLink("21", int32_t(20) / linkBoost);
+    link22 = factory->createLink("22", int32_t(20) / linkBoost);
+    link23 = factory->createLink("23", int32_t(20) / linkBoost);
+    link24 = factory->createLink("24", int32_t(20) / linkBoost);
+    switch_ = factory->createSwitch("switch");
+    link31 = factory->createLink("31", int32_t(13) / linkBoost);
+    link32 = factory->createLink("32", int32_t(17) / linkBoost);
+    link33 = factory->createLink("33", int32_t(34) / linkBoost);
+    link34 = factory->createLink("34", int32_t(13) / linkBoost);
+    link35 = factory->createLink("35", int32_t(17) / linkBoost);
+    link36 = factory->createLink("36", int32_t(34) / linkBoost);
+    bufuR1 = factory->createBUFU("R1BF", buttonHLT_R1);
+    bufuL1 = factory->createBUFU("L1BF", buttonHLT_L1);
+    bufuR2 = factory->createBUFU("R2BF", buttonHLT_R2);
+    bufuL2 = factory->createBUFU("L2BF", buttonHLT_L2);
+    bufuR3 = factory->createBUFU("R3BF", buttonHLT_R3);
+    bufuL3 = factory->createBUFU("L3BF", buttonHLT_L3);
+    link41 = factory->createLink("41", int32_t(10) / linkBoost);
+    link42 = factory->createLink("42", int32_t(4) / linkBoost);
+    link43 = factory->createLink("43", int32_t(13) / linkBoost);
+    link44 = factory->createLink("44", int32_t(25) / linkBoost);
+    link45 = factory->createLink("45", int32_t(10) / linkBoost);
+    link46 = factory->createLink("46", int32_t(4) / linkBoost);
+    link47 = factory->createLink("47", int32_t(13) / linkBoost);
+    link48 = factory->createLink("48", int32_t(25) / linkBoost);
     storage = factory->createStorage();
-    dispatcher = factory->createDispatcher(::java::util::Arrays::asList(new ::java::lang::ObjectArray({static_cast< ::java::lang::Object* >(bufuL1), static_cast< ::java::lang::Object* >(bufuL2), static_cast< ::java::lang::Object* >(bufuL3), static_cast< ::java::lang::Object* >(bufuR1), static_cast< ::java::lang::Object* >(bufuR2), static_cast< ::java::lang::Object* >(bufuR3)})), ::java::util::Arrays::asList(new ::java::lang::ObjectArray({static_cast< ::java::lang::Object* >(link31), static_cast< ::java::lang::Object* >(link32), static_cast< ::java::lang::Object* >(link33), static_cast< ::java::lang::Object* >(link34), static_cast< ::java::lang::Object* >(link35), static_cast< ::java::lang::Object* >(link36)})));
-    npc(buffer1)->setDispatcher(dispatcher);
-    npc(buffer2)->setDispatcher(dispatcher);
-    npc(buffer3)->setDispatcher(dispatcher);
-    npc(buffer4)->setDispatcher(dispatcher);
-    npc(npc(link11)->getSuccessors())->add(static_cast< ::java::lang::Object* >(buffer1));
-    npc(npc(link12)->getSuccessors())->add(static_cast< ::java::lang::Object* >(buffer2));
-    npc(npc(link13)->getSuccessors())->add(static_cast< ::java::lang::Object* >(buffer3));
-    npc(npc(link14)->getSuccessors())->add(static_cast< ::java::lang::Object* >(buffer4));
-    npc(npc(buffer1)->getSuccessors())->add(static_cast< ::java::lang::Object* >(link21));
-    npc(npc(buffer2)->getSuccessors())->add(static_cast< ::java::lang::Object* >(link22));
-    npc(npc(buffer3)->getSuccessors())->add(static_cast< ::java::lang::Object* >(link23));
-    npc(npc(buffer4)->getSuccessors())->add(static_cast< ::java::lang::Object* >(link24));
-    npc(npc(link21)->getSuccessors())->add(static_cast< ::java::lang::Object* >(switch_));
-    npc(npc(link22)->getSuccessors())->add(static_cast< ::java::lang::Object* >(switch_));
-    npc(npc(link23)->getSuccessors())->add(static_cast< ::java::lang::Object* >(switch_));
-    npc(npc(link24)->getSuccessors())->add(static_cast< ::java::lang::Object* >(switch_));
-    npc(npc(switch_)->getSuccessors())->add(static_cast< ::java::lang::Object* >(link31));
-    npc(npc(switch_)->getSuccessors())->add(static_cast< ::java::lang::Object* >(link32));
-    npc(npc(switch_)->getSuccessors())->add(static_cast< ::java::lang::Object* >(link33));
-    npc(npc(switch_)->getSuccessors())->add(static_cast< ::java::lang::Object* >(link34));
-    npc(npc(switch_)->getSuccessors())->add(static_cast< ::java::lang::Object* >(link35));
-    npc(npc(switch_)->getSuccessors())->add(static_cast< ::java::lang::Object* >(link36));
-    npc(npc(link31)->getSuccessors())->add(static_cast< ::java::lang::Object* >(bufuL1));
-    npc(npc(link32)->getSuccessors())->add(static_cast< ::java::lang::Object* >(bufuL2));
-    npc(npc(link33)->getSuccessors())->add(static_cast< ::java::lang::Object* >(bufuL3));
-    npc(npc(link34)->getSuccessors())->add(static_cast< ::java::lang::Object* >(bufuR1));
-    npc(npc(link35)->getSuccessors())->add(static_cast< ::java::lang::Object* >(bufuR2));
-    npc(npc(link36)->getSuccessors())->add(static_cast< ::java::lang::Object* >(bufuR3));
-    npc(npc(bufuL1)->getSuccessors())->add(static_cast< ::java::lang::Object* >(link41));
-    npc(npc(link41)->getSuccessors())->add(static_cast< ::java::lang::Object* >(link43));
-    npc(npc(bufuL2)->getSuccessors())->add(static_cast< ::java::lang::Object* >(link42));
-    npc(npc(bufuL3)->getSuccessors())->add(static_cast< ::java::lang::Object* >(link44));
-    npc(npc(link42)->getSuccessors())->add(static_cast< ::java::lang::Object* >(link43));
-    npc(npc(link43)->getSuccessors())->add(static_cast< ::java::lang::Object* >(link44));
-    npc(npc(bufuR1)->getSuccessors())->add(static_cast< ::java::lang::Object* >(link45));
-    npc(npc(link45)->getSuccessors())->add(static_cast< ::java::lang::Object* >(link47));
-    npc(npc(bufuR2)->getSuccessors())->add(static_cast< ::java::lang::Object* >(link46));
-    npc(npc(bufuR3)->getSuccessors())->add(static_cast< ::java::lang::Object* >(link48));
-    npc(npc(link46)->getSuccessors())->add(static_cast< ::java::lang::Object* >(link47));
-    npc(npc(link47)->getSuccessors())->add(static_cast< ::java::lang::Object* >(link48));
-    npc(npc(link44)->getSuccessors())->add(static_cast< ::java::lang::Object* >(storage));
-    npc(npc(link48)->getSuccessors())->add(static_cast< ::java::lang::Object* >(storage));
-    npc(controller)->observer = new DataObserver(this);
+
+    vector<FlipperObject> targetsList;
+    targets.push_back(bufuL1);
+    targets.push_back(bufuL2);
+    targets.push_back(bufuL3);
+    targets.push_back(bufuR1);
+    targets.push_back(bufuR2);
+    targets.push_back(bufuR3);
+
+    vector<FlipperObject> linksList;
+    linksList.push_back(link31);
+    linksList.push_back(link32);
+    linksList.push_back(link33);
+    linksList.push_back(link34);
+    linksList.push_back(link35);
+    linksList.push_back(link36);
+
+    dispatcher = factory->createDispatcher(targetsList,linksList);
+    buffer1->setDispatcher(dispatcher);
+    buffer2->setDispatcher(dispatcher);
+    buffer3->setDispatcher(dispatcher);
+    buffer4->setDispatcher(dispatcher);
+    link11->getSuccessors()->add(buffer1);
+    link12->getSuccessors()->add(buffer2);
+    link13->getSuccessors()->add(buffer3);
+    link14->getSuccessors()->add(buffer4);
+    buffer1->getSuccessors()->add(link21);
+    buffer2->getSuccessors()->add(link22);
+    buffer3->getSuccessors()->add(link23);
+    buffer4->getSuccessors()->add(link24);
+    link21->getSuccessors()->add(switch_);
+    link22->getSuccessors()->add(switch_);
+    link23->getSuccessors()->add(switch_);
+    link24->getSuccessors()->add(switch_);
+    switch_->getSuccessors()->add(link31);
+    switch_->getSuccessors()->add(link32);
+    switch_->getSuccessors()->add(link33);
+    switch_->getSuccessors()->add(link34);
+    switch_->getSuccessors()->add(link35);
+    switch_->getSuccessors()->add(link36);
+    link31->getSuccessors()->add(bufuL1);
+    link32->getSuccessors()->add(bufuL2);
+    link33->getSuccessors()->add(bufuL3);
+    link34->getSuccessors()->add(bufuR1);
+    link35->getSuccessors()->add(bufuR2);
+    link36->getSuccessors()->add(bufuR3);
+    bufuL1->getSuccessors()->add(link41);
+    link41->getSuccessors()->add(link43);
+    bufuL2->getSuccessors()->add(link42);
+    bufuL3->getSuccessors()->add(link44);
+    link42->getSuccessors()->add(link43);
+    link43->getSuccessors()->add(link44);
+    bufuR1->getSuccessors()->add(link45);
+    link45->getSuccessors()->add(link47);
+    bufuR2->getSuccessors()->add(link46);
+    bufuR3->getSuccessors()->add(link48);
+    link46->getSuccessors()->add(link47);
+    link47->getSuccessors()->add(link48);
+    link44->getSuccessors()->add(storage);
+    link48->getSuccessors()->add(storage);
+    //controller->observer = new DataObserver(this);
     fragmentGenerator = new FragmentGenerator(link11, link12, link13, link14);
 }
 
@@ -162,9 +174,9 @@ void FlipperGame::doStep()
     controller->doStep();
 }
 
-void FlipperGame::doSteps(int32_t steps)
+void FlipperGame::doSteps(int steps)
 {
-    for (auto i = int32_t(0); i < steps; i++) {
+    for (int i = 0; i < steps; i++) {
         controller->doStep();
     }
 }

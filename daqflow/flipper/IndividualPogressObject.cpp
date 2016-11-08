@@ -10,7 +10,7 @@ IndividualPogressObject::IndividualPogressObject(string name, int capacity, int 
 {
 }
 
-constexpr int IndividualPogressObject::fakeInf;
+int IndividualPogressObject::fakeInf;
 
 
 void IndividualPogressObject::performInsert(Data* data)
@@ -29,7 +29,7 @@ bool IndividualPogressObject::canAccept()
     return IndividualPogressObject::canAccept();
 }
 
-int arr[] IndividualPogressObject::getProgress()
+int vector<int> IndividualPogressObject::getProgress()
 {
     return queue->getProgress();
 }
@@ -45,9 +45,9 @@ void IndividualPogressObject::doStep()
 {
     if(!queue->isEmpty()) {
         int localProgressLimit = fakeInf;
-        int32_t initialSize = queue->size();
-        int32_t recentSize = initialSize;
-        for (int32_t i = 0; i < recentSize; i++) {
+        int initialSize = queue->size();
+        int recentSize = initialSize;
+        for (int i = 0; i < recentSize; i++) {
             Data current = queue->get(i);
             if(current->getProgress() + progressStep < localProgressLimit) {
                 int progress = stepImplementation(current);
