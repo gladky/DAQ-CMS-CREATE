@@ -20,24 +20,42 @@ FragmentGenerator::FragmentGenerator(Link* link1_, Link* link2_, Link* link3_, L
 void FragmentGenerator::generateAndInsertFragments()
 {
 
-    Data* f4 = new Fragment(true);
+    Data* f1 = new Fragment(true);
     Data* f2 = new Fragment(true);
     Data* f3 = new Fragment(true);
-    Data* f1;
-    if(val == true){
-    	Serial.print("FragmentGenerator: Generating interesting f4 ");
-        f1 = new Fragment(true);
-        val = false;
-    } else{
-        Serial.print("FragmentGenerator: Generated non-interesting f4 ");
-        f1 = new Fragment(false);
-        val = true;
-    }
-    //val = !val;
+    Data* f4 = new Fragment(val);
+
+    val = !val;
+
     link1->insert(f1);
     link2->insert(f2);
     link3->insert(f3);
     link4->insert(f4);
 
+
+
+
+    /*Serial.print("Generated fragments (interesting)?: ");
+
+    Serial.print(f1->getName().c_str());
+    Serial.print(":");
+    Serial.print(f1->isInteresting());
+    Serial.print(" ");
+
+
+    Serial.print(f2->getName().c_str());
+    Serial.print(":");
+    Serial.print(f2->isInteresting());
+    Serial.print(" ");
+
+    Serial.print(f3->getName().c_str());
+    Serial.print(":");
+    Serial.print(f3->isInteresting());
+    Serial.print(" ");
+
+    Serial.print(f4->getName().c_str());
+    Serial.print(":");
+    Serial.print(f4->isInteresting());
+    Serial.print(" ");*/
 }
 

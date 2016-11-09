@@ -7,10 +7,8 @@
 Fragment::Fragment(bool interesting) 
     : Data("f", true, interesting)
 {
-    id_++;
 }
 
 
-int Fragment::id_;
 
 

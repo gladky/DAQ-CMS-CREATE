@@ -203,8 +203,10 @@ void FlowObserver::persist()
                     }
 
 		    int soundInt = soundPlayer->getSounds()[i];
-                    Serial.print("FlowObserver: registered sound with id: ");
-                    Serial.println(soundInt);
+
+                    /*Serial.print("FlowObserver: registered sound with id: ");
+                    Serial.println(soundInt);*/
+
                     data.append(toString(soundInt));
                 }
                 result = data;

@@ -24,15 +24,15 @@ Data* SimpleFifoQueue::peek()
 Data* SimpleFifoQueue::poll()
 {
 
-    Serial.print("Polling, current size: ");
-    Serial.println(size());
+    /*Serial.print("Polling, current size: ");
+    Serial.println(size());*/
 
     Data* result = queue[0];
     queue.erase(queue.begin()); // remove(0)
     tailIndex--;
 
-    Serial.print("Polled, current size: ");
-    Serial.println(size());
+    /*Serial.print("Polled, current size: ");
+    Serial.println(size());*/
 
     return result;
 }
@@ -40,8 +40,8 @@ Data* SimpleFifoQueue::poll()
 bool SimpleFifoQueue::add(Data* data)
 {
 
-    Serial.print("Adding, current tail: ");
-    Serial.println(tailIndex);
+    //Serial.print("Adding, current tail: ");
+    //Serial.println(tailIndex);
     if(tailIndex >= capacity)
         return false;
 

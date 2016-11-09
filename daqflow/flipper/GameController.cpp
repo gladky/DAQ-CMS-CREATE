@@ -29,8 +29,8 @@ vector<FlipperObject*>& GameController::getFlipperObjects()
 void GameController::doStep()
 {
     
-    Serial.print("GameController: doStep, objects to do step: ");
-    Serial.println(flipperObjects.size());
+    /*Serial.print("GameController: doStep, objects to do step: ");
+    Serial.println(flipperObjects.size());*/
     
     for (int i = flipperObjects.size()-1; i >=0; i-- ) {
         flipperObjects[i]->doStep();

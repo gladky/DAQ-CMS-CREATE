@@ -10,10 +10,6 @@ class Fragment
 {
 
 
-private:
-    static int id_;
-
-
 public:
     Fragment(bool interesting);
 
