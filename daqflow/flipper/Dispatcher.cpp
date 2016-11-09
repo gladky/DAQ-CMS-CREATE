@@ -28,12 +28,19 @@ FlipperObject* Dispatcher::getLink(int id)
 
 int Dispatcher::findAvailableTarget()
 {
+
+    //Serial.print("Dispatcher::findAvailableTarget: about to ");
     if(valid) {
     } else {
         result = -1;
         vector<int> ready;
+        /*Serial.print(", Available targets: ");
+        Serial.print(targets.size());
+        Serial.print(", iterating, ");*/
         for (int i = 0; i < targets.size(); i++) {
+	    //Serial.print(targets[i]->getName().c_str());
             FlipperObject* bufu = targets[i];
+	    //Serial.print(bufu->getName().c_str());
             if(!bufu->isBusy() && bufu->canAccept()) {
                 ready.push_back(i);
             }
@@ -55,6 +62,8 @@ int Dispatcher::findAvailableTarget()
             backpressure = true;
         }
     }
+
+    //Serial.println("Dispatcher::findAvailableTarget: done");
     return result;
 }
 

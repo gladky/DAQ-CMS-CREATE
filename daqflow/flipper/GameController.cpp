@@ -7,8 +7,8 @@ THis class is reduced for testing. Just uncomment elements
 
 #include "GameController.hpp"
 
-//#include <Button.hpp>
-//#include <Dispatcher.hpp>
+#include "Button.hpp"
+#include "Dispatcher.hpp"
 #include "FlipperObject.hpp"
 #include "FlowObserver.hpp"
 #include "SoundPlayer.hpp"
@@ -39,11 +39,11 @@ void GameController::doStep()
         observer->persist();
     }
 
- /*
-    for (vector<Button>::iterator it = buttons.begin() ; it != buttons.end(); ++it){
-        it->doStep();
+ 
+    for (int i = buttons.size()-1; i >=0; i-- ) {
+        buttons[i]->doStep();
     }
-    dispatcher->invalidate();*/
+    dispatcher->invalidate();
     soundPlayer->flush();
 }
 

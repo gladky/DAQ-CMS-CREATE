@@ -61,12 +61,14 @@ FlipperGame::FlipperGame()
 
 /*
     switch_ = factory->createSwitch("switch");
+*/
     link31 = factory->createLink("31", int32_t(13) / linkBoost);
     link32 = factory->createLink("32", int32_t(17) / linkBoost);
     link33 = factory->createLink("33", int32_t(34) / linkBoost);
     link34 = factory->createLink("34", int32_t(13) / linkBoost);
     link35 = factory->createLink("35", int32_t(17) / linkBoost);
     link36 = factory->createLink("36", int32_t(34) / linkBoost);
+/*
     bufuR1 = factory->createBUFU("R1BF", buttonHLT_R1);
     bufuL1 = factory->createBUFU("L1BF", buttonHLT_L1);
     bufuR2 = factory->createBUFU("R2BF", buttonHLT_R2);

@@ -115,7 +115,7 @@ int counter = 0;
 void loop() {
 
 
-  if(counter < 18){
+  if(counter < 40){
 
     
     Serial.print("step-");
@@ -127,8 +127,8 @@ void loop() {
     if(counter % 6 == 0 && counter < 200) {
         flipperGame->generateNewFragments();
     }
-    /*flipperGame->pressButtonLevel1();
-    flipperGame->pressButtonHLT_L1();
+    flipperGame->pressButtonLevel1();
+    /*flipperGame->pressButtonHLT_L1();
     flipperGame->pressButtonHLT_L2();
     flipperGame->pressButtonHLT_L3();
     flipperGame->pressButtonHLT_R1();
