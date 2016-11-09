@@ -16,7 +16,7 @@ int IndividualPogressObject::fakeInf =100000 ;
 
 void IndividualPogressObject::performInsert(Data* data)
 {
-    Serial.println("IndividualPogressObject: performing insert");
+    //Serial.println("IndividualPogressObject: performing insert");
     data->setProgress(0);
     data->setTimeOutProgress(0);
     queue->add(data);
@@ -27,10 +27,10 @@ bool IndividualPogressObject::canAccept()
 {
 
     if(acceptedThisCycle) {
-        Serial.println("IndividualPogressObject: can accept? NO, already accepted this cycle");
+        //Serial.println("IndividualPogressObject: can accept? NO, already accepted this cycle");
         return false;
     }
-    Serial.println("IndividualPogressObject: can accept? will ask FlipperObject");
+    //Serial.println("IndividualPogressObject: can accept? will ask FlipperObject");
     return FlipperObject::canAccept();
 }
 
@@ -48,7 +48,7 @@ int IndividualPogressObject::stepImplementation(Data* current)
 
 void IndividualPogressObject::doStep()
 {
-    Serial.println("IndividualProgressObject: doStep");
+    //Serial.println("IndividualProgressObject: doStep");
     if(!queue->isEmpty()) {
         int localProgressLimit = fakeInf;
         int initialSize = queue->size();

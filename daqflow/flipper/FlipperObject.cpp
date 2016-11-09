@@ -25,10 +25,10 @@ FlipperObject::FlipperObject(string name_, int32_t capacity_, int progressStep_,
 bool FlipperObject::insert(Data* data)
 {
     if(!canAccept()) {
-        Serial.println("FlipperObject: Inserting data disallowed");
+        //Serial.println("FlipperObject: Inserting data disallowed");
         return false;
     } else {
-        Serial.println("FlipperObject: Inserting data allowed");
+        //Serial.println("FlipperObject: Inserting data allowed");
         performInsert(data);
         reserved = false;
         return true;
@@ -41,20 +41,20 @@ bool FlipperObject::canAccept()
     bool iAmAbleToAccept;
     if(queue->size() == capacity) {
         iAmAbleToAccept = false;
-        Serial.println("FlipperObject:canAccept? false, full");
+        //Serial.println("FlipperObject:canAccept? false, full");
         return false;
     } else {
         iAmAbleToAccept = true;
     }
     bool existsNonLinkSuccessorsCanAccept = false;
     if(Link* link = dynamic_cast<Link*>(this)) {
-        Serial.print("FlipperObject:I am link, I have to ask others, number of my successors: ");
-        Serial.println(successors.size());
+        //Serial.print("FlipperObject:I am link, I have to ask others, number of my successors: ");
+        //Serial.println(successors.size());
         for (int i = 0; i< successors.size(); i++ ) {
             FlipperObject* successor = successors[i];
             {
-                Serial.print("FlipperObject:Asking successor ");
-                Serial.println(successor->getName().c_str());
+                //Serial.print("FlipperObject:Asking successor ");
+                //Serial.println(successor->getName().c_str());
                 bool canAccept = successor->canAccept();
                 if(canAccept == true) {
                     existsNonLinkSuccessorsCanAccept = true;
@@ -65,10 +65,10 @@ bool FlipperObject::canAccept()
         existsNonLinkSuccessorsCanAccept = true;
     }
     if(iAmAbleToAccept == false || existsNonLinkSuccessorsCanAccept == false) {
-        Serial.println("FlipperObject:canAccept? false, one of 2 condition");
+        //Serial.println("FlipperObject:canAccept? false, one of 2 condition");
         return false;
     } else {
-        Serial.println("FlipperObject:canAccept? true");
+        //Serial.println("FlipperObject:canAccept? true");
         return true;
     }
 }

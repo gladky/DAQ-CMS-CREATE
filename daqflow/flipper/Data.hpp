@@ -24,6 +24,9 @@ private:
     bool isFragment_ ;
     bool isInteresting_ ;
 
+    static int id;
+    static char numstr[6]; // tmp buffer for converting int to std:strings. Capable to int 999999
+
 public:
     virtual string getName();
     virtual FlipperObject* getTarget();
@@ -38,6 +41,7 @@ public:
     virtual void setTimeOutProgress(int timeOutProgress);
     virtual int getTargetIndex();
     virtual void setTargetIndex(int targetIndex);
+    virtual string toString(int i);
 
     // Generated
     Data(string name, bool isFragment, bool isInteresting);

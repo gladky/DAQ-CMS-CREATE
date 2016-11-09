@@ -20,15 +20,24 @@ FragmentGenerator::FragmentGenerator(Link* link1_, Link* link2_, Link* link3_, L
 void FragmentGenerator::generateAndInsertFragments()
 {
 
-    Serial.println("FragmentGenerator: Generating new fragments");
-    Data* f1 = new Fragment(true);
+    Data* f4 = new Fragment(true);
     Data* f2 = new Fragment(true);
     Data* f3 = new Fragment(true);
-    Data* f4 = new Fragment(val);
-    val = !val;
+    Data* f1;
+    if(val == true){
+    	Serial.print("FragmentGenerator: Generating interesting f4 ");
+        f1 = new Fragment(true);
+        val = false;
+    } else{
+        Serial.print("FragmentGenerator: Generated non-interesting f4 ");
+        f1 = new Fragment(false);
+        val = true;
+    }
+    //val = !val;
     link1->insert(f1);
     link2->insert(f2);
     link3->insert(f3);
     link4->insert(f4);
+
 }
 

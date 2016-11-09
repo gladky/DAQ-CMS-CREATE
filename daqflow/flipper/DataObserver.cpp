@@ -14,7 +14,7 @@ THis class is reduced
 
 
 DataObserver::DataObserver(FlipperGame* flipperGame)
-: FlowObserver(flipperGame, 2,4,5,14,7,4)
+: FlowObserver(flipperGame, 2,4,5,14,17,4)
 {
 }
 

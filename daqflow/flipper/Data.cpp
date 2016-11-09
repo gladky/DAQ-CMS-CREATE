@@ -4,11 +4,19 @@
 
 #include "FlipperObject.hpp"
 
+#include <iostream>
+
 Data::Data(string name_, bool isFragment, bool isInteresting) 
 {
     isFragment_ = isFragment;
     isInteresting_ = isInteresting;
     name = name_;
+
+    if(isInteresting_ == true){
+        name = "F";
+    }
+
+    name.append(toString(id++));
 }
 
 string Data::getName()
@@ -79,5 +87,14 @@ int Data::getTargetIndex()
 void Data::setTargetIndex(int targetIndex_)
 {
     targetIndex = targetIndex_;
+}
+
+char Data::numstr[6];
+int Data::id=0;
+
+string Data::toString(int i){
+	sprintf(Data::numstr, "%d", i);
+	string numberString =  numstr;
+	return numberString;
 }
 
