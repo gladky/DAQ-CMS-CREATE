@@ -86,34 +86,26 @@ FlowObserver::FlowObserver(FlipperGame* flipperGame, int minWidth, int width, in
     //lengths = //should be initialized automatically
     for (int i = 0; i < observedObjects.size(); i++) {
         NamedObject* object = observedObjects[i];
-        
-        Serial.print("Observed object type: ");
-	Serial.println(typeid(object).name());
-        if(typeid(FlipperObject) == typeid(object)) {
             /*if(typeid(Storage) == typeid(object)) {
                 lengths.put(i, STORAGE_WIDTH);
             } else if(dynamic_cast< Switch* >(object) != nullptr) {
                 npc(lengths)->put(::java::lang::Integer::valueOf(i), ::java::lang::Integer::valueOf(SWITCH_WIDTH));
             } else */
 
-	    if(typeid(Link) == typeid(object)) {
+	    if(Link *v = dynamic_cast<Link*>(object)) {
+           	Serial.println("Observed object is a Link");
                 lengths.push_back( MIN_WIDTH); // was with the i
             }
             /*else if(dynamic_cast< Buffer* >(object) != nullptr) {
                 npc(lengths)->put(::java::lang::Integer::valueOf(i), ::java::lang::Integer::valueOf(BUFFER_WIDTH));
             }*/
-	    else {
-                lengths.push_back( WIDTH); // was with the i indicating position
-            }
-        }/* else {
-            if(dynamic_cast< Button* >(object) != nullptr) {
+            /*else if(dynamic_cast< Button* >(object) != nullptr) {
                 npc(lengths)->put(::java::lang::Integer::valueOf(i), ::java::lang::Integer::valueOf(MIN_WIDTH));
             } else if(dynamic_cast< SoundPlayer* >(object) != nullptr) {
                 npc(lengths)->put(::java::lang::Integer::valueOf(i), ::java::lang::Integer::valueOf(SOUND_WIDTH));
-            } else {
-                npc(lengths)->put(::java::lang::Integer::valueOf(i), ::java::lang::Integer::valueOf(WIDTH));
+            }*/ else {
+                lengths.push_back(WIDTH);
             }
-        }*/
     }
 }
 /*
@@ -136,8 +128,7 @@ string FlowObserver::getState(Switch* switch_)
 string FlowObserver::getState(FlipperObject* observedObject)
 {
     string data;
-    if(typeid(Link) ==typeid(observedObject)) {
-	Link* linkObject = dynamic_cast<Link*>(observedObject);
+    if(Link *linkObject = dynamic_cast<Link*>(observedObject)) {
         data = getState(linkObject);
     } 
     /*else if(dynamic_cast< Buffer* >(observedObject) != nullptr) {
@@ -170,8 +161,7 @@ void FlowObserver::persist()
         NamedObject* observedObject = observedObjects[i];
         {
             string result;
-            if( typeid(FlipperObject) == typeid(observedObject)) {
-                FlipperObject* observedFlipperObject =  dynamic_cast< FlipperObject* >(observedObject);
+            if( FlipperObject* observedFlipperObject = dynamic_cast<FlipperObject*>(observedObject)) {
                 result = getState(observedFlipperObject);
             } 
 

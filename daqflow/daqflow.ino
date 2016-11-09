@@ -113,6 +113,9 @@ void loop() {
 
     Serial.println(flipperGame->getController()->observer->toString().c_str());
     //cout << "There should be x events in storage: " << flipperGame->getStorage()->getQueue()->size() << endl;
+    Serial.println();
+    Serial.println("-----------------------");
+    delay(50000);
 
   }
 
