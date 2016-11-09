@@ -1,19 +1,19 @@
 // Generated from /cms.flipper/src/main/java/SoundPlayer.java
-#include <SoundPlayer.hpp>
+#include "SoundPlayer.hpp"
 
-#include <Sound.hpp>
-
-
+#include "Sound.hpp"
 
 
-void SoundPlayer::SoundPlayer(string name): NamedObject(name)
+
+
+SoundPlayer::SoundPlayer(string name): NamedObject(name)
 {
     vector<int> sounds;
 }
 
 void SoundPlayer::register_(int soundId)
 {
-    sounds->add(soundId);
+    sounds.push_back(soundId);
 }
 
 vector<int> SoundPlayer::getSounds()
@@ -23,7 +23,7 @@ vector<int> SoundPlayer::getSounds()
 
 void SoundPlayer::flush()
 {
-    sounds->clear();
+    sounds.clear();
 }
 
 

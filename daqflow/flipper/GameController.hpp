@@ -11,7 +11,7 @@ THis class is reduced for testing. Just uncomment elements
 #include "FlipperObject.hpp"
 //#include "Button.hpp"
 //#include "Dispatcher.hpp"
-//#include "SoundPlayer.hpp"
+#include "SoundPlayer.hpp"
 #include "FlowObserver.hpp"
 #include <vector>
 
@@ -24,17 +24,17 @@ private:
     vector<FlipperObject*> flipperObjects;
   //  vector<Button> buttons {  };
  //   Dispatcher* dispatcher {  };
-  //  SoundPlayer* soundPlayer {  };
+    SoundPlayer* soundPlayer {  };
 
 public:
     FlowObserver* observer;
 
 public:
-    virtual vector<FlipperObject> getFlipperObjects();
+    virtual vector<FlipperObject*> getFlipperObjects();
     virtual void doStep();
     //virtual vector<Button> getButtons();
     //virtual void setDispatcher(Dispatcher* dispatcher);
-    //virtual void setSoundPlayer(SoundPlayer* soundPlayer);
+    virtual void setSoundPlayer(SoundPlayer* soundPlayer);
 
     // Generated
     GameController();

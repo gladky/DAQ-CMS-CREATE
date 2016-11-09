@@ -1,5 +1,5 @@
 // Generated from /cms.flipper/src/main/java/FlipperObjectFactory.java
-#include <FlipperObjectFactory.hpp>
+#include "FlipperObjectFactory.hpp"
 
 
 /*
@@ -10,10 +10,10 @@ This class is reduced, uncomment to introduce new elements
 //#include <Buffer.hpp>
 //#include <Button.hpp>
 //#include <Dispatcher.hpp>
-#include <FlipperObject.hpp>
-#include <GameController.hpp>
-#include <Link.hpp>
-//#include <SoundPlayer.hpp>
+#include "FlipperObject.hpp"
+#include "GameController.hpp"
+#include "Link.hpp"
+#include "SoundPlayer.hpp"
 //#include <Storage.hpp>
 //#include <Switch.hpp>
 
@@ -21,22 +21,26 @@ This class is reduced, uncomment to introduce new elements
 
 FlipperObjectFactory::FlipperObjectFactory() 
 {
+
+    Serial.println("FlipperObjectFactory: initializing controller");
     controller = new GameController();
     bufferProcessingStep = DEFAULT_BUFFER_PROCESSING_STEP;
     bufferTimeoutStep = DEFAULT_BUFFER_TIMEOUT_STEP;
     bufuProcessingStep = DEFAULT_BUFU_PROCESSING_STEP;
     bufuTimeoutStep = DEFAULT_BUFU_TIMEOUT_STEP;
+
+    Serial.println("FlipperObjectFactory: initializing sound player");
     soundPlayer = new SoundPlayer("SP");
     controller->setSoundPlayer(soundPlayer);
 }
 
-constexpr int FlipperObjectFactory::DEFAULT_BUFFER_PROCESSING_STEP = 8;
+int FlipperObjectFactory::DEFAULT_BUFFER_PROCESSING_STEP = 8;
 
-constexpr int FlipperObjectFactory::DEFAULT_BUFFER_TIMEOUT_STEP=25;
+int FlipperObjectFactory::DEFAULT_BUFFER_TIMEOUT_STEP=25;
 
-constexpr int FlipperObjectFactory::DEFAULT_BUFU_PROCESSING_STEP=10;
+int FlipperObjectFactory::DEFAULT_BUFU_PROCESSING_STEP=10;
 
-constexpr int FlipperObjectFactory::DEFAULT_BUFU_TIMEOUT_STEP=25;
+int FlipperObjectFactory::DEFAULT_BUFU_TIMEOUT_STEP=25;
 
 
 FlipperObject* FlipperObjectFactory::createLink(string name, int logicalLength)
@@ -49,7 +53,7 @@ FlipperObject* FlipperObjectFactory::createLink(string name, int logicalLength)
     }
     string uniqueName = getShortName(name);
     FlipperObject* link = new Link(uniqueName, 1, calculatedStep, soundPlayer);
-    controller->getFlipperObjects()->add(link);
+    controller->getFlipperObjects().push_back(link);
     return link;
 }
 
@@ -110,6 +114,7 @@ string FlipperObjectFactory::getShortName(string name)
 
 GameController* FlipperObjectFactory::getController()
 {
+    Serial.println("FlipperObjectFactory: Getting controller");
     return controller;
 }
 

@@ -26,8 +26,14 @@ THis class is reduced for testing. Just uncomment elements
 //FlipperGame::FlipperGame(FlipperObjectFactory* factory_)
 FlipperGame::FlipperGame()
 {
-    //factory = factory_;
+
+    Serial.println("FlipperGame: initializing factory and controller");
+    factory = new FlipperObjectFactory;
+
     controller = factory->getController();
+
+
+    Serial.println("FlipperGame: creating links");
 /*
     buttonL1 = factory->createButton("Lv1 btn");
     buttonHLT_L1 = factory->createButton("L1 btn");
@@ -134,12 +140,18 @@ FlipperGame::FlipperGame()
     link44->getSuccessors().push_back(storage);
     link48->getSuccessors().push_back(storage);*/
 
+
+    Serial.println("FlipperGame: initializing generator");
+
     fragmentGenerator = new FragmentGenerator(link11, link12, link13, link14);
 
+    Serial.println("FlipperGame: initializing observer");
 
     FlipperGame* flipperGame_ = this;
     DataObserver* observer_ = new DataObserver(flipperGame_);
     controller->observer = observer_;
+
+    Serial.println("FlipperGame: initialized");
 }
 
 void FlipperGame::generateNewFragments()

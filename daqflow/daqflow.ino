@@ -4,6 +4,12 @@
 #include "flipper/FlipperGame.hpp"
 #include "flipper/FlipperGame.cpp"
 
+#include "flipper/GameController.hpp"
+#include "flipper/GameController.cpp"
+
+#include "flipper/SoundPlayer.hpp"
+#include "flipper/SoundPlayer.cpp"
+
 
 #include "flipper/FragmentGenerator.hpp"
 #include "flipper/FragmentGenerator.cpp"
@@ -27,8 +33,20 @@
 #include "flipper/FlipperObject.hpp"
 #include "flipper/FlipperObject.cpp"
 
+#include "flipper/FlipperObjectFactory.hpp"
+#include "flipper/FlipperObjectFactory.cpp"
+
 #include "flipper/IndividualPogressObject.hpp"
 #include "flipper/IndividualPogressObject.cpp"
+
+#include "flipper/Link.hpp"
+#include "flipper/Link.cpp"
+
+
+#include "flipper/SimpleFifoQueue.hpp"
+#include "flipper/SimpleFifoQueue.cpp"
+
+
 
 
 #include <vector>
@@ -55,8 +73,9 @@ void setup() {
   strip.show();  // Turn all LEDs off ASAP
   
   Serial.begin(9600);
-  delay(100);
+  delay(2000);
 
+  Serial.println("Initializing model");
   //model = new Model(result_leds);
 
   flipperGame = new FlipperGame();
@@ -65,6 +84,8 @@ void setup() {
   //printModel();
 
   //model->start();
+  
+  Serial.println("Model initialized");
 }
 
 int counter = 0;
@@ -87,8 +108,10 @@ void loop() {
     flipperGame->pressButtonHLT_R3();*/
     flipperGame->doStep();
   } else{
+    delay(5000);
+    Serial.println("Finished test run");
 
-    //cout << flipperGame->getController()->observer->toString() << endl;
+    Serial.println(flipperGame->getController()->observer->toString().c_str());
     //cout << "There should be x events in storage: " << flipperGame->getStorage()->getQueue()->size() << endl;
 
   }

@@ -16,7 +16,6 @@ This class is reduced, uncomment
 #include "FlipperObject.hpp"
 #include "Link.hpp"
 #include "NamedObject.hpp"
-#include "Pair.hpp"
 #include "SimpleFifoQueue.hpp"
 #include "Sound.hpp"
 //#include <SoundPlayer.hpp>
@@ -134,7 +133,7 @@ string FlowObserver::getState(Switch* switch_)
 }
 */
 
-Pair* FlowObserver::getState(FlipperObject* observedObject)
+string FlowObserver::getState(FlipperObject* observedObject)
 {
     string data;
     if(typeid(Link) ==typeid(observedObject)) {
@@ -152,7 +151,7 @@ Pair* FlowObserver::getState(FlipperObject* observedObject)
     } */else {
         data = "???";
     }
-    return Pair::of(observedObject->getName(), data);
+    return data;
 }
 
 /*
@@ -170,7 +169,7 @@ void FlowObserver::persist()
     for (int i = 0; i< observedObjects.size(); i++ ) {
         NamedObject* observedObject = observedObjects[i];
         {
-            Pair* result;
+            string result;
             if( typeid(FlipperObject) == typeid(observedObject)) {
                 FlipperObject* observedFlipperObject =  dynamic_cast< FlipperObject* >(observedObject);
                 result = getState(observedFlipperObject);
@@ -201,10 +200,10 @@ void FlowObserver::persist()
                 }
                 result = Pair::of(npc(soundPlayer)->getName(), data);
             } */ else {
-                result = Pair::of("X", "?");
+                result = "?";
             }
             //currentState.push_back(result->getLeft(), result->getRight()); // it used to be a map, maybe now the pair not necessary
-            currentState.push_back( result->getRight());
+            currentState.push_back( result);
         }
     }
     states.push_back(currentState);

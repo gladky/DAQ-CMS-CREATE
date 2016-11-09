@@ -10,7 +10,6 @@ This class is reduced, uncomment
 #include "Link.hpp"
 #include "NamedObject.hpp"
 #include "FlipperObject.hpp"
-#include "Pair.hpp"
 
 #include <string>
 #include <vector>
@@ -42,7 +41,7 @@ public: /* protected */
     //virtual string getState(Switch* switch_);
 
 private:
-    Pair* getState(FlipperObject* observedObject);
+    string getState(FlipperObject* observedObject);
     //Pair* getState(Button* observedButtonObject);
 
 public:

@@ -26,6 +26,7 @@ public:
     virtual Data* get(int index);
     virtual void clear();
     virtual vector<int> getProgress();
+    virtual string toString();
 
     // Generated
     SimpleFifoQueue(int capacity);

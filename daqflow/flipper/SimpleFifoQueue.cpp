@@ -1,26 +1,30 @@
 // Generated from /cms.flipper/src/main/java/SimpleFifoQueue.java
-#include <SimpleFifoQueue.hpp>
+#include "SimpleFifoQueue.hpp"
 
-#include <Data.hpp>
+#include "Data.hpp"
 
+#include <vector>
+
+using namespace std;
 
 
 SimpleFifoQueue::SimpleFifoQueue(int capacity_) 
 {
     capacity= capacity_;
-    queue(capacity_);
+    //queue(capacity_); // underlying data structure is unlimited watch out
     tailIndex = 0;
 }
 
 
 Data* SimpleFifoQueue::peek()
 {
-    return queue->get(0);
+    return queue[0];
 }
 
 Data* SimpleFifoQueue::poll()
 {
-    Data result = queue->erase(0);
+    Data* result = queue[0];
+    queue.erase(queue.begin()); // remove(0)
     tailIndex--;
     return result;
 }
@@ -30,12 +34,12 @@ bool SimpleFifoQueue::add(Data* data)
     if(tailIndex >= capacity)
         return false;
 
-    queue->insert(tailIndex, data);
+    queue.insert(queue.begin()+tailIndex, data); // add(index,element)
     tailIndex++;
     return true;
 }
 
-int32_t SimpleFifoQueue::size()
+int SimpleFifoQueue::size()
 {
     return tailIndex;
 }
@@ -43,9 +47,10 @@ int32_t SimpleFifoQueue::size()
 string SimpleFifoQueue::toString()
 {
     string result = "";
-    for (it=queue.begin(); it<queue.end(); it++)
-        result.append(*it);
-        result.append(",")
+    for (int i = 0 ; i < tailIndex; i++){
+        result.append(queue[i]->getName());
+        result.append(",");
+    }
     return result;
 }
 
@@ -59,24 +64,25 @@ bool SimpleFifoQueue::isEmpty()
 
 Data* SimpleFifoQueue::get(int index)
 {
-    return queue->get(index);
+    return queue[index];
 }
 
 void SimpleFifoQueue::clear()
 {
     tailIndex = 0;
-    queue->clear();
+    queue.clear();
 }
 
 vector<int> SimpleFifoQueue::getProgress()
 {
-    if(queue->size() == 0) {
-        return new ::int32_tArray({int32_t(0)});
+    vector<int> progress;
+    if(queue.size() == 0) {
+        progress.push_back(0);
     }
-    auto progressArray_ = new ::int32_tArray(npc(queue)->size());
-    for (auto i = int32_t(0); i < npc(queue)->size(); i++) {
-        (*progressArray_)[i] = npc(java_cast< Data* >(npc(queue)->get(i)))->getProgress();
+    for (int i = 0; i < queue.size(); i++) {
+        progress.push_back(queue[i]->getProgress());
     }
-    return progressArray_;
+    
+    return progress;
 }
 

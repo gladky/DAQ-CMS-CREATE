@@ -4,6 +4,7 @@
 
 
 #include "IndividualPogressObject.hpp"
+#include "SoundPlayer.hpp"
 
 class Link:
     public IndividualPogressObject

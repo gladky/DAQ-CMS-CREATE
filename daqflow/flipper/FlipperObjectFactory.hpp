@@ -9,7 +9,7 @@ This class is reduced, uncomment to introduce new elements
 
 //#include "Buffer.hpp"
 #include "GameController.hpp"
-//#include "SoundPlayer.hpp"
+#include "SoundPlayer.hpp"
 #include "FlipperObject.hpp"
 
 
@@ -27,7 +27,7 @@ private:
     int bufferTimeoutStep ;
     int bufuProcessingStep;
     int bufuTimeoutStep;
-    //SoundPlayer* soundPlayer;
+    SoundPlayer* soundPlayer;
 
 public:
     virtual FlipperObject* createLink(string name, int logicalLength);
