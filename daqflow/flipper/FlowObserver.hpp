@@ -10,6 +10,7 @@ This class is reduced, uncomment
 #include "Link.hpp"
 #include "NamedObject.hpp"
 #include "FlipperObject.hpp"
+#include "Storage.hpp"
 
 #include <string>
 #include <vector>
@@ -33,11 +34,13 @@ private:
     vector<vector<string> > states;
     vector<int> lengths; // map was used
 
+    char numstr[4]; // tmp buffer for converting int to std:strings. Capable to int 9999
+
 public: /* protected */
     virtual string getState(Link* link) = 0;
     //virtual string getState(BUFU* bufu) = 0;
     //virtual string getState(Buffer* buffer) = 0;
-    //virtual string getState(Storage* storage) = 0;
+    virtual string getState(Storage* storage) = 0;
     //virtual string getState(Switch* switch_);
 
 private:
@@ -50,6 +53,7 @@ public:
 
 private:
     string toString(vector<string> row);
+    string toString(int i);
 
 public:
 

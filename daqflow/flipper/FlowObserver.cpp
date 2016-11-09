@@ -23,7 +23,10 @@ This class is reduced, uncomment
 //#include <Switch.hpp>
 
 #include <typeinfo>
+#include <string>
 #include <iostream>
+
+
 using namespace std;
 
 
@@ -89,13 +92,14 @@ FlowObserver::FlowObserver(FlipperGame* flipperGame, int minWidth, int width, in
     //lengths = //should be initialized automatically
     for (int i = 0; i < observedObjects.size(); i++) {
         NamedObject* object = observedObjects[i];
-            /*if(typeid(Storage) == typeid(object)) {
-                lengths.put(i, STORAGE_WIDTH);
-            } else if(dynamic_cast< Switch* >(object) != nullptr) {
+            if(Storage* v = dynamic_cast<Storage*>(object)) {
+           	Serial.println("Observed object is a Storage");
+                lengths.push_back(STORAGE_WIDTH);
+            }/* else if(dynamic_cast< Switch* >(object) != nullptr) {
                 npc(lengths)->put(::java::lang::Integer::valueOf(i), ::java::lang::Integer::valueOf(SWITCH_WIDTH));
             } else */
 
-	    if(Link *v = dynamic_cast<Link*>(object)) {
+	    else if(Link* v = dynamic_cast<Link*>(object)) {
            	Serial.println("Observed object is a Link");
                 lengths.push_back( MIN_WIDTH); // was with the i
             }
@@ -104,9 +108,11 @@ FlowObserver::FlowObserver(FlipperGame* flipperGame, int minWidth, int width, in
             }*/
             /*else if(dynamic_cast< Button* >(object) != nullptr) {
                 npc(lengths)->put(::java::lang::Integer::valueOf(i), ::java::lang::Integer::valueOf(MIN_WIDTH));
-            } else if(dynamic_cast< SoundPlayer* >(object) != nullptr) {
-                npc(lengths)->put(::java::lang::Integer::valueOf(i), ::java::lang::Integer::valueOf(SOUND_WIDTH));
-            }*/ else {
+            } */
+            else if(SoundPlayer* v = dynamic_cast< SoundPlayer* >(object)) {
+           	Serial.println("Observed object is a SoundPlayer");
+                lengths.push_back( SOUND_WIDTH); 
+            } else {
                 lengths.push_back(WIDTH);
             }
     }
@@ -133,14 +139,19 @@ string FlowObserver::getState(FlipperObject* observedObject)
     string data;
     if(Link *linkObject = dynamic_cast<Link*>(observedObject)) {
         data = getState(linkObject);
-    } 
+    } else if(SoundPlayer* v = dynamic_cast< SoundPlayer* >(observedObject)) {
+        FlipperObject* f = dynamic_cast< FlipperObject* >(observedObject);
+        data = getState(f);
+    }
     /*else if(dynamic_cast< Buffer* >(observedObject) != nullptr) {
         data = getState(java_cast< Buffer* >(observedObject));
     } else if(dynamic_cast< BUFU* >(observedObject) != nullptr) {
         data = getState(java_cast< BUFU* >(observedObject));
-    } else if(dynamic_cast< Storage* >(observedObject) != nullptr) {
-        data = getState(java_cast< Storage* >(observedObject));
-    } else if(dynamic_cast< Switch* >(observedObject) != nullptr) {
+    }*/ 
+    else if(Storage* storageObject = dynamic_cast< Storage* >(observedObject)) {
+        data = getState(storageObject);
+    } 
+    /*else if(dynamic_cast< Switch* >(observedObject) != nullptr) {
         data = getState(java_cast< Switch* >(observedObject));
     } */else {
         data = "???";
@@ -182,17 +193,20 @@ void FlowObserver::persist()
                     data = ::java::lang::StringBuilder(data).append(u"BP"_j)->toString();
                 }
                 result = Pair::of(npc(dispatcher)->getName(), data);
-            } else if(dynamic_cast< SoundPlayer* >(observedObject) != nullptr) {
-                auto soundPlayer = java_cast< SoundPlayer* >(observedObject);
-                auto data = u""_j;
-                for (auto i = int32_t(0); i < npc(npc(soundPlayer)->getSounds())->size(); i++) {
+            }*/
+
+            else if(SoundPlayer* soundPlayer = dynamic_cast< SoundPlayer* >(observedObject)) {
+                string data = "";
+                for (int i = 0; i < soundPlayer->getSounds().size(); i++) {
                     if(i != 0) {
-                        data = ::java::lang::StringBuilder(data).append(u","_j)->toString();
+                        data.append(",");
                     }
-                    data = ::java::lang::StringBuilder(data).append(npc(Sound::getById((npc(java_cast< ::java::lang::Integer* >(npc(npc(soundPlayer)->getSounds())->get(i))))->intValue()))->getId())->toString();
+
+		    int soundInt = soundPlayer->getSounds()[i];
+                    data.append(toString(soundInt));
                 }
-                result = Pair::of(npc(soundPlayer)->getName(), data);
-            } */ else {
+                result = data;
+            }  else {
                 result = "?";
             }
             //currentState.push_back(result->getLeft(), result->getRight()); // it used to be a map, maybe now the pair not necessary
@@ -225,7 +239,10 @@ string FlowObserver::toString()
     for (int i =0; i< states.size(); i++ ) {
         vector<string> state = states[i];
         {
-            string step = fixedLengthString(stepNumber + "", WIDTH);
+
+		
+
+            string step = fixedLengthString(toString(stepNumber), WIDTH);
             sb.append("|");
             sb.append(step);
             sb.append(toString(state));
@@ -241,9 +258,18 @@ string FlowObserver::toString(vector<string> row)
     string sb = "";
     sb.append("|");
     int i = 0;
+
+    /* DEBUGGING
+    Serial.println("To string the row: ");
+    for(int l = 0; l<row.size(); l++){
+        Serial.print(row[l].c_str());
+	Serial.print(", ");
+    } EOD
+    */
+
     for (int it = 0 ; it < row.size(); it++ ) {
         {
-            string curr = fixedLengthString(row[it], lengths[i]);
+            string curr = fixedLengthString(row[it].c_str(), lengths[i]);
             sb.append(curr);
             sb.append("|");
             i++;
@@ -254,15 +280,26 @@ string FlowObserver::toString(vector<string> row)
 
 string FlowObserver::fixedLengthString(string text, int length)
 {
+    //Serial.print("Text before: ");
+    //Serial.println(text.c_str());
     if(text.length() > length) {
         text = text.substr(0, length - 1);
-        text.append("*");;
-    }else if(text.length() < length){
+        text.append("*");
+    }
+    else if(text.length() < length){
         int diff = length - text.length();
         for(int i = 0; i< diff; i++){
 	     text.insert(0," ");
         }
     }
+    //Serial.print("Text after: ");
+    //Serial.println(text.c_str());
     return text;
+}
+
+string FlowObserver::toString(int i){
+	sprintf(numstr, "%d", i);
+	string numberString =  numstr;
+	return numberString;
 }
 

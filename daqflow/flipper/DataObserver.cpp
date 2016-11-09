@@ -10,7 +10,7 @@ THis class is reduced
 #include "Data.hpp"
 #include "Link.hpp"
 #include "SimpleFifoQueue.hpp"
-//#include <Storage.hpp>
+#include "Storage.hpp"
 
 
 DataObserver::DataObserver(FlipperGame* flipperGame)
@@ -51,18 +51,18 @@ java::lang::String* DataObserver::getState(Buffer* buffer)
     }
     return data;
 }
-
-java::lang::String* DataObserver::getState(Storage* storage)
+*/
+string DataObserver::getState(Storage* storage)
 {
-    auto result = u""_j;
-    for (auto _i = npc(java_cast< ::java::util::List* >(npc(npc(storage)->getQueue())->queue))->iterator(); _i->hasNext(); ) {
-        Data* data = java_cast< Data* >(_i->next());
+    string result = "";
+    for (int i = 0; i < storage->getQueue()->queue.size(); i++ ) {
+        Data* data = storage->getQueue()->queue[i];
         {
-            result = ::java::lang::StringBuilder(result).append(npc(data)->getName())->toString();
+            result.append(data->getName());
         }
     }
     return result;
-}*/
+}
 
 
 /*java::lang::String* DataObserver::getState(Switch* switch_)

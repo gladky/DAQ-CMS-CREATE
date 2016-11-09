@@ -82,6 +82,8 @@ void setup() {
   Serial.begin(9600);
   delay(2000);
 
+  Serial.flush();
+
   Serial.println("Initializing model");
   //model = new Model(result_leds);
 
@@ -133,3 +135,4 @@ void loop() {
   counter++;
 
 }
+
