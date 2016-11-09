@@ -8,17 +8,17 @@ This class is reduced, uncomment
 #include "FlowObserver.hpp"
 
 //#include <BUFU.hpp>
-//#include <Buffer.hpp>
-//#include <Button.hpp>
+#include "Buffer.hpp"
+#include "Button.hpp"
 #include "Data.hpp"
-//#include "Dispatcher.hpp"
+#include "Dispatcher.hpp"
 #include "FlipperGame.hpp"
 #include "FlipperObject.hpp"
 #include "Link.hpp"
 #include "NamedObject.hpp"
 #include "SimpleFifoQueue.hpp"
 #include "Sound.hpp"
-//#include <SoundPlayer.hpp>
+#include "SoundPlayer.hpp"
 #include "Storage.hpp"
 //#include <Switch.hpp>
 
@@ -47,7 +47,7 @@ FlowObserver::FlowObserver(FlipperGame* flipperGame, int minWidth, int width, in
     observedObjects.push_back(flipperGame->link12);
     observedObjects.push_back(flipperGame->link13);
     observedObjects.push_back(flipperGame->link14);
-    /*observedObjects.push_back(flipperGame->getBuffer1());
+    observedObjects.push_back(flipperGame->getBuffer1());
     observedObjects.push_back(flipperGame->getBuffer2());
     observedObjects.push_back(flipperGame->getBuffer3());
     observedObjects.push_back(flipperGame->getBuffer4());
@@ -57,7 +57,7 @@ FlowObserver::FlowObserver(FlipperGame* flipperGame, int minWidth, int width, in
     observedObjects.push_back(flipperGame->link22);
     observedObjects.push_back(flipperGame->link23);
     observedObjects.push_back(flipperGame->link24);
-    observedObjects.push_back(flipperGame->getSwitch());
+    /*observedObjects.push_back(flipperGame->getSwitch());
     observedObjects.push_back(flipperGame->link31);
     observedObjects.push_back(flipperGame->link32);
     observedObjects.push_back(flipperGame->link33);
@@ -103,15 +103,15 @@ FlowObserver::FlowObserver(FlipperGame* flipperGame, int minWidth, int width, in
            	Serial.println("Observed object is a Link");
                 lengths.push_back( MIN_WIDTH); // was with the i
             }
-            /*else if(dynamic_cast< Buffer* >(object) != nullptr) {
-                npc(lengths)->put(::java::lang::Integer::valueOf(i), ::java::lang::Integer::valueOf(BUFFER_WIDTH));
-            }*/
-            /*else if(dynamic_cast< Button* >(object) != nullptr) {
-                npc(lengths)->put(::java::lang::Integer::valueOf(i), ::java::lang::Integer::valueOf(MIN_WIDTH));
-            } */
+            else if(Buffer* v = dynamic_cast< Buffer* >(object)) {
+                lengths.push_back(BUFFER_WIDTH);
+            }
+            else if(Button* v = dynamic_cast< Button* >(object)) {
+                lengths.push_back(MIN_WIDTH);
+            }
             else if(SoundPlayer* v = dynamic_cast< SoundPlayer* >(object)) {
            	Serial.println("Observed object is a SoundPlayer");
-                lengths.push_back( SOUND_WIDTH); 
+                lengths.push_back(SOUND_WIDTH); 
             } else {
                 lengths.push_back(WIDTH);
             }
@@ -143,9 +143,9 @@ string FlowObserver::getState(FlipperObject* observedObject)
         FlipperObject* f = dynamic_cast< FlipperObject* >(observedObject);
         data = getState(f);
     }
-    /*else if(dynamic_cast< Buffer* >(observedObject) != nullptr) {
-        data = getState(java_cast< Buffer* >(observedObject));
-    } else if(dynamic_cast< BUFU* >(observedObject) != nullptr) {
+    else if(Buffer* v = dynamic_cast< Buffer* >(observedObject)) {
+        data = getState(v);
+    } /*else if(dynamic_cast< BUFU* >(observedObject) != nullptr) {
         data = getState(java_cast< BUFU* >(observedObject));
     }*/ 
     else if(Storage* storageObject = dynamic_cast< Storage* >(observedObject)) {
@@ -159,14 +159,16 @@ string FlowObserver::getState(FlipperObject* observedObject)
     return data;
 }
 
-/*
-Pair* FlowObserver::getState(Button* observedButtonObject)
+
+string FlowObserver::getState(Button* observedButtonObject)
 {
-    auto name = npc(observedButtonObject)->getName();
-    auto enabled = npc(observedButtonObject)->isEnabled() ? u"E"_j : u" "_j;
-    auto pressed = npc(observedButtonObject)->isPressed() ? u"P"_j : u" "_j;
-    return Pair::of(name, ::java::lang::StringBuilder().append(enabled)->append(pressed)->toString());
-}*/
+    string result = "";
+    string enabled = observedButtonObject->isEnabled() ? "E" : " ";
+    string pressed = observedButtonObject->isPressed() ? "P" : " ";
+    result.append(enabled);
+    result.append(pressed);
+    return result;
+}
 
 void FlowObserver::persist()
 {
@@ -179,21 +181,19 @@ void FlowObserver::persist()
                 result = getState(observedFlipperObject);
             } 
 
-            /*else if(dynamic_cast< Button* >(observedObject) != nullptr) {
-                auto observedButtonObject = java_cast< Button* >(observedObject);
+            else if(Button* observedButtonObject = dynamic_cast< Button* >(observedObject)) {
                 result = getState(observedButtonObject);
-            } else if(dynamic_cast< Dispatcher* >(observedObject) != nullptr) {
-                auto dispatcher = java_cast< Dispatcher* >(observedObject);
-                auto target = npc(dispatcher)->getResult();
-                auto data = u""_j;
-                if(target != -int32_t(1)) {
-                    data = ::java::lang::StringBuilder(data).append(target)->toString();
+            } else if(Dispatcher* dispatcher = dynamic_cast< Dispatcher* >(observedObject)) {
+                int target = dispatcher->getResult();
+                string data = "";
+                if(target != -1) {
+                    data.append(toString(target));
                 }
-                if(npc(dispatcher)->isBackpressure()) {
-                    data = ::java::lang::StringBuilder(data).append(u"BP"_j)->toString();
+                if(dispatcher->isBackpressure()) {
+                    data.append("BP");
                 }
-                result = Pair::of(npc(dispatcher)->getName(), data);
-            }*/
+                result = data;
+            }
 
             else if(SoundPlayer* soundPlayer = dynamic_cast< SoundPlayer* >(observedObject)) {
                 string data = "";

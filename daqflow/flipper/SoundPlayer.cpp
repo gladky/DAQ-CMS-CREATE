@@ -23,7 +23,7 @@ vector<int> SoundPlayer::getSounds()
 
 void SoundPlayer::flush()
 {
-    Serial.print("SoundPlayer: ");
+    //Serial.print("SoundPlayer: ");
     sounds.clear();
 }
 

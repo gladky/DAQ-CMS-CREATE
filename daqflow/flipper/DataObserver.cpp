@@ -5,7 +5,7 @@ THis class is reduced
 */
 
 //#include <BUFU.hpp>
-//#include <Buffer.hpp>
+#include "Buffer.hpp"
 #include "DataObserver.hpp"
 #include "Data.hpp"
 #include "Link.hpp"
@@ -28,30 +28,31 @@ string DataObserver::getState(Link* link)
 }
 
 /*
-java::lang::String* DataObserver::getState(BUFU* bufu)
+string DataObserver::getState(BUFU* bufu)
 {
     if(npc(java_cast< ::java::util::List* >(npc(npc(bufu)->getQueue())->queue))->size() == 0) {
         return u""_j;
     } else {
         return npc(java_cast< Data* >(npc(java_cast< ::java::util::List* >(npc(npc(bufu)->getQueue())->queue))->get(0)))->getName();
     }
-}
+}*/
 
-java::lang::String* DataObserver::getState(Buffer* buffer)
+string DataObserver::getState(Buffer* buffer)
 {
-    auto data = u""_j;
-    auto elements = npc(npc(buffer)->getQueue())->size();
+    string data = "";
+    int elements = buffer->getQueue()->size();
     if(elements == 0) {
-        data = empty();
+        data = "";
     } else if(elements == 1) {
-        data = npc(npc(npc(buffer)->getQueue())->get(0))->getName();
+        data = buffer->getQueue()->get(0)->getName();
     } else {
-        data = ::java::lang::StringBuilder().append(u"["_j)->append(elements)
-            ->append(u"]"_j)->toString();
+        data.append("[");
+	data.append(toString(elements));
+	data.append("]");
     }
     return data;
 }
-*/
+
 string DataObserver::getState(Storage* storage)
 {
     string result = "";

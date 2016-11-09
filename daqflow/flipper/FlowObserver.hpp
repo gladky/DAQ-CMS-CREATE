@@ -11,6 +11,8 @@ This class is reduced, uncomment
 #include "NamedObject.hpp"
 #include "FlipperObject.hpp"
 #include "Storage.hpp"
+#include "Buffer.hpp"
+#include "Button.hpp"
 
 #include <string>
 #include <vector>
@@ -39,21 +41,21 @@ private:
 public: /* protected */
     virtual string getState(Link* link) = 0;
     //virtual string getState(BUFU* bufu) = 0;
-    //virtual string getState(Buffer* buffer) = 0;
+    virtual string getState(Buffer* buffer) = 0;
     virtual string getState(Storage* storage) = 0;
     //virtual string getState(Switch* switch_);
 
 private:
     string getState(FlipperObject* observedObject);
-    //Pair* getState(Button* observedButtonObject);
+    string getState(Button* observedButtonObject);
 
 public:
     virtual void persist();
     string toString();// override;
+    string toString(int i);
 
 private:
     string toString(vector<string> row);
-    string toString(int i);
 
 public:
 

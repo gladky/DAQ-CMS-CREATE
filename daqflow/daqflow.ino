@@ -115,7 +115,7 @@ int counter = 0;
 void loop() {
 
 
-  if(counter < 30){
+  if(counter < 18){
 
     
     Serial.print("step-");

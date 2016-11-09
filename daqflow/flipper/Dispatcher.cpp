@@ -13,6 +13,7 @@ Dispatcher::Dispatcher(vector<FlipperObject*> targets_, vector<FlipperObject*> l
     valid = false;
     backpressure = false;
     soundPlayer = soundPlayer_;
+    result = -1;
 }
 
 FlipperObject* Dispatcher::getTarget(int id)
@@ -68,7 +69,7 @@ bool Dispatcher::isBackpressure()
     return backpressure;
 }
 
-int32_t Dispatcher::getResult()
+int Dispatcher::getResult()
 {
     return result;
 }
