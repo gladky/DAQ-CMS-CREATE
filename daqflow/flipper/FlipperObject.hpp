@@ -54,7 +54,7 @@ public: /* protected */
     virtual void sendData();
 
 public:
-    virtual vector<FlipperObject*> getSuccessors();
+    virtual vector<FlipperObject*>& getSuccessors();
     virtual bool isBusy();
     virtual void setBusy(bool busy);
     virtual SimpleFifoQueue* getQueue();

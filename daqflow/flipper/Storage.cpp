@@ -16,8 +16,10 @@ Storage::Storage(string name, int capacity, SoundPlayer* soundPlayer)
 bool Storage::canAccept()
 {
     if(queue->size() == capacity) {
+	Serial.println("Storage::canAccept? false, full");
         return false;
     } else {
+	Serial.println("Storage::canAccept? true");
         return true;
     }
 }

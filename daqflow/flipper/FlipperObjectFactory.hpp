@@ -30,7 +30,7 @@ private:
     SoundPlayer* soundPlayer;
 
 public:
-    virtual FlipperObject* createLink(string name, int logicalLength);
+    virtual Link* createLink(string name, int logicalLength);
     //virtual FlipperObject* createBUFU(string name, Button* button);
     //virtual FlipperObject* createSwitch(string name);
 

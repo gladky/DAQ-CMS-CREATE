@@ -43,7 +43,7 @@ int FlipperObjectFactory::DEFAULT_BUFU_PROCESSING_STEP=10;
 int FlipperObjectFactory::DEFAULT_BUFU_TIMEOUT_STEP=25;
 
 
-FlipperObject* FlipperObjectFactory::createLink(string name, int logicalLength)
+Link* FlipperObjectFactory::createLink(string name, int logicalLength)
 {
     int calculatedStep = 100 / logicalLength;
     if(calculatedStep < 1) {
@@ -52,7 +52,7 @@ FlipperObject* FlipperObjectFactory::createLink(string name, int logicalLength)
         calculatedStep = 50;
     }
     string uniqueName = getShortName(name);
-    FlipperObject* link = new Link(uniqueName, 1, calculatedStep, soundPlayer);
+    Link* link = new Link(uniqueName, 1, calculatedStep, soundPlayer);
     controller->getFlipperObjects().push_back(link);
     return link;
 }

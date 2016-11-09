@@ -30,8 +30,10 @@ void SinglePogressObject::doStep()
 bool SinglePogressObject::canAccept()
 {
     if(queue->size() == capacity) {
+	Serial.println("SingleProgressObject::canAccept? false, full");
         return false;
     } else {
+	Serial.println("SingleProgressObject::canAccept? false, full");
         return true;
     }
 }

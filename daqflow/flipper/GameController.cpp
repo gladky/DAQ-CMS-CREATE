@@ -21,13 +21,16 @@ GameController::GameController()
     observer;// = nullptr;
 }
 
-vector<FlipperObject*> GameController::getFlipperObjects()
+vector<FlipperObject*>& GameController::getFlipperObjects()
 {
     return flipperObjects;
 }
 
 void GameController::doStep()
 {
+    
+    Serial.print("GameController: doStep, objects to do step: ");
+    Serial.println(flipperObjects.size());
     
     for (int i = flipperObjects.size()-1; i >=0; i-- ) {
         flipperObjects[i]->doStep();

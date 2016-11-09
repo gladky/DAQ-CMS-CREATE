@@ -30,7 +30,7 @@ public:
     FlowObserver* observer;
 
 public:
-    virtual vector<FlipperObject*> getFlipperObjects();
+    virtual vector<FlipperObject*>& getFlipperObjects();
     virtual void doStep();
     //virtual vector<Button> getButtons();
     //virtual void setDispatcher(Dispatcher* dispatcher);

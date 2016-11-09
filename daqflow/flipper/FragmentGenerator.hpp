@@ -10,17 +10,17 @@ class FragmentGenerator
 
 
 private:
-    FlipperObject* link1 ;
-    FlipperObject* link2 ;
-    FlipperObject* link3 ;
-    FlipperObject* link4 ;
+    Link* link1 ;
+    Link* link2 ;
+    Link* link3 ;
+    Link* link4 ;
     bool val ;
 
 public:
     virtual void generateAndInsertFragments();
 
     // Generated
-    FragmentGenerator(FlipperObject* link1, FlipperObject* link2, FlipperObject* link3, FlipperObject* link4);
+    FragmentGenerator(Link* link1, Link* link2, Link* link3, Link* link4);
 
 
 };

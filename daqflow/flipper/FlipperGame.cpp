@@ -91,10 +91,14 @@ FlipperGame::FlipperGame()
 	DELETE
 
 	*/
+    Serial.print("Number of Link 11 successors before: ");
+    Serial.println(link11->getSuccessors().size());
     link11->getSuccessors().push_back(storage);
     link12->getSuccessors().push_back(storage);
     link13->getSuccessors().push_back(storage);
     link14->getSuccessors().push_back(storage);
+    Serial.print("Number of Link 11 successors after: ");
+    Serial.println(link11->getSuccessors().size());
 
 /*
     vector<FlipperObject*> targetsList;

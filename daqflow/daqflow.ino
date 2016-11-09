@@ -103,7 +103,7 @@ int counter = 0;
 void loop() {
 
 
-  if(counter < 400){
+  if(counter < 30){
 
     if(counter % 4 == 0 && counter < 200) {
         flipperGame->generateNewFragments();

@@ -38,10 +38,10 @@ private:
 
 
 public:
-    FlipperObject* link11;
-    FlipperObject* link12;
-    FlipperObject* link13;
-    FlipperObject* link14;
+    Link* link11;
+    Link* link12;
+    Link* link13;
+    Link* link14;
 
 
 /*

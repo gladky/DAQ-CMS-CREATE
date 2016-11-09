@@ -8,6 +8,7 @@
 IndividualPogressObject::IndividualPogressObject(string name, int capacity, int progressStep, SoundPlayer* soundPlayer) 
     : FlipperObject(name,capacity,progressStep,soundPlayer)
 {
+    acceptedThisCycle = false;
 }
 
 int IndividualPogressObject::fakeInf =100000 ;
@@ -15,6 +16,7 @@ int IndividualPogressObject::fakeInf =100000 ;
 
 void IndividualPogressObject::performInsert(Data* data)
 {
+    Serial.println("IndividualPogressObject: performing insert");
     data->setProgress(0);
     data->setTimeOutProgress(0);
     queue->add(data);
@@ -23,10 +25,13 @@ void IndividualPogressObject::performInsert(Data* data)
 
 bool IndividualPogressObject::canAccept()
 {
+
     if(acceptedThisCycle) {
+        Serial.println("IndividualPogressObject: can accept? NO, already accepted this cycle");
         return false;
     }
-    return IndividualPogressObject::canAccept();
+    Serial.println("IndividualPogressObject: can accept? will ask FlipperObject");
+    return FlipperObject::canAccept();
 }
 
 vector<int> IndividualPogressObject::getProgress()
@@ -43,6 +48,7 @@ int IndividualPogressObject::stepImplementation(Data* current)
 
 void IndividualPogressObject::doStep()
 {
+    Serial.println("IndividualProgressObject: doStep");
     if(!queue->isEmpty()) {
         int localProgressLimit = fakeInf;
         int initialSize = queue->size();

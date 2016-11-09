@@ -8,7 +8,7 @@
 
 
 
-FragmentGenerator::FragmentGenerator(FlipperObject* link1_, FlipperObject* link2_, FlipperObject* link3_, FlipperObject* link4_) 
+FragmentGenerator::FragmentGenerator(Link* link1_, Link* link2_, Link* link3_, Link* link4_) 
 {
     link1 = link1_;
     link2 = link2_;
@@ -19,6 +19,8 @@ FragmentGenerator::FragmentGenerator(FlipperObject* link1_, FlipperObject* link2
 
 void FragmentGenerator::generateAndInsertFragments()
 {
+
+    Serial.println("FragmentGenerator: Generating new fragments");
     Data* f1 = new Fragment(true);
     Data* f2 = new Fragment(true);
     Data* f3 = new Fragment(true);
