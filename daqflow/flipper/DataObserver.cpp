@@ -20,10 +20,10 @@ DataObserver::DataObserver(FlipperGame* flipperGame)
 
 string DataObserver::getState(Link* link)
 {
-    if(link->getQueue()->queue)->size() == 0) {
+    if(link->getQueue()->queue.size() == 0) {
         return "";
     } else {
-        return link->getQueue()->queue)->get(0)->getName();
+        return link->getQueue()->queue[0]->getName();
     }
 }
 

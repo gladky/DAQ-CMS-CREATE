@@ -1,10 +1,10 @@
 // Generated from /cms.flipper/src/main/java/FlipperObject.java
-#include <FlipperObject.hpp>
+#include "FlipperObject.hpp"
 
-#include <Data.hpp>
-#include <Link.hpp>
-#include <SimpleFifoQueue.hpp>
-#include <SoundPlayer.hpp>
+#include "Data.hpp"
+#include "Link.hpp"
+#include "SimpleFifoQueue.hpp"
+#include "SoundPlayer.hpp"
 
 
 
@@ -35,16 +35,16 @@ bool FlipperObject::insert(Data* data)
 bool FlipperObject::canAccept()
 {
     bool iAmAbleToAccept;
-    if(npc(queue)->size() == capacity) {
+    if(queue->size() == capacity) {
         iAmAbleToAccept = false;
         return false;
     } else {
         iAmAbleToAccept = true;
     }
     bool existsNonLinkSuccessorsCanAccept = false;
-    if(dynamic_cast< Link* >(this) != nullptr) {
-        for (bool _i = successors->iterator(); _i->hasNext(); ) {
-            FlipperObject* successor = _i->next();
+    if(typeid(this) == typeid(Link)) {
+        for (int i = 0; i< successors.size(); i++ ) {
+            FlipperObject* successor = successors[i];
             {
                 bool canAccept = successor->canAccept();
                 if(canAccept == true) {
@@ -65,7 +65,8 @@ bool FlipperObject::canAccept()
 bool FlipperObject::canSend()
 {
     bool allDirectAccept = true;
-    for(auto const& successor: successors) {
+    for (int i = 0; i< successors.size(); i++ ) {
+	FlipperObject* successor = successors[i];
         {
             bool accept = successor->canAccept();
             if(!accept) {
@@ -82,12 +83,11 @@ bool FlipperObject::canSend()
 
 void FlipperObject::sendData()
 {
-    Data data = queue->poll();
+    Data* data = queue->poll();
     
-    for(auto const& successor: successors) {
-        {
+    for (int i = 0; i< successors.size(); i++ ) {
+        FlipperObject* successor = successors[i];
             successor->insert(data);
-        }
     }
 }
 

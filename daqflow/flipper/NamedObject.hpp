@@ -14,5 +14,8 @@ public:
 
     NamedObject(string name);
 
+private:
+
+    string name;
 
 };

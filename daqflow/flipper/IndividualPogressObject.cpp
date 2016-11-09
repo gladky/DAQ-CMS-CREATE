@@ -1,8 +1,8 @@
 // Generated from /cms.flipper/src/main/java/IndividualPogressObject.java
-#include <IndividualPogressObject.hpp>
+#include "IndividualPogressObject.hpp"
 
-#include <Data.hpp>
-#include <SimpleFifoQueue.hpp>
+#include "Data.hpp"
+#include "SimpleFifoQueue.hpp"
 
 
 IndividualPogressObject::IndividualPogressObject(string name, int capacity, int progressStep, SoundPlayer* soundPlayer) 
@@ -29,7 +29,7 @@ bool IndividualPogressObject::canAccept()
     return IndividualPogressObject::canAccept();
 }
 
-int vector<int> IndividualPogressObject::getProgress()
+vector<int> IndividualPogressObject::getProgress()
 {
     return queue->getProgress();
 }
@@ -48,7 +48,7 @@ void IndividualPogressObject::doStep()
         int initialSize = queue->size();
         int recentSize = initialSize;
         for (int i = 0; i < recentSize; i++) {
-            Data current = queue->get(i);
+            Data* current = queue->get(i);
             if(current->getProgress() + progressStep < localProgressLimit) {
                 int progress = stepImplementation(current);
                 if(progress < localProgressLimit) {

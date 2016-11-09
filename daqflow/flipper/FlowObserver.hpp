@@ -30,7 +30,7 @@ private:
     int SOUND_WIDTH ;
     int BUFFER_WIDTH ;
     static string empty_;
-    vector<NamedObject> observedObjects ;
+    vector<NamedObject*> observedObjects ;
     vector<vector<string> > states;
     vector<int> lengths; // map was used
 

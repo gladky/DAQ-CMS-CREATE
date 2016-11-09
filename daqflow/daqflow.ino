@@ -21,6 +21,15 @@
 #include "flipper/DataObserver.hpp"
 #include "flipper/DataObserver.cpp"
 
+#include "flipper/NamedObject.hpp"
+#include "flipper/NamedObject.cpp"
+
+#include "flipper/FlipperObject.hpp"
+#include "flipper/FlipperObject.cpp"
+
+#include "flipper/IndividualPogressObject.hpp"
+#include "flipper/IndividualPogressObject.cpp"
+
 
 #include <vector>
 

@@ -41,67 +41,70 @@ FlowObserver::FlowObserver(FlipperGame* flipperGame, int minWidth, int width, in
     //states = //should be initialized automatically
     //observedObjects = // should be initialized automatically
 
-    observedObjects->push_back(flipperGame->link11);
-    observedObjects->push_back(flipperGame->link12);
-    observedObjects->push_back(flipperGame->link13);
-    observedObjects->push_back(flipperGame->link14);
-    /*observedObjects->push_back(flipperGame->getBuffer1());
-    observedObjects->push_back(flipperGame->getBuffer2());
-    observedObjects->push_back(flipperGame->getBuffer3());
-    observedObjects->push_back(flipperGame->getBuffer4());
-    observedObjects->push_back(flipperGame->dispatcher);
-    observedObjects->push_back(flipperGame->buttonL1);
-    observedObjects->push_back(flipperGame->link21);
-    observedObjects->push_back(flipperGame->link22);
-    observedObjects->push_back(flipperGame->link23);
-    observedObjects->push_back(flipperGame->link24);
-    observedObjects->push_back(flipperGame->getSwitch());
-    observedObjects->push_back(flipperGame->link31);
-    observedObjects->push_back(flipperGame->link32);
-    observedObjects->push_back(flipperGame->link33);
-    observedObjects->push_back(flipperGame->link34);
-    observedObjects->push_back(flipperGame->link35);
-    observedObjects->push_back(flipperGame->link36);
-    observedObjects->push_back(flipperGame->getBufuL1());
-    observedObjects->push_back(flipperGame->buttonHLT_L1);
-    observedObjects->push_back(flipperGame->getBufuL2());
-    observedObjects->push_back(flipperGame->buttonHLT_L2);
-    observedObjects->push_back(flipperGame->getBufuL3());
-    observedObjects->push_back(flipperGame->buttonHLT_L3);
-    observedObjects->push_back(flipperGame->getBufuR1());
-    observedObjects->push_back(flipperGame->buttonHLT_R1);
-    observedObjects->push_back(flipperGame->getBufuR2());
-    observedObjects->push_back(flipperGame->buttonHLT_R2);
-    observedObjects->push_back(flipperGame->getBufuR3());
-    observedObjects->push_back(flipperGame->buttonHLT_R3);
-    observedObjects->push_back(flipperGame->link41);
-    observedObjects->push_back(flipperGame->link42);
-    observedObjects->push_back(flipperGame->link43);
-    observedObjects->push_back(flipperGame->link44);
-    observedObjects->push_back(flipperGame->link45);
-    observedObjects->push_back(flipperGame->link46);
-    observedObjects->push_back(flipperGame->link47);
-    observedObjects->push_back(flipperGame->link48);
-    observedObjects->push_back(flipperGame->getStorage());
-    observedObjects->push_back(flipperGame->getSoundPlayer());*/
+    observedObjects.push_back(flipperGame->link11);
+    observedObjects.push_back(flipperGame->link12);
+    observedObjects.push_back(flipperGame->link13);
+    observedObjects.push_back(flipperGame->link14);
+    /*observedObjects.push_back(flipperGame->getBuffer1());
+    observedObjects.push_back(flipperGame->getBuffer2());
+    observedObjects.push_back(flipperGame->getBuffer3());
+    observedObjects.push_back(flipperGame->getBuffer4());
+    observedObjects.push_back(flipperGame->dispatcher);
+    observedObjects.push_back(flipperGame->buttonL1);
+    observedObjects.push_back(flipperGame->link21);
+    observedObjects.push_back(flipperGame->link22);
+    observedObjects.push_back(flipperGame->link23);
+    observedObjects.push_back(flipperGame->link24);
+    observedObjects.push_back(flipperGame->getSwitch());
+    observedObjects.push_back(flipperGame->link31);
+    observedObjects.push_back(flipperGame->link32);
+    observedObjects.push_back(flipperGame->link33);
+    observedObjects.push_back(flipperGame->link34);
+    observedObjects.push_back(flipperGame->link35);
+    observedObjects.push_back(flipperGame->link36);
+    observedObjects.push_back(flipperGame->getBufuL1());
+    observedObjects.push_back(flipperGame->buttonHLT_L1);
+    observedObjects.push_back(flipperGame->getBufuL2());
+    observedObjects.push_back(flipperGame->buttonHLT_L2);
+    observedObjects.push_back(flipperGame->getBufuL3());
+    observedObjects.push_back(flipperGame->buttonHLT_L3);
+    observedObjects.push_back(flipperGame->getBufuR1());
+    observedObjects.push_back(flipperGame->buttonHLT_R1);
+    observedObjects.push_back(flipperGame->getBufuR2());
+    observedObjects.push_back(flipperGame->buttonHLT_R2);
+    observedObjects.push_back(flipperGame->getBufuR3());
+    observedObjects.push_back(flipperGame->buttonHLT_R3);
+    observedObjects.push_back(flipperGame->link41);
+    observedObjects.push_back(flipperGame->link42);
+    observedObjects.push_back(flipperGame->link43);
+    observedObjects.push_back(flipperGame->link44);
+    observedObjects.push_back(flipperGame->link45);
+    observedObjects.push_back(flipperGame->link46);
+    observedObjects.push_back(flipperGame->link47);
+    observedObjects.push_back(flipperGame->link48);
+    observedObjects.push_back(flipperGame->getStorage());
+    observedObjects.push_back(flipperGame->getSoundPlayer());*/
     //lengths = //should be initialized automatically
-    for (int i = 0; i < observedObjects->size(); i++) {
-        NamedObject object = observedObjects->get(i);
+    for (int i = 0; i < observedObjects.size(); i++) {
+        NamedObject* object = observedObjects[i];
+        
+        Serial.print("Observed object type: ");
+	Serial.println(typeid(object).name());
         if(typeid(FlipperObject) == typeid(object)) {
             /*if(typeid(Storage) == typeid(object)) {
-                lengths->put(i, STORAGE_WIDTH);
+                lengths.put(i, STORAGE_WIDTH);
             } else if(dynamic_cast< Switch* >(object) != nullptr) {
                 npc(lengths)->put(::java::lang::Integer::valueOf(i), ::java::lang::Integer::valueOf(SWITCH_WIDTH));
             } else */
 
-	    if(typeid(Link) = typeid(object)) {
-                lengths->push_back(i, MIN_WIDTH);
+	    if(typeid(Link) == typeid(object)) {
+                lengths.push_back( MIN_WIDTH); // was with the i
             }
             /*else if(dynamic_cast< Buffer* >(object) != nullptr) {
                 npc(lengths)->put(::java::lang::Integer::valueOf(i), ::java::lang::Integer::valueOf(BUFFER_WIDTH));
             }*/
 	    else {
-                lengths->push_back(i, WIDTH);
+                lengths.push_back( WIDTH); // was with the i indicating position
             }
         }/* else {
             if(dynamic_cast< Button* >(object) != nullptr) {
@@ -110,10 +113,11 @@ FlowObserver::FlowObserver(FlipperGame* flipperGame, int minWidth, int width, in
                 npc(lengths)->put(::java::lang::Integer::valueOf(i), ::java::lang::Integer::valueOf(SOUND_WIDTH));
             } else {
                 npc(lengths)->put(::java::lang::Integer::valueOf(i), ::java::lang::Integer::valueOf(WIDTH));
-            }*/
-        }
+            }
+        }*/
     }
 }
+/*
 
 string FlowObserver::getState(Switch* switch_)
 {
@@ -128,12 +132,13 @@ string FlowObserver::getState(Switch* switch_)
         return result;
     }
 }
+*/
 
 Pair* FlowObserver::getState(FlipperObject* observedObject)
 {
     string data;
     if(typeid(Link) ==typeid(observedObject)) {
-	Link* linkObject = observedObject;
+	Link* linkObject = dynamic_cast<Link*>(observedObject);
         data = getState(linkObject);
     } 
     /*else if(dynamic_cast< Buffer* >(observedObject) != nullptr) {
@@ -162,12 +167,12 @@ Pair* FlowObserver::getState(Button* observedButtonObject)
 void FlowObserver::persist()
 {
     vector<string> currentState;//= new ::java::util::LinkedHashMap();
-    for (int i = 0; i< observedObjects->size(); i++ ) {
-        NamedObject* observedObject = observedObjects.get(i);
+    for (int i = 0; i< observedObjects.size(); i++ ) {
+        NamedObject* observedObject = observedObjects[i];
         {
-            Pair* result = nullptr;
+            Pair* result;
             if( typeid(FlipperObject) == typeid(observedObject)) {
-                FlipperObject observedFlipperObject = observedObject;
+                FlipperObject* observedFlipperObject =  dynamic_cast< FlipperObject* >(observedObject);
                 result = getState(observedFlipperObject);
             } 
 
@@ -198,40 +203,41 @@ void FlowObserver::persist()
             } */ else {
                 result = Pair::of("X", "?");
             }
-            currentState->put(result->getLeft(), result->getRight());
+            //currentState.push_back(result->getLeft(), result->getRight()); // it used to be a map, maybe now the pair not necessary
+            currentState.push_back( result->getRight());
         }
     }
-    states->add(currentState);
+    states.push_back(currentState);
 }
 
 string FlowObserver::toString()
 {
     string sb = "";
-    int stepHeading = fixedLengthString("step", WIDTH);
-    sb->append("|");
-    sb->append(stepHeading);
-    sb->append("|");
+    string stepHeading = fixedLengthString("step", WIDTH);
+    sb.append("|");
+    sb.append(stepHeading);
+    sb.append("|");
     int h = 0;
 
-    for (int i = 0; i < observedObjects->size(); i++) {
-        NamedObject object = observedObjects->get(i);
+    for (int i = 0; i < observedObjects.size(); i++) {
+        NamedObject* object = observedObjects[i];
         {
-            string heading = fixedLengthString(object->getName(), lengths->get(h));
-            sb->append(heading);
-            sb->append("|");
+            string heading = fixedLengthString(object->getName(), lengths[h]);
+            sb.append(heading);
+            sb.append("|");
             h++;
         }
     }
-    sb->append("\n");
+    sb.append("\n");
     int stepNumber = 0;
-    for (int i =0; i< states->size(); i++ ) {
-        vector<string> state = states.get(i);
+    for (int i =0; i< states.size(); i++ ) {
+        vector<string> state = states[i];
         {
             string step = fixedLengthString(stepNumber + "", WIDTH);
-            sb->append("|");
-            sb->append(step);
-            sb->append(toString(state));
-            sb->append("\n");
+            sb.append("|");
+            sb.append(step);
+            sb.append(toString(state));
+            sb.append("\n");
             stepNumber++;
         }
     }
@@ -241,13 +247,13 @@ string FlowObserver::toString()
 string FlowObserver::toString(vector<string> row)
 {
     string sb = "";
-    sb->append("|");
+    sb.append("|");
     int i = 0;
-    for (it = 0 ; it row->size(); it++ ) {
+    for (int it = 0 ; it < row.size(); it++ ) {
         {
-            string curr = fixedLengthString(row->get(it), lengths->get(i));
-            sb->append(curr);
-            sb->append("|");
+            string curr = fixedLengthString(row[it], lengths[i]);
+            sb.append(curr);
+            sb.append("|");
             i++;
         }
     }
@@ -256,13 +262,13 @@ string FlowObserver::toString(vector<string> row)
 
 string FlowObserver::fixedLengthString(string text, int length)
 {
-    if(text->length() > length) {
-        text = text->substr(0, length - 1);
+    if(text.length() > length) {
+        text = text.substr(0, length - 1);
         text.append("*");;
-    }else if(text->length() < length){
-        int diff = length - text->length();
+    }else if(text.length() < length){
+        int diff = length - text.length();
         for(int i = 0; i< diff; i++){
-	     text.insert(0,' ');
+	     text.insert(0," ");
         }
     }
     return text;
