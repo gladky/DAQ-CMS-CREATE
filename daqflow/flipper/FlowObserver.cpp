@@ -20,7 +20,7 @@ This class is reduced, uncomment
 #include "Sound.hpp"
 #include "SoundPlayer.hpp"
 #include "Storage.hpp"
-//#include <Switch.hpp>
+#include "Switch.hpp"
 
 #include <typeinfo>
 #include <string>
@@ -57,14 +57,14 @@ FlowObserver::FlowObserver(FlipperGame* flipperGame, int minWidth, int width, in
     observedObjects.push_back(flipperGame->link22);
     observedObjects.push_back(flipperGame->link23);
     observedObjects.push_back(flipperGame->link24);
-    /*observedObjects.push_back(flipperGame->getSwitch());
+    observedObjects.push_back(flipperGame->getSwitch());
     observedObjects.push_back(flipperGame->link31);
     observedObjects.push_back(flipperGame->link32);
     observedObjects.push_back(flipperGame->link33);
     observedObjects.push_back(flipperGame->link34);
     observedObjects.push_back(flipperGame->link35);
     observedObjects.push_back(flipperGame->link36);
-    observedObjects.push_back(flipperGame->getBufuL1());
+    /*observedObjects.push_back(flipperGame->getBufuL1());
     observedObjects.push_back(flipperGame->buttonHLT_L1);
     observedObjects.push_back(flipperGame->getBufuL2());
     observedObjects.push_back(flipperGame->buttonHLT_L2);
@@ -95,9 +95,9 @@ FlowObserver::FlowObserver(FlipperGame* flipperGame, int minWidth, int width, in
             if(Storage* v = dynamic_cast<Storage*>(object)) {
            	Serial.println("Observed object is a Storage");
                 lengths.push_back(STORAGE_WIDTH);
-            }/* else if(dynamic_cast< Switch* >(object) != nullptr) {
-                npc(lengths)->put(::java::lang::Integer::valueOf(i), ::java::lang::Integer::valueOf(SWITCH_WIDTH));
-            } else */
+            } else if(Switch* v = dynamic_cast< Switch* >(object) ) {
+                lengths.push_back(SWITCH_WIDTH);
+            }
 
 	    else if(Link* v = dynamic_cast<Link*>(object)) {
            	Serial.println("Observed object is a Link");
@@ -117,22 +117,22 @@ FlowObserver::FlowObserver(FlipperGame* flipperGame, int minWidth, int width, in
             }
     }
 }
-/*
+
 
 string FlowObserver::getState(Switch* switch_)
 {
-    if(switch_->getQueue()->queue->size() == 0) {
+    if(switch_->getQueue()->queue.size() == 0) {
         return "";
     } else {
 
 	string result = "";
-	result.append(switch_->getQueue()->queue)->get(3)->getName());
+	result.append(switch_->getQueue()->queue[3]->getName());
 	result.append("-");
-	result.append(switch_->getQueue()->queue)->get(0)->getName());
+	result.append(switch_->getQueue()->queue[0]->getName());
         return result;
     }
 }
-*/
+
 
 string FlowObserver::getState(FlipperObject* observedObject)
 {
@@ -151,9 +151,9 @@ string FlowObserver::getState(FlipperObject* observedObject)
     else if(Storage* storageObject = dynamic_cast< Storage* >(observedObject)) {
         data = getState(storageObject);
     } 
-    /*else if(dynamic_cast< Switch* >(observedObject) != nullptr) {
-        data = getState(java_cast< Switch* >(observedObject));
-    } */else {
+    else if(Switch* switch_ = dynamic_cast< Switch* >(observedObject)) {
+        data = getState(switch_);
+    } else {
         data = "???";
     }
     return data;

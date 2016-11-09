@@ -32,7 +32,7 @@ private:
 public:
     virtual Link* createLink(string name, int logicalLength);
     //virtual FlipperObject* createBUFU(string name, Button* button);
-    //virtual FlipperObject* createSwitch(string name);
+    virtual FlipperObject* createSwitch(string name);
 
 private:
     string getShortName(string name);

@@ -77,20 +77,20 @@ private:
     FlipperObject* bufuR2 {  };
     FlipperObject* bufuR3 {  };
 
-public:
-    FlipperObject* link41 {  };
-    FlipperObject* link42 {  };
-    FlipperObject* link43 {  };
-    FlipperObject* link44 {  };
-    FlipperObject* link45 {  };
-    FlipperObject* link46 {  };
-    FlipperObject* link47 {  };
-    FlipperObject* link48 {  };
-
 */
+public:
+    FlipperObject* link41;
+    FlipperObject* link42;
+    FlipperObject* link43;
+    FlipperObject* link44;
+    FlipperObject* link45;
+    FlipperObject* link46;
+    FlipperObject* link47;
+    FlipperObject* link48;
+
 
 private:
-    //FlipperObject* switch_ {  };
+    FlipperObject* switch_;
     FragmentGenerator* fragmentGenerator;
 
 public:
@@ -98,7 +98,7 @@ public:
 
 
 public:
-    Dispatcher* dispatcher {  };
+    Dispatcher* dispatcher;
 
 
 public:
@@ -114,7 +114,7 @@ public:
     virtual void doStep();
     virtual void doSteps(int steps);
     virtual FlipperObject* getStorage();
-    //virtual FlipperObject* getSwitch();
+    virtual FlipperObject* getSwitch();
     //virtual FlipperObject* getBufuL1();
     //virtual FlipperObject* getBufuL2();
     //virtual FlipperObject* getBufuL3();

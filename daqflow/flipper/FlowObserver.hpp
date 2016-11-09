@@ -13,6 +13,7 @@ This class is reduced, uncomment
 #include "Storage.hpp"
 #include "Buffer.hpp"
 #include "Button.hpp"
+#include "Switch.hpp"
 
 #include <string>
 #include <vector>
@@ -43,7 +44,7 @@ public: /* protected */
     //virtual string getState(BUFU* bufu) = 0;
     virtual string getState(Buffer* buffer) = 0;
     virtual string getState(Storage* storage) = 0;
-    //virtual string getState(Switch* switch_);
+    virtual string getState(Switch* switch_);
 
 private:
     string getState(FlipperObject* observedObject);

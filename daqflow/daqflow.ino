@@ -21,6 +21,9 @@
 #include "flipper/Fragment.hpp"
 #include "flipper/Fragment.cpp"
 
+#include "flipper/Event.hpp"
+#include "flipper/Event.cpp"
+
 
 #include "flipper/FlowObserver.hpp"
 #include "flipper/FlowObserver.cpp"
@@ -60,6 +63,9 @@
 
 #include "flipper/Dispatcher.hpp"
 #include "flipper/Dispatcher.cpp"
+
+#include "flipper/Switch.hpp"
+#include "flipper/Switch.cpp"
 
 
 #include "flipper/SimpleFifoQueue.hpp"

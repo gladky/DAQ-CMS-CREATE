@@ -15,7 +15,7 @@ This class is reduced, uncomment to introduce new elements
 #include "Link.hpp"
 #include "SoundPlayer.hpp"
 #include "Storage.hpp"
-//#include <Switch.hpp>
+#include "Switch.hpp"
 
 
 
@@ -65,15 +65,15 @@ FlipperObject* FlipperObjectFactory::createBUFU(string name, Button* button)
     controller->getFlipperObjects()->add(bufu);
     return bufu;
 }
-
+*/
 FlipperObject* FlipperObjectFactory::createSwitch(string name)
 {
     string uniqueName = getShortName(name);
     FlipperObject* switch_ = new Switch(uniqueName, soundPlayer);
-    controller->getFlipperObjects()->add(switch_);
+    controller->getFlipperObjects().push_back(switch_);
     return switch_;
 }
-*/
+
 
 FlipperObject* FlipperObjectFactory::createStorage()
 {

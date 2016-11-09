@@ -59,9 +59,9 @@ FlipperGame::FlipperGame()
     link23 = factory->createLink("23", int32_t(20) / linkBoost);
     link24 = factory->createLink("24", int32_t(20) / linkBoost);
 
-/*
+
     switch_ = factory->createSwitch("switch");
-*/
+
     link31 = factory->createLink("31", int32_t(13) / linkBoost);
     link32 = factory->createLink("32", int32_t(17) / linkBoost);
     link33 = factory->createLink("33", int32_t(34) / linkBoost);
@@ -74,36 +74,20 @@ FlipperGame::FlipperGame()
     bufuR2 = factory->createBUFU("R2BF", buttonHLT_R2);
     bufuL2 = factory->createBUFU("L2BF", buttonHLT_L2);
     bufuR3 = factory->createBUFU("R3BF", buttonHLT_R3);
-    bufuL3 = factory->createBUFU("L3BF", buttonHLT_L3);
-    link41 = factory->createLink("41", int32_t(10) / linkBoost);
-    link42 = factory->createLink("42", int32_t(4) / linkBoost);
-    link43 = factory->createLink("43", int32_t(13) / linkBoost);
-    link44 = factory->createLink("44", int32_t(25) / linkBoost);
-    link45 = factory->createLink("45", int32_t(10) / linkBoost);
-    link46 = factory->createLink("46", int32_t(4) / linkBoost);
-    link47 = factory->createLink("47", int32_t(13) / linkBoost);
-    link48 = factory->createLink("48", int32_t(25) / linkBoost);
-*/
+    bufuL3 = factory->createBUFU("L3BF", buttonHLT_L3);*/
+
+    link41 = factory->createLink("41", 10 / linkBoost);
+    link42 = factory->createLink("42", 4 / linkBoost);
+    link43 = factory->createLink("43", 13 / linkBoost);
+    link44 = factory->createLink("44", 25 / linkBoost);
+    link45 = factory->createLink("45", 10 / linkBoost);
+    link46 = factory->createLink("46", 4 / linkBoost);
+    link47 = factory->createLink("47", 13 / linkBoost);
+    link48 = factory->createLink("48", 25 / linkBoost);
+
 
     storage = factory->createStorage();
 
-
-	/*
-	DELETE
-
-	DELETE
-
-	DELETE
-
-	*/
-    Serial.print("Number of Link 11 successors before: ");
-    Serial.println(link11->getSuccessors().size());
-    link21->getSuccessors().push_back(storage);
-    link22->getSuccessors().push_back(storage);
-    link23->getSuccessors().push_back(storage);
-    link24->getSuccessors().push_back(storage);
-    Serial.print("Number of Link 11 successors after: ");
-    Serial.println(link11->getSuccessors().size());
 
 
 /*
@@ -153,7 +137,7 @@ vector<FlipperObject*> targetsList;
     buffer3->getSuccessors().push_back(link23);
     buffer4->getSuccessors().push_back(link24);
 
-/*
+
     link21->getSuccessors().push_back(switch_);
     link22->getSuccessors().push_back(switch_);
     link23->getSuccessors().push_back(switch_);
@@ -164,7 +148,7 @@ vector<FlipperObject*> targetsList;
     switch_->getSuccessors().push_back(link34);
     switch_->getSuccessors().push_back(link35);
     switch_->getSuccessors().push_back(link36);
-    link31->getSuccessors().push_back(bufuL1);
+/*    link31->getSuccessors().push_back(bufuL1);
     link32->getSuccessors().push_back(bufuL2);
     link33->getSuccessors().push_back(bufuL3);
     link34->getSuccessors().push_back(bufuR1);
@@ -262,12 +246,13 @@ FlipperObject* FlipperGame::getStorage()
 }
 
 
-/*
+
 FlipperObject* FlipperGame::getSwitch()
 {
     return switch_;
 }
 
+/*
 FlipperObject* FlipperGame::getBufuL1()
 {
     return bufuL1;
