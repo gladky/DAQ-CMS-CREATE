@@ -49,6 +49,15 @@
 #include "flipper/Link.hpp"
 #include "flipper/Link.cpp"
 
+#include "flipper/Clickable.hpp"
+#include "flipper/Clickable.cpp"
+
+#include "flipper/Buffer.hpp"
+#include "flipper/Buffer.cpp"
+
+#include "flipper/Button.hpp"
+#include "flipper/Button.cpp"
+
 
 #include "flipper/SimpleFifoQueue.hpp"
 #include "flipper/SimpleFifoQueue.cpp"

@@ -3,6 +3,7 @@
 #pragma once
 
 #include "Clickable.hpp"
+#include "Dispatcher.hpp"
 
 
 class Buffer

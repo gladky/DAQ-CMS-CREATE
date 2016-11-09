@@ -1,11 +1,11 @@
 // Generated from /cms.flipper/src/main/java/Button.java
-#include <Button.hpp>
+#include "Button.hpp"
 
-#include <Sound.hpp>
-#include <SoundPlayer.hpp>
+#include "Sound.hpp"
+#include "SoundPlayer.hpp"
 
 
-void Button::Button(string name, SoundPlayer* soundPlayer_):NamedObject(name)
+Button::Button(string name, SoundPlayer* soundPlayer_):NamedObject(name)
 {
     enabled = false;
     pressed = false;
@@ -24,10 +24,10 @@ bool Button::press()
 {
     if(enabled) {
         pressed = true;
-        soundPlayer->register_(Sound::ButtonPressedWhenEnabled);
+        soundPlayer->register_(ButtonPressedWhenEnabled);
         return true;
     } else {
-        soundPlayer->register_(Sound::ButtonPressedWhenDisabled);
+        soundPlayer->register_(ButtonPressedWhenDisabled);
         return false;
     }
 }

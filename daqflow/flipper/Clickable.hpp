@@ -3,6 +3,7 @@
 #pragma once
 
 #include "IndividualPogressObject.hpp"
+#include "Button.hpp"
 
 
 class Clickable

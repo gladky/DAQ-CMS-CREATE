@@ -11,8 +11,8 @@ class Dispatcher
 
 
 private:
-    vector<FlipperObject> linksToTarget;
-    vector<FlipperObject> targets ;
+    vector<FlipperObject*> linksToTarget;
+    vector<FlipperObject*> targets ;
     int result ;
     bool valid;
     bool backpressure;

@@ -1,9 +1,9 @@
 // Generated from /cms.flipper/src/main/java/Clickable.java
-#include <Clickable.hpp>
+#include "Clickable.hpp"
 
-#include <Button.hpp>
-#include <Data.hpp>
-#include <SimpleFifoQueue.hpp>
+#include "Button.hpp"
+#include "Data.hpp"
+#include "SimpleFifoQueue.hpp"
 
 
 
@@ -23,7 +23,7 @@ bool Clickable::canSend()
     }
     bool pressed = button->isPressed();
     if(pressed || accepted) {
-        Data data = this->queue->peek();
+        Data* data = this->queue->peek();
         if(!accepted) {
             accepted = true;
             registerAcceptedSound(data->isInteresting());
@@ -32,7 +32,7 @@ bool Clickable::canSend()
         bool canSend = IndividualPogressObject::canSend();
         return canSend;
     } else {
-        Data data = this->queue->peek();
+        Data* data = this->queue->peek();
         int timeoutProgress = data->getTimeOutProgress() + timeoutStep;
         data->setTimeOutProgress(timeoutProgress);
         if(timeoutProgress > 99) {
