@@ -1,11 +1,11 @@
 // Generated from /cms.flipper/src/main/java/FlipperGame.java
 #include "FlipperGame.hpp"
 
-//#include "Buffer.hpp"
-//#include "Button.hpp"
+#include "Buffer.hpp"
+#include "Button.hpp"
 #include "DataObserver.hpp"
 #include "FlowObserver.hpp"
-//#include "Dispatcher.hpp"
+#include "Dispatcher.hpp"
 #include "FlipperObject.hpp"
 #include "FlipperObjectFactory.hpp"
 #include "FragmentGenerator.hpp"
@@ -34,7 +34,7 @@ FlipperGame::FlipperGame()
 
 
     Serial.println("FlipperGame: creating links");
-/*
+
     buttonL1 = factory->createButton("Lv1 btn");
     buttonHLT_L1 = factory->createButton("L1 btn");
     buttonHLT_L2 = factory->createButton("L2 btn");
@@ -42,21 +42,24 @@ FlipperGame::FlipperGame()
     buttonHLT_R1 = factory->createButton("R1 btn");
     buttonHLT_R2 = factory->createButton("R2 btn");
     buttonHLT_R3 = factory->createButton("R3 btn");
-*/
+
     link11 = factory->createLink("11", 20 / linkBoost);
     link12 = factory->createLink("12", 20 / linkBoost);
     link13 = factory->createLink("13", 20 / linkBoost);
     link14 = factory->createLink("14", 20 / linkBoost);
 
-/*
+
     buffer1 = factory->createBuffer("buf1", buttonL1, true);
     buffer2 = factory->createBuffer("buf2", buttonL1, true);
     buffer3 = factory->createBuffer("buf3", buttonL1, true);
     buffer4 = factory->createBuffer("buf4", buttonL1, false);
+
     link21 = factory->createLink("21", int32_t(20) / linkBoost);
     link22 = factory->createLink("22", int32_t(20) / linkBoost);
     link23 = factory->createLink("23", int32_t(20) / linkBoost);
     link24 = factory->createLink("24", int32_t(20) / linkBoost);
+
+/*
     switch_ = factory->createSwitch("switch");
     link31 = factory->createLink("31", int32_t(13) / linkBoost);
     link32 = factory->createLink("32", int32_t(17) / linkBoost);
@@ -93,12 +96,26 @@ FlipperGame::FlipperGame()
 	*/
     Serial.print("Number of Link 11 successors before: ");
     Serial.println(link11->getSuccessors().size());
-    link11->getSuccessors().push_back(storage);
-    link12->getSuccessors().push_back(storage);
-    link13->getSuccessors().push_back(storage);
-    link14->getSuccessors().push_back(storage);
+    link21->getSuccessors().push_back(storage);
+    link22->getSuccessors().push_back(storage);
+    link23->getSuccessors().push_back(storage);
+    link24->getSuccessors().push_back(storage);
     Serial.print("Number of Link 11 successors after: ");
     Serial.println(link11->getSuccessors().size());
+
+
+/*
+* DELETEME
+*/
+vector<FlipperObject*> targetsList;
+    targetsList.push_back(link31);
+    targetsList.push_back(link32);
+    targetsList.push_back(link33);
+    targetsList.push_back(link34);
+    targetsList.push_back(link35);
+    targetsList.push_back(link36);
+
+
 
 /*
     vector<FlipperObject*> targetsList;
@@ -108,6 +125,7 @@ FlipperGame::FlipperGame()
     targets.push_back(bufuR1);
     targets.push_back(bufuR2);
     targets.push_back(bufuR3);
+*/
 
     vector<FlipperObject*> linksList;
     linksList.push_back(link31);
@@ -116,6 +134,8 @@ FlipperGame::FlipperGame()
     linksList.push_back(link34);
     linksList.push_back(link35);
     linksList.push_back(link36);
+
+
 
     dispatcher = factory->createDispatcher(targetsList,linksList);
     buffer1->setDispatcher(dispatcher);
@@ -130,6 +150,8 @@ FlipperGame::FlipperGame()
     buffer2->getSuccessors().push_back(link22);
     buffer3->getSuccessors().push_back(link23);
     buffer4->getSuccessors().push_back(link24);
+
+/*
     link21->getSuccessors().push_back(switch_);
     link22->getSuccessors().push_back(switch_);
     link23->getSuccessors().push_back(switch_);
@@ -179,7 +201,7 @@ void FlipperGame::generateNewFragments()
 {
     fragmentGenerator->generateAndInsertFragments();
 }
-/*
+
 void FlipperGame::pressButtonLevel1()
 {
     buttonL1->press();
@@ -213,7 +235,7 @@ void FlipperGame::pressButtonHLT_R2()
 void FlipperGame::pressButtonHLT_R3()
 {
     buttonHLT_R3->press();
-}*/
+}
 
 GameController* FlipperGame::getController()
 {
@@ -272,7 +294,7 @@ FlipperObject* FlipperGame::getBufuR2()
 FlipperObject* FlipperGame::getBufuR3()
 {
     return bufuR3;
-}
+}*/
 
 Buffer* FlipperGame::getBuffer1()
 {
@@ -294,7 +316,7 @@ Buffer* FlipperGame::getBuffer4()
     return buffer4;
 }
 
-*/
+
 SoundPlayer* FlipperGame::getSoundPlayer()
 {
     return factory->getSoundPlayer();

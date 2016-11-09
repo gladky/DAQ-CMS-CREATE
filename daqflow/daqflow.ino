@@ -58,6 +58,9 @@
 #include "flipper/Button.hpp"
 #include "flipper/Button.cpp"
 
+#include "flipper/Dispatcher.hpp"
+#include "flipper/Dispatcher.cpp"
+
 
 #include "flipper/SimpleFifoQueue.hpp"
 #include "flipper/SimpleFifoQueue.cpp"

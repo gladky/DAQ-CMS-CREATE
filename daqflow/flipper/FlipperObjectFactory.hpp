@@ -7,7 +7,7 @@
 This class is reduced, uncomment to introduce new elements
 */
 
-//#include "Buffer.hpp"
+#include "Buffer.hpp"
 #include "GameController.hpp"
 #include "SoundPlayer.hpp"
 #include "FlipperObject.hpp"
@@ -39,9 +39,9 @@ private:
 
 public:
     virtual FlipperObject* createStorage();
-    //virtual Buffer* createBuffer(string name, Button* button, bool soundMasked);
-    //virtual Dispatcher* createDispatcher(vector<FlipperObject> bufus, vector<FlipperObject> links);
-    //virtual Button* createButton(string name);
+    virtual Buffer* createBuffer(string name, Button* button, bool soundMasked);
+    virtual Dispatcher* createDispatcher(vector<FlipperObject*> bufus, vector<FlipperObject*> links);
+    virtual Button* createButton(string name);
     virtual GameController* getController();
     virtual void setBufferProcessingStep(int bufferProcessingStep);
     virtual void setBufferTimeoutStep(int bufferTimeoutStep);

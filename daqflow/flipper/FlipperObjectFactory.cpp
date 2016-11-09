@@ -7,9 +7,9 @@ This class is reduced, uncomment to introduce new elements
 */
 
 //#include <BUFU.hpp>
-//#include <Buffer.hpp>
-//#include <Button.hpp>
-//#include <Dispatcher.hpp>
+#include "Buffer.hpp"
+#include "Button.hpp"
+#include "Dispatcher.hpp"
 #include "FlipperObject.hpp"
 #include "GameController.hpp"
 #include "Link.hpp"
@@ -83,17 +83,17 @@ FlipperObject* FlipperObjectFactory::createStorage()
     return storage;
 }
 
-/*
+
 
 Buffer* FlipperObjectFactory::createBuffer(string name, Button* button, bool soundMasked)
 {
     string uniqueName = getShortName(name);
-    Buffer* buffer = new Buffer(uniqueName, int32_t(12), bufferProcessingStep, bufferTimeoutStep, button, soundPlayer, soundMasked);
-    controller->getFlipperObjects()->add(buffer);
+    Buffer* buffer = new Buffer(uniqueName, 12, bufferProcessingStep, bufferTimeoutStep, button, soundPlayer, soundMasked);
+    controller->getFlipperObjects().push_back(buffer);
     return buffer;
 }
 
-Dispatcher* FlipperObjectFactory::createDispatcher(vector<FlipperObject> bufus, vector<FlipperObject> links)
+Dispatcher* FlipperObjectFactory::createDispatcher(vector<FlipperObject*> bufus, vector<FlipperObject*> links)
 {
     Dispatcher* dispatcher = new Dispatcher(bufus, links, soundPlayer);
     controller->setDispatcher(dispatcher);
@@ -102,13 +102,13 @@ Dispatcher* FlipperObjectFactory::createDispatcher(vector<FlipperObject> bufus, 
 
 Button* FlipperObjectFactory::createButton(string name)
 {
-    auto uniqueName = getShortName(name);
-    auto button = new Button(uniqueName, soundPlayer);
-    controller->getButtons()->add(button);
+    string uniqueName = getShortName(name);
+    Button* button = new Button(uniqueName, soundPlayer);
+    controller->getButtons().push_back(button);
     return button;
 }
 
-*/
+
 string FlipperObjectFactory::getShortName(string name)
 {
     return name;

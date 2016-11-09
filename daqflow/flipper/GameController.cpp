@@ -47,8 +47,8 @@ void GameController::doStep()
     soundPlayer->flush();
 }
 
-/*
-vector<Button> GameController::getButtons()
+
+vector<Button*> GameController::getButtons()
 {
     return buttons;
 }
@@ -56,7 +56,7 @@ vector<Button> GameController::getButtons()
 void GameController::setDispatcher(Dispatcher* dispatcher)
 {
     this->dispatcher = dispatcher;
-}*/
+}
 
 void GameController::setSoundPlayer(SoundPlayer* soundPlayer_)
 {
