@@ -7,6 +7,7 @@
 #include "flipper/GameController.hpp"
 #include "flipper/GameController.cpp"
 
+#include "flipper/Sound.hpp"
 #include "flipper/SoundPlayer.hpp"
 #include "flipper/SoundPlayer.cpp"
 
@@ -38,6 +39,12 @@
 
 #include "flipper/IndividualPogressObject.hpp"
 #include "flipper/IndividualPogressObject.cpp"
+
+#include "flipper/SinglePogressObject.hpp"
+#include "flipper/SinglePogressObject.cpp"
+
+#include "flipper/Storage.hpp"
+#include "flipper/Storage.cpp"
 
 #include "flipper/Link.hpp"
 #include "flipper/Link.cpp"

@@ -14,7 +14,7 @@ This class is reduced, uncomment to introduce new elements
 #include "GameController.hpp"
 #include "Link.hpp"
 #include "SoundPlayer.hpp"
-//#include <Storage.hpp>
+#include "Storage.hpp"
 //#include <Switch.hpp>
 
 
@@ -73,15 +73,17 @@ FlipperObject* FlipperObjectFactory::createSwitch(string name)
     controller->getFlipperObjects()->add(switch_);
     return switch_;
 }
-
+*/
 
 FlipperObject* FlipperObjectFactory::createStorage()
 {
     string uniqueName = getShortName("Storage");
     FlipperObject* storage = new Storage(uniqueName, 40, soundPlayer);
-    controller->getFlipperObjects()->add(storage);
+    controller->getFlipperObjects().push_back(storage);
     return storage;
 }
+
+/*
 
 Buffer* FlipperObjectFactory::createBuffer(string name, Button* button, bool soundMasked)
 {
@@ -138,11 +140,11 @@ void FlipperObjectFactory::setBufuTimeoutStep(int bufuTimeoutStep_)
     bufuTimeoutStep = bufuTimeoutStep_;
 }
 
-/*
+
 
 SoundPlayer* FlipperObjectFactory::getSoundPlayer()
 {
     return soundPlayer;
-}*/
+}
 
 

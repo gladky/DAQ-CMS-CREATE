@@ -2,20 +2,12 @@
 
 #pragma once
 
-#include <fwd-cms.flipper.hpp>
-#include <java/lang/fwd-cms.flipper.hpp>
-#include <SinglePogressObject.hpp>
+#include "SinglePogressObject.hpp"
 
-struct default_init_tag;
 
 class Storage
     : public SinglePogressObject
 {
-
-public:
-    typedef SinglePogressObject super;
-protected:
-    void ctor(::java::lang::String* name, int32_t capacity, SoundPlayer* soundPlayer);
 
 public:
     bool canAccept() override;
@@ -27,14 +19,6 @@ public: /* protected */
     // Generated
 
 public:
-    Storage(::java::lang::String* name, int32_t capacity, SoundPlayer* soundPlayer);
-protected:
-    Storage(const ::default_init_tag&);
+    Storage(string name, int capacity, SoundPlayer* soundPlayer);
 
-
-public:
-    static ::java::lang::Class *class_();
-
-private:
-    virtual ::java::lang::Class* getClass0();
 };

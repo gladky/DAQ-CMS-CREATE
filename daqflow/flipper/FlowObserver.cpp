@@ -19,7 +19,7 @@ This class is reduced, uncomment
 #include "SimpleFifoQueue.hpp"
 #include "Sound.hpp"
 //#include <SoundPlayer.hpp>
-//#include <Storage.hpp>
+#include "Storage.hpp"
 //#include <Switch.hpp>
 
 #include <typeinfo>
@@ -81,8 +81,11 @@ FlowObserver::FlowObserver(FlipperGame* flipperGame, int minWidth, int width, in
     observedObjects.push_back(flipperGame->link46);
     observedObjects.push_back(flipperGame->link47);
     observedObjects.push_back(flipperGame->link48);
+
+*/
     observedObjects.push_back(flipperGame->getStorage());
-    observedObjects.push_back(flipperGame->getSoundPlayer());*/
+    observedObjects.push_back(flipperGame->getSoundPlayer());
+
     //lengths = //should be initialized automatically
     for (int i = 0; i < observedObjects.size(); i++) {
         NamedObject* object = observedObjects[i];

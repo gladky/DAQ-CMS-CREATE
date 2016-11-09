@@ -31,11 +31,11 @@ public:
     Button* buttonHLT_R3 {  };
 */
 
-/*
-private:
-    FlipperObject* storage {  };
 
-*/
+private:
+    FlipperObject* storage;
+
+
 
 public:
     FlipperObject* link11;
@@ -109,7 +109,7 @@ public:
     virtual GameController* getController();
     virtual void doStep();
     virtual void doSteps(int steps);
-    //virtual FlipperObject* getStorage();
+    virtual FlipperObject* getStorage();
     //virtual FlipperObject* getSwitch();
     //virtual FlipperObject* getBufuL1();
     //virtual FlipperObject* getBufuL2();
@@ -121,7 +121,7 @@ public:
     //virtual Buffer* getBuffer2();
     //virtual Buffer* getBuffer3();
     //virtual Buffer* getBuffer4();
-    //virtual SoundPlayer* getSoundPlayer();
+    virtual SoundPlayer* getSoundPlayer();
 
     // Generated
     FlipperGame();

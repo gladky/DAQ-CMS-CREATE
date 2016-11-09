@@ -10,7 +10,7 @@
 #include "FlipperObjectFactory.hpp"
 #include "FragmentGenerator.hpp"
 #include "GameController.hpp"
-//#include "SoundPlayer.hpp"
+#include "SoundPlayer.hpp"
 
 
 int FlipperGame::linkBoost =4;
@@ -78,8 +78,25 @@ FlipperGame::FlipperGame()
     link46 = factory->createLink("46", int32_t(4) / linkBoost);
     link47 = factory->createLink("47", int32_t(13) / linkBoost);
     link48 = factory->createLink("48", int32_t(25) / linkBoost);
+*/
+
     storage = factory->createStorage();
 
+
+	/*
+	DELETE
+
+	DELETE
+
+	DELETE
+
+	*/
+    link11->getSuccessors().push_back(storage);
+    link12->getSuccessors().push_back(storage);
+    link13->getSuccessors().push_back(storage);
+    link14->getSuccessors().push_back(storage);
+
+/*
     vector<FlipperObject*> targetsList;
     targets.push_back(bufuL1);
     targets.push_back(bufuL2);
@@ -210,12 +227,14 @@ void FlipperGame::doSteps(int steps)
         controller->doStep();
     }
 }
-/*
+
 FlipperObject* FlipperGame::getStorage()
 {
     return storage;
 }
 
+
+/*
 FlipperObject* FlipperGame::getSwitch()
 {
     return switch_;
@@ -271,9 +290,10 @@ Buffer* FlipperGame::getBuffer4()
     return buffer4;
 }
 
+*/
 SoundPlayer* FlipperGame::getSoundPlayer()
 {
     return factory->getSoundPlayer();
-}*/
+}
 
 

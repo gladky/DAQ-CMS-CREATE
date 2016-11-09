@@ -38,7 +38,7 @@ private:
     string getShortName(string name);
 
 public:
-    //virtual FlipperObject* createStorage();
+    virtual FlipperObject* createStorage();
     //virtual Buffer* createBuffer(string name, Button* button, bool soundMasked);
     //virtual Dispatcher* createDispatcher(vector<FlipperObject> bufus, vector<FlipperObject> links);
     //virtual Button* createButton(string name);
@@ -47,7 +47,7 @@ public:
     virtual void setBufferTimeoutStep(int bufferTimeoutStep);
     virtual void setBufuProcessingStep(int bufuProcessingStep);
     virtual void setBufuTimeoutStep(int bufuTimeoutStep);
-    //virtual SoundPlayer* getSoundPlayer();
+    virtual SoundPlayer* getSoundPlayer();
 
     // Generated
     FlipperObjectFactory();
