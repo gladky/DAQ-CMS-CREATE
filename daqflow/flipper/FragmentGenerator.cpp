@@ -1,8 +1,11 @@
 // Generated from /cms.flipper/src/main/java/FragmentGenerator.java
-#include <FragmentGenerator.hpp>
 
-#include <FlipperObject.hpp>
-#include <Fragment.hpp>
+
+#include "FragmentGenerator.hpp"
+
+#include "FlipperObject.hpp"
+#include "Fragment.hpp"
+
 
 
 FragmentGenerator::FragmentGenerator(FlipperObject* link1_, FlipperObject* link2_, FlipperObject* link3_, FlipperObject* link4_) 

@@ -1,7 +1,27 @@
 #include <Adafruit_DotStar.h>
 #include <SPI.h>
 
+#include "flipper/FlipperGame.hpp"
 #include "flipper/FlipperGame.cpp"
+
+
+#include "flipper/FragmentGenerator.hpp"
+#include "flipper/FragmentGenerator.cpp"
+
+#include "flipper/Data.hpp"
+#include "flipper/Data.cpp"
+
+#include "flipper/Fragment.hpp"
+#include "flipper/Fragment.cpp"
+
+
+#include "flipper/FlowObserver.hpp"
+#include "flipper/FlowObserver.cpp"
+
+#include "flipper/DataObserver.hpp"
+#include "flipper/DataObserver.cpp"
+
+
 #include <vector>
 
 #define NUMPIXELS 100
@@ -30,7 +50,7 @@ void setup() {
 
   //model = new Model(result_leds);
 
-  //flipperGame = new FlipperGame();
+  flipperGame = new FlipperGame();
 
   
   //printModel();
@@ -44,20 +64,30 @@ int counter = 0;
 void loop() {
 
 
-  //model->animate();
+  if(counter < 400){
 
-  //printModel();
+    if(counter % 4 == 0 && counter < 200) {
+        flipperGame->generateNewFragments();
+    }
+    /*flipperGame->pressButtonLevel1();
+    flipperGame->pressButtonHLT_L1();
+    flipperGame->pressButtonHLT_L2();
+    flipperGame->pressButtonHLT_L3();
+    flipperGame->pressButtonHLT_R1();
+    flipperGame->pressButtonHLT_R2();
+    flipperGame->pressButtonHLT_R3();*/
+    flipperGame->doStep();
+  } else{
 
-  //strip.setPixelColor(tail, 0);     // 'Off' pixel at tail
-  strip.show();                     // Refresh strip
-  delay(50);                        // Pause 20 milliseconds (~50 FPS)
+    //cout << flipperGame->getController()->observer->toString() << endl;
+    //cout << "There should be x events in storage: " << flipperGame->getStorage()->getQueue()->size() << endl;
+
+  }
+
+
+  //strip.show();                     // Refresh strip
 
  
-  if(counter%40 == 0){
-    
-    //Event* e1 = new Event();
-    //model->insert(e1);
-  }
   counter++;
 
 }

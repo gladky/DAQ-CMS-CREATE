@@ -21,13 +21,13 @@ class GameController
 {
 
 private:
-    vector<FlipperObject*> flipperObjects {  };
+    vector<FlipperObject*> flipperObjects;
   //  vector<Button> buttons {  };
  //   Dispatcher* dispatcher {  };
   //  SoundPlayer* soundPlayer {  };
 
 public:
-    FlowObserver* observer {  };
+    FlowObserver* observer;
 
 public:
     virtual vector<FlipperObject> getFlipperObjects();

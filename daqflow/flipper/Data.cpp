@@ -1,7 +1,8 @@
 // Generated from /cms.flipper/src/main/java/Data.java
-#include <Data.hpp>
 
-#include <FlipperObject.hpp>
+#include "Data.hpp"
+
+#include "FlipperObject.hpp"
 
 Data::Data(string name_, bool isFragment, bool isInteresting) 
 {
@@ -15,10 +16,10 @@ string Data::getName()
     return name;
 }
 
-string Data::toString()
+/*string Data::toString()
 {
     return name
-}
+}*/
 
 FlipperObject* Data::getTarget()
 {

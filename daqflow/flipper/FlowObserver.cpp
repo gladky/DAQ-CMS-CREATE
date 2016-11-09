@@ -5,20 +5,20 @@
 This class is reduced, uncomment
 */
 
-#include <FlowObserver.hpp>
+#include "FlowObserver.hpp"
 
 //#include <BUFU.hpp>
 //#include <Buffer.hpp>
 //#include <Button.hpp>
-#include <Data.hpp>
-#include <Dispatcher.hpp>
-#include <FlipperGame.hpp>
-#include <FlipperObject.hpp>
-#include <Link.hpp>
-#include <NamedObject.hpp>
-#include <Pair.hpp>
-#include <SimpleFifoQueue.hpp>
-#include <Sound.hpp>
+#include "Data.hpp"
+//#include "Dispatcher.hpp"
+#include "FlipperGame.hpp"
+#include "FlipperObject.hpp"
+#include "Link.hpp"
+#include "NamedObject.hpp"
+#include "Pair.hpp"
+#include "SimpleFifoQueue.hpp"
+#include "Sound.hpp"
 //#include <SoundPlayer.hpp>
 //#include <Storage.hpp>
 //#include <Switch.hpp>

@@ -2,6 +2,8 @@
 
 #pragma once
 
+#include "FlipperObject.hpp";
+
 
 class FragmentGenerator
 {

@@ -1,12 +1,13 @@
 // Generated from /cms.flipper/src/main/java/Fragment.java
-#include <Fragment.hpp>
+
+#include "Data.hpp"
 
 
 
 Fragment::Fragment(bool interesting) 
     : Data("f", true, interesting)
 {
-    id++;
+    id_++;
 }
 
 

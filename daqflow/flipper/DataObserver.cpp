@@ -1,5 +1,4 @@
 // Generated from /cms.flipper/src/main/java/DataObserver.java
-#include <DataObserver.hpp>
 
 /*
 THis class is reduced
@@ -7,13 +6,15 @@ THis class is reduced
 
 //#include <BUFU.hpp>
 //#include <Buffer.hpp>
-#include <Data.hpp>
-#include <Link.hpp>
-#include <SimpleFifoQueue.hpp>
+#include "DataObserver.hpp"
+#include "Data.hpp"
+#include "Link.hpp"
+#include "SimpleFifoQueue.hpp"
 //#include <Storage.hpp>
 
 
-DataObserver::DataObserver(FlipperGame* flipperGame) : FlowObserver(flipperGame, 2,4,5,14,7,4)
+DataObserver::DataObserver(FlipperGame* flipperGame)
+: FlowObserver(flipperGame, 2,4,5,14,7,4)
 {
 }
 

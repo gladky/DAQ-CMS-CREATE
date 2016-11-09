@@ -4,6 +4,7 @@
 //#include "Buffer.hpp"
 //#include "Button.hpp"
 #include "DataObserver.hpp"
+#include "FlowObserver.hpp"
 //#include "Dispatcher.hpp"
 #include "FlipperObject.hpp"
 #include "FlipperObjectFactory.hpp"
@@ -20,10 +21,13 @@ int FlipperGame::linkBoost =4;
 THis class is reduced for testing. Just uncomment elements
 */
 
-FlipperGame::FlipperGame(FlipperObjectFactory* factory_)
+
+
+//FlipperGame::FlipperGame(FlipperObjectFactory* factory_)
+FlipperGame::FlipperGame()
 {
-    factory = factory_;
-    controller = factory_->getController();
+    //factory = factory_;
+    controller = factory->getController();
 /*
     buttonL1 = factory->createButton("Lv1 btn");
     buttonHLT_L1 = factory->createButton("L1 btn");
@@ -129,8 +133,13 @@ FlipperGame::FlipperGame(FlipperObjectFactory* factory_)
     link47->getSuccessors().push_back(link48);
     link44->getSuccessors().push_back(storage);
     link48->getSuccessors().push_back(storage);*/
-    controller->observer = new DataObserver(this);
+
     fragmentGenerator = new FragmentGenerator(link11, link12, link13, link14);
+
+
+    FlipperGame* flipperGame_ = this;
+    DataObserver* observer_ = new DataObserver(flipperGame_);
+    controller->observer = observer_;
 }
 
 void FlipperGame::generateNewFragments()

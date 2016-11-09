@@ -1,6 +1,7 @@
 // Generated from /cms.flipper/src/main/java/FlipperGame.java
 
-#pragma once
+#ifndef _FLIPPER_GAME_H
+#define _FLIPPER_GAME_H
 
 #include "GameController.hpp"
 #include "FlipperObjectFactory.hpp"
@@ -16,8 +17,8 @@ class FlipperGame
 
 
 private:
-    GameController* controller {  };
-    FlipperObjectFactory* factory {  };
+    GameController* controller;
+    FlipperObjectFactory* factory;
 
 /*
 public:
@@ -37,10 +38,10 @@ private:
 */
 
 public:
-    FlipperObject* link11 {  };
-    FlipperObject* link12 {  };
-    FlipperObject* link13 {  };
-    FlipperObject* link14 {  };
+    FlipperObject* link11;
+    FlipperObject* link12;
+    FlipperObject* link13;
+    FlipperObject* link14;
 
 
 /*
@@ -86,7 +87,7 @@ public:
 
 private:
     //FlipperObject* switch_ {  };
-    FragmentGenerator* fragmentGenerator {  };
+    FragmentGenerator* fragmentGenerator;
 
 public:
     static int linkBoost ;
@@ -124,7 +125,10 @@ public:
 
     // Generated
     FlipperGame();
-    FlipperGame(FlipperObjectFactory* factory);
+    //FlipperGame(FlipperObjectFactory* factory);
 
 
 };
+
+
+#endif

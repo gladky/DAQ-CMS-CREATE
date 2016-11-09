@@ -47,7 +47,7 @@ private:
 
 public:
     virtual void persist();
-    //string toString();// override;
+    string toString();// override;
 
 private:
     string toString(vector<string> row);
@@ -57,7 +57,7 @@ public:
     // Generated
     FlowObserver(FlipperGame* flipperGame, int minWidth, int width, int switchWidth, int storageWidth, int soundWidth, int bufferWidth);
 
-    //static string fixedLengthString(string string, int length);
+    static string fixedLengthString(string string, int length);
 
 
 };
