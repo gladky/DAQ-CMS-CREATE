@@ -10,7 +10,7 @@ THis class is reduced for testing. Just uncomment elements
 //#include <Button.hpp>
 //#include <Dispatcher.hpp>
 #include <FlipperObject.hpp>
-//#include <FlowObserver.hpp>
+#include <FlowObserver.hpp>
 //#include <SoundPlayer.hpp>
 
 
@@ -18,7 +18,7 @@ void GameController::GameController()
 {
     flipperObjects; //vector should be initialized
 //   buttons ; // the same
-//    observer = nullptr;
+    observer = nullptr;
 }
 
 vector<FlipperObject> GameController::getFlipperObjects()
@@ -32,9 +32,9 @@ void GameController::doStep()
     for (vector<FlipperObject>::reverse_iterator i = flipperObjects.rbegin(); i != flipperObjects.rend(); ++i ) {
         i->doStep();
     }
-    //if(observer != nullptr) {
-    //    observer->persist();
-    //}
+    if(observer != nullptr) {
+        observer->persist();
+    }
 
  /*
     for (vector<Button>::iterator it = buttons.begin() ; it != buttons.end(); ++it){

@@ -3,7 +3,10 @@
 #pragma once
 
 
-class Link: public IndividualPogressObject
+#include "IndividualPogressObject.hpp"
+
+class Link:
+    public IndividualPogressObject
 {
 
 

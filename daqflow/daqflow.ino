@@ -16,6 +16,7 @@ std::vector<uint32_t> result_leds(NUMPIXELS,0);
 
 
 //Model *model;
+FlipperGame *flipperGame;
 
 void setup() {
   #if defined(__AVR_ATtiny85__) && (F_CPU == 16000000L)
@@ -28,6 +29,8 @@ void setup() {
   delay(100);
 
   //model = new Model(result_leds);
+
+  //flipperGame = new FlipperGame();
 
   
   //printModel();

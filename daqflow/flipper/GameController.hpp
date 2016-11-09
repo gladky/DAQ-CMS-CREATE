@@ -12,7 +12,7 @@ THis class is reduced for testing. Just uncomment elements
 //#include "Button.hpp"
 //#include "Dispatcher.hpp"
 //#include "SoundPlayer.hpp"
-//#include "FlowObserver.hpp"
+#include "FlowObserver.hpp"
 #include <vector>
 
 using namespace std;
@@ -26,8 +26,8 @@ private:
  //   Dispatcher* dispatcher {  };
   //  SoundPlayer* soundPlayer {  };
 
-//public:
-    //FlowObserver* observer {  };
+public:
+    FlowObserver* observer {  };
 
 public:
     virtual vector<FlipperObject> getFlipperObjects();

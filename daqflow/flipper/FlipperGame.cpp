@@ -3,7 +3,7 @@
 
 //#include "Buffer.hpp"
 //#include "Button.hpp"
-//#include "DataObserver.hpp"
+#include "DataObserver.hpp"
 //#include "Dispatcher.hpp"
 #include "FlipperObject.hpp"
 #include "FlipperObjectFactory.hpp"
@@ -129,7 +129,7 @@ FlipperGame::FlipperGame(FlipperObjectFactory* factory_)
     link47->getSuccessors().push_back(link48);
     link44->getSuccessors().push_back(storage);
     link48->getSuccessors().push_back(storage);*/
-    //controller->observer = new DataObserver(this);
+    controller->observer = new DataObserver(this);
     fragmentGenerator = new FragmentGenerator(link11, link12, link13, link14);
 }
 

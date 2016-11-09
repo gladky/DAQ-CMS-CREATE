@@ -2,60 +2,62 @@
 
 #pragma once
 
+/*
+This class is reduced, uncomment
+*/
 
+#include "FlipperGame.hpp"
+#include "Link.hpp"
+#include "NamedObject.hpp"
+#include "FlipperObject.hpp"
+#include "Pair.hpp"
+
+#include <string>
+#include <vector>
+using namespace std;
+
+class FlipperGame;
 
 class FlowObserver
 {
 
 
 private:
-    int MIN_WIDTH {  };
-    int WIDTH {  };
-    int SWITCH_WIDTH {  };
-    int STORAGE_WIDTH {  };
-    int SOUND_WIDTH {  };
-    int BUFFER_WIDTH {  };
-    static ::java::lang::String* empty_;
-    ::java::util::List* observedObjects {  };
-    ::java::util::List* states {  };
-    ::java::util::Map* lengths {  };
-protected:
-    void ctor(FlipperGame* flipperGame, int32_t minWidth, int32_t width, int32_t switchWidth, int32_t storageWidth, int32_t soundWidth, int32_t bufferWidth);
+    int MIN_WIDTH ;
+    int WIDTH ;
+    int SWITCH_WIDTH ;
+    int STORAGE_WIDTH ;
+    int SOUND_WIDTH ;
+    int BUFFER_WIDTH ;
+    static string empty_;
+    vector<NamedObject> observedObjects ;
+    vector<vector<string> > states;
+    vector<int> lengths; // map was used
 
 public: /* protected */
-    virtual ::java::lang::String* getState(Link* link) = 0;
-    virtual ::java::lang::String* getState(BUFU* bufu) = 0;
-    virtual ::java::lang::String* getState(Buffer* buffer) = 0;
-    virtual ::java::lang::String* getState(Storage* storage) = 0;
-    virtual ::java::lang::String* getState(Switch* switch_);
+    virtual string getState(Link* link) = 0;
+    //virtual string getState(BUFU* bufu) = 0;
+    //virtual string getState(Buffer* buffer) = 0;
+    //virtual string getState(Storage* storage) = 0;
+    //virtual string getState(Switch* switch_);
 
 private:
     Pair* getState(FlipperObject* observedObject);
-    Pair* getState(Button* observedButtonObject);
+    //Pair* getState(Button* observedButtonObject);
 
 public:
     virtual void persist();
-    ::java::lang::String* toString() override;
+    //string toString();// override;
 
 private:
-    ::java::lang::String* toString(::java::util::Map* row);
+    string toString(vector<string> row);
 
 public:
-    static ::java::lang::String* fixedLengthString(::java::lang::String* string, int32_t length);
 
     // Generated
-    FlowObserver(FlipperGame* flipperGame, int32_t minWidth, int32_t width, int32_t switchWidth, int32_t storageWidth, int32_t soundWidth, int32_t bufferWidth);
-protected:
-    FlowObserver(const ::default_init_tag&);
+    FlowObserver(FlipperGame* flipperGame, int minWidth, int width, int switchWidth, int storageWidth, int soundWidth, int bufferWidth);
+
+    //static string fixedLengthString(string string, int length);
 
 
-public:
-    static ::java::lang::Class *class_();
-    static void clinit();
-
-public: /* protected */
-    static ::java::lang::String*& empty();
-
-private:
-    virtual ::java::lang::Class* getClass0();
 };
