@@ -124,7 +124,7 @@ int counter = 0;
 void loop() {
 
 
-  if(counter < 40){
+  if(counter < 59){
 
     
     Serial.print("step-");
@@ -133,16 +133,16 @@ void loop() {
     Serial.print("step-");
     Serial.println(counter);
 
-    if(counter % 6 == 0 && counter < 200) {
+    if(counter % 6 == 0 && counter < 5) {
         flipperGame->generateNewFragments();
     }
     flipperGame->pressButtonLevel1();
-    /*flipperGame->pressButtonHLT_L1();
+    flipperGame->pressButtonHLT_L1();
     flipperGame->pressButtonHLT_L2();
     flipperGame->pressButtonHLT_L3();
     flipperGame->pressButtonHLT_R1();
     flipperGame->pressButtonHLT_R2();
-    flipperGame->pressButtonHLT_R3();*/
+    flipperGame->pressButtonHLT_R3();
     flipperGame->doStep();
   } else{
     delay(5000);

@@ -28,7 +28,7 @@ bool Buffer::backpressure()
 
 void Buffer::dispatch()
 {
-    //Serial.print("Buffer::dispatch: about to");
+    Serial.print("Buffer::dispatch: about to");
     if(!queue->peek()->isDispatched()) {
         int choosenIndex = dispatcher->findAvailableTarget();
         if(!dispatcher->isBackpressure()) {
@@ -36,7 +36,7 @@ void Buffer::dispatch()
             queue->peek()->setTargetIndex(choosenIndex);
         }
     }
-    //Serial.println("Buffer::dispatch: done");
+    Serial.println("Buffer::dispatch: done");
 }
 
 Dispatcher* Buffer::getDispatcher()
@@ -73,13 +73,28 @@ void Buffer::registerMissedSound(bool interesting)
 
 void Buffer::reserve()
 {
-    //Serial.print("Buffer::reserve: about to");
+    Serial.print("Buffer::reserve: about to");
+
     Data* data = queue->peek();
+    
+    Serial.print("data: ");
+    Serial.println(data->getName().c_str());
+
     int reservedIndex = data->getTargetIndex();
+
+    Serial.print("dispatched to: ");
+    Serial.println(reservedIndex);
+
     FlipperObject* target = dispatcher->getTarget(reservedIndex);
     FlipperObject* link = dispatcher->getLink(reservedIndex);
+
+    Serial.print("target: ");
+    Serial.println(target->getName().c_str());
+    Serial.print("link: ");
+    Serial.println(link->getName().c_str());
+
     target->setBusy(true);
     data->setTarget(link);
 
-    //Serial.println("Buffer::reserve: done");
+    Serial.println("Buffer::reserve: done");
 }

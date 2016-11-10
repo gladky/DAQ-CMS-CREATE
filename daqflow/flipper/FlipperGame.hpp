@@ -8,6 +8,7 @@
 #include "FragmentGenerator.hpp"
 #include "Button.hpp"
 #include "Buffer.hpp"
+#include "BUFU.hpp"
 #include "Dispatcher.hpp"
 
 
@@ -68,16 +69,16 @@ public:
     FlipperObject* link35 ;
     FlipperObject* link36 ;
 
-/*
-private:
-    FlipperObject* bufuL1 {  };
-    FlipperObject* bufuL2 {  };
-    FlipperObject* bufuL3 {  };
-    FlipperObject* bufuR1 {  };
-    FlipperObject* bufuR2 {  };
-    FlipperObject* bufuR3 {  };
 
-*/
+private:
+    FlipperObject* bufuL1 ;
+    FlipperObject* bufuL2 ;
+    FlipperObject* bufuL3 ;
+    FlipperObject* bufuR1 ;
+    FlipperObject* bufuR2 ;
+    FlipperObject* bufuR3 ;
+
+
 public:
     FlipperObject* link41;
     FlipperObject* link42;
@@ -115,12 +116,12 @@ public:
     virtual void doSteps(int steps);
     virtual FlipperObject* getStorage();
     virtual FlipperObject* getSwitch();
-    //virtual FlipperObject* getBufuL1();
-    //virtual FlipperObject* getBufuL2();
-    //virtual FlipperObject* getBufuL3();
-    //virtual FlipperObject* getBufuR1();
-    //virtual FlipperObject* getBufuR2();
-    //virtual FlipperObject* getBufuR3();
+    virtual FlipperObject* getBufuL1();
+    virtual FlipperObject* getBufuL2();
+    virtual FlipperObject* getBufuL3();
+    virtual FlipperObject* getBufuR1();
+    virtual FlipperObject* getBufuR2();
+    virtual FlipperObject* getBufuR3();
     virtual Buffer* getBuffer1();
     virtual Buffer* getBuffer2();
     virtual Buffer* getBuffer3();

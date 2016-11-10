@@ -29,18 +29,23 @@ FlipperObject* Dispatcher::getLink(int id)
 int Dispatcher::findAvailableTarget()
 {
 
-    //Serial.print("Dispatcher::findAvailableTarget: about to ");
+    Serial.print("Dispatcher::findAvailableTarget: about to ");
     if(valid) {
+        Serial.print("Dispatcher::findAvailableTarget: stil valid ");
     } else {
         result = -1;
         vector<int> ready;
+
         /*Serial.print(", Available targets: ");
         Serial.print(targets.size());
         Serial.print(", iterating, ");*/
+
         for (int i = 0; i < targets.size(); i++) {
-	    //Serial.print(targets[i]->getName().c_str());
+	    
+            //Serial.print(targets[i]->getName().c_str());
             FlipperObject* bufu = targets[i];
 	    //Serial.print(bufu->getName().c_str());
+            
             if(!bufu->isBusy() && bufu->canAccept()) {
                 ready.push_back(i);
             }
@@ -56,7 +61,7 @@ int Dispatcher::findAvailableTarget()
             result = choosen;
             valid = true;
         } else {
-            Serial.println("Beginning backpressure, ready = 0");
+            //Serial.println("Beginning backpressure, ready = 0");
             if(backpressure == false) {
                 soundPlayer->register_(Backpressure);
             }
@@ -64,7 +69,8 @@ int Dispatcher::findAvailableTarget()
         }
     }
 
-    //Serial.println("Dispatcher::findAvailableTarget: done");
+    /*Serial.print("Dispatcher::findAvailableTarget: result: ");
+    Serial.println(result);*/
     return result;
 }
 

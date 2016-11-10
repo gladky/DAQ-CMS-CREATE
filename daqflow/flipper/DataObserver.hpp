@@ -17,7 +17,7 @@ class DataObserver
 
 public: /* protected */
     string getState(Link* link) override;
-    //string getState(BUFU* bufu) override;
+    string getState(BUFU* bufu) override;
     string getState(Buffer* buffer) override;
     string getState(Storage* storage) override;
 
@@ -27,7 +27,7 @@ public:
     DataObserver(FlipperGame* flipperGame);
 
 
-//public: /* protected */
-//    virtual string getState(Switch* switch_);
+public: /* protected */
+    virtual string getState(Switch* switch_);
 
 };

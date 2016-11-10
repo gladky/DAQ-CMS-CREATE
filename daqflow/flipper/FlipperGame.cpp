@@ -2,6 +2,7 @@
 #include "FlipperGame.hpp"
 
 #include "Buffer.hpp"
+#include "BUFU.hpp"
 #include "Button.hpp"
 #include "DataObserver.hpp"
 #include "FlowObserver.hpp"
@@ -68,13 +69,13 @@ FlipperGame::FlipperGame()
     link34 = factory->createLink("34", int32_t(13) / linkBoost);
     link35 = factory->createLink("35", int32_t(17) / linkBoost);
     link36 = factory->createLink("36", int32_t(34) / linkBoost);
-/*
+
     bufuR1 = factory->createBUFU("R1BF", buttonHLT_R1);
     bufuL1 = factory->createBUFU("L1BF", buttonHLT_L1);
     bufuR2 = factory->createBUFU("R2BF", buttonHLT_R2);
     bufuL2 = factory->createBUFU("L2BF", buttonHLT_L2);
     bufuR3 = factory->createBUFU("R3BF", buttonHLT_R3);
-    bufuL3 = factory->createBUFU("L3BF", buttonHLT_L3);*/
+    bufuL3 = factory->createBUFU("L3BF", buttonHLT_L3);
 
     link41 = factory->createLink("41", 10 / linkBoost);
     link42 = factory->createLink("42", 4 / linkBoost);
@@ -90,28 +91,18 @@ FlipperGame::FlipperGame()
 
 
 
-/*
-* DELETEME
-*/
-vector<FlipperObject*> targetsList;
-    targetsList.push_back(link31);
-    targetsList.push_back(link32);
-    targetsList.push_back(link33);
-    targetsList.push_back(link34);
-    targetsList.push_back(link35);
-    targetsList.push_back(link36);
 
 
 
-/*
+
     vector<FlipperObject*> targetsList;
-    targets.push_back(bufuL1);
-    targets.push_back(bufuL2);
-    targets.push_back(bufuL3);
-    targets.push_back(bufuR1);
-    targets.push_back(bufuR2);
-    targets.push_back(bufuR3);
-*/
+    targetsList.push_back(bufuL1);
+    targetsList.push_back(bufuL2);
+    targetsList.push_back(bufuL3);
+    targetsList.push_back(bufuR1);
+    targetsList.push_back(bufuR2);
+    targetsList.push_back(bufuR3);
+
 
     vector<FlipperObject*> linksList;
     linksList.push_back(link31);
@@ -148,7 +139,7 @@ vector<FlipperObject*> targetsList;
     switch_->getSuccessors().push_back(link34);
     switch_->getSuccessors().push_back(link35);
     switch_->getSuccessors().push_back(link36);
-/*    link31->getSuccessors().push_back(bufuL1);
+    link31->getSuccessors().push_back(bufuL1);
     link32->getSuccessors().push_back(bufuL2);
     link33->getSuccessors().push_back(bufuL3);
     link34->getSuccessors().push_back(bufuR1);
@@ -167,7 +158,7 @@ vector<FlipperObject*> targetsList;
     link46->getSuccessors().push_back(link47);
     link47->getSuccessors().push_back(link48);
     link44->getSuccessors().push_back(storage);
-    link48->getSuccessors().push_back(storage);*/
+    link48->getSuccessors().push_back(storage);
 
 
     Serial.println("FlipperGame: initializing generator");
@@ -252,7 +243,7 @@ FlipperObject* FlipperGame::getSwitch()
     return switch_;
 }
 
-/*
+
 FlipperObject* FlipperGame::getBufuL1()
 {
     return bufuL1;
@@ -281,7 +272,7 @@ FlipperObject* FlipperGame::getBufuR2()
 FlipperObject* FlipperGame::getBufuR3()
 {
     return bufuR3;
-}*/
+}
 
 Buffer* FlipperGame::getBuffer1()
 {

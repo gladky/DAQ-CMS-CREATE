@@ -6,7 +6,7 @@
 This class is reduced, uncomment to introduce new elements
 */
 
-//#include <BUFU.hpp>
+#include "BUFU.hpp"
 #include "Buffer.hpp"
 #include "Button.hpp"
 #include "Dispatcher.hpp"
@@ -57,15 +57,16 @@ Link* FlipperObjectFactory::createLink(string name, int logicalLength)
     return link;
 }
 
-/*
+
 FlipperObject* FlipperObjectFactory::createBUFU(string name, Button* button)
 {
     string uniqueName = getShortName(name);
     FlipperObject* bufu = new BUFU(uniqueName, bufuProcessingStep, bufuTimeoutStep, button, soundPlayer);
-    controller->getFlipperObjects()->add(bufu);
+    controller->getFlipperObjects().push_back(bufu);
     return bufu;
 }
-*/
+
+
 FlipperObject* FlipperObjectFactory::createSwitch(string name)
 {
     string uniqueName = getShortName(name);

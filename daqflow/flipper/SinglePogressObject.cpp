@@ -11,10 +11,18 @@ SinglePogressObject::SinglePogressObject(string name, int capacity, int progress
 
 void SinglePogressObject::performInsert(Data* data)
 {
+
+    
+    Serial.print("SingleProgressObject::");
+    Serial.print(getName().c_str());
+    Serial.print("::performInsert, start-- ");
+    
     queue->add(data);
     int size = queue->size();
     int result = size * 100 / capacity;
     progress = result;
+
+    Serial.print("-- end ::performInsert ");
 }
 
 void SinglePogressObject::doStep()
@@ -30,10 +38,14 @@ void SinglePogressObject::doStep()
 bool SinglePogressObject::canAccept()
 {
     if(queue->size() == capacity) {
-	Serial.println("SingleProgressObject::canAccept? false, full");
+        Serial.print("SingleProgressObject::");
+        Serial.print(getName().c_str());
+	Serial.println("::canAccept? false, full");
         return false;
     } else {
-	Serial.println("SingleProgressObject::canAccept? false, full");
+        Serial.print("SingleProgressObject::");
+        Serial.print(getName().c_str());
+	Serial.println("::canAccept? true, not full");
         return true;
     }
 }

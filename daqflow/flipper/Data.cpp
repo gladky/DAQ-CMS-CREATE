@@ -17,6 +17,7 @@ Data::Data(string name_, bool isFragment, bool isInteresting)
     }
 
     name.append(toString(id++));
+    dispatched = false;
 }
 
 string Data::getName()

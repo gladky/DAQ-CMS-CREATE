@@ -7,7 +7,7 @@ This class is reduced, uncomment
 
 #include "FlowObserver.hpp"
 
-//#include <BUFU.hpp>
+#include "BUFU.hpp"
 #include "Buffer.hpp"
 #include "Button.hpp"
 #include "Data.hpp"
@@ -64,7 +64,7 @@ FlowObserver::FlowObserver(FlipperGame* flipperGame, int minWidth, int width, in
     observedObjects.push_back(flipperGame->link34);
     observedObjects.push_back(flipperGame->link35);
     observedObjects.push_back(flipperGame->link36);
-    /*observedObjects.push_back(flipperGame->getBufuL1());
+    observedObjects.push_back(flipperGame->getBufuL1());
     observedObjects.push_back(flipperGame->buttonHLT_L1);
     observedObjects.push_back(flipperGame->getBufuL2());
     observedObjects.push_back(flipperGame->buttonHLT_L2);
@@ -85,7 +85,7 @@ FlowObserver::FlowObserver(FlipperGame* flipperGame, int minWidth, int width, in
     observedObjects.push_back(flipperGame->link47);
     observedObjects.push_back(flipperGame->link48);
 
-*/
+
     observedObjects.push_back(flipperGame->getStorage());
     observedObjects.push_back(flipperGame->getSoundPlayer());
 
@@ -145,9 +145,9 @@ string FlowObserver::getState(FlipperObject* observedObject)
     }
     else if(Buffer* v = dynamic_cast< Buffer* >(observedObject)) {
         data = getState(v);
-    } /*else if(dynamic_cast< BUFU* >(observedObject) != nullptr) {
-        data = getState(java_cast< BUFU* >(observedObject));
-    }*/ 
+    } else if(BUFU* v = dynamic_cast< BUFU* >(observedObject) ) {
+        data = getState(v);
+    } 
     else if(Storage* storageObject = dynamic_cast< Storage* >(observedObject)) {
         data = getState(storageObject);
     } 

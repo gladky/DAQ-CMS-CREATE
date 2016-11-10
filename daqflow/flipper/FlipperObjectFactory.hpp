@@ -8,6 +8,7 @@ This class is reduced, uncomment to introduce new elements
 */
 
 #include "Buffer.hpp"
+#include "BUFU.hpp"
 #include "GameController.hpp"
 #include "SoundPlayer.hpp"
 #include "FlipperObject.hpp"
@@ -31,7 +32,7 @@ private:
 
 public:
     virtual Link* createLink(string name, int logicalLength);
-    //virtual FlipperObject* createBUFU(string name, Button* button);
+    virtual FlipperObject* createBUFU(string name, Button* button);
     virtual FlipperObject* createSwitch(string name);
 
 private:

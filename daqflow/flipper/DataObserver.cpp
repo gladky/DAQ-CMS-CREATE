@@ -4,7 +4,8 @@
 THis class is reduced
 */
 
-//#include <BUFU.hpp>
+#include "BUFU.hpp"
+#include "Switch.hpp"
 #include "Buffer.hpp"
 #include "DataObserver.hpp"
 #include "Data.hpp"
@@ -27,15 +28,15 @@ string DataObserver::getState(Link* link)
     }
 }
 
-/*
+
 string DataObserver::getState(BUFU* bufu)
 {
-    if(npc(java_cast< ::java::util::List* >(npc(npc(bufu)->getQueue())->queue))->size() == 0) {
-        return u""_j;
+    if(bufu->getQueue()->queue.size() == 0) {
+        return "";
     } else {
-        return npc(java_cast< Data* >(npc(java_cast< ::java::util::List* >(npc(npc(bufu)->getQueue())->queue))->get(0)))->getName();
+        return bufu->getQueue()->get(0)->getName();
     }
-}*/
+}
 
 string DataObserver::getState(Buffer* buffer)
 {
@@ -66,9 +67,9 @@ string DataObserver::getState(Storage* storage)
 }
 
 
-/*java::lang::String* DataObserver::getState(Switch* switch_)
+string DataObserver::getState(Switch* switch_)
 {
-    return super::getState(switch_);
-}*/
+    return FlowObserver::getState(switch_);
+}
 
 
