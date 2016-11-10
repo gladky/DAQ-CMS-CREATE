@@ -81,17 +81,43 @@
 
 #define NUMPIXELS 100
 
-#define DATAPIN    4
-#define CLOCKPIN   5
+#define DATAPIN    11 //from 4
+#define CLOCKPIN   13 //from 5
 Adafruit_DotStar strip = Adafruit_DotStar(
                            NUMPIXELS, DATAPIN, CLOCKPIN, DOTSTAR_BRG);
 
                            
 std::vector<uint32_t> result_leds(NUMPIXELS,0);
 
+int BUTTON_START = 3;
+
 int BUTTON_LEVEL_1 = 2;
+
+int BUTTON_HLT_L1 = 4;
+int BUTTON_HLT_L2 = 5;
+int BUTTON_HLT_L3 = 6;
+
+int BUTTON_HLT_R1 = 9;
+int BUTTON_HLT_R2 = 8;
+int BUTTON_HLT_R3 = 7;
+
+bool buttonStartState = false;
 bool buttonL1State = false;
+bool buttonHltL1State = false;
+bool buttonHltL2State = false;
+bool buttonHltL3State = false;
+bool buttonHltR1State = false;
+bool buttonHltR2State = false;
+bool buttonHltR3State = false;
+
+bool buttonStartStatePrev = false;
 bool buttonL1StatePrev = false;
+bool buttonHltL1StatePrev = false;
+bool buttonHltL2StatePrev = false;
+bool buttonHltL3StatePrev = false;
+bool buttonHltR1StatePrev = false;
+bool buttonHltR2StatePrev = false;
+bool buttonHltR3StatePrev = false;
 
 //Model *model;
 FlipperGame *flipperGame;
@@ -99,7 +125,14 @@ FlipperGame *flipperGame;
 void setup() {
 
   //BUTTONS
+  pinMode(BUTTON_START, INPUT_PULLUP);
   pinMode(BUTTON_LEVEL_1, INPUT_PULLUP);
+  pinMode(BUTTON_HLT_L1, INPUT_PULLUP);
+  pinMode(BUTTON_HLT_L2, INPUT_PULLUP);
+  pinMode(BUTTON_HLT_L3, INPUT_PULLUP);
+  pinMode(BUTTON_HLT_R1, INPUT_PULLUP);
+  pinMode(BUTTON_HLT_R2, INPUT_PULLUP);
+  pinMode(BUTTON_HLT_R3, INPUT_PULLUP);
 
   
   #if defined(__AVR_ATtiny85__) && (F_CPU == 16000000L)
@@ -127,17 +160,30 @@ void setup() {
 }
 
 int counter = 0;
+int max_cycles = 800;
+int max_generating_cycles = 800;
 
+bool started = false;
+bool finished = false;
 
 void loop() {
 
-  int stateNow = digitalRead( BUTTON_LEVEL_1 );
-  buttonL1State = stateNow == 0 && buttonL1StatePrev == 1;
-  buttonL1StatePrev=stateNow;
+  int stateNow;
+  stateNow = digitalRead( BUTTON_START ); buttonStartState = stateNow == 0 && buttonStartStatePrev == 1; buttonStartStatePrev=stateNow;
+  stateNow = digitalRead( BUTTON_LEVEL_1 ); buttonL1State = stateNow == 0 && buttonL1StatePrev == 1; buttonL1StatePrev=stateNow;
+  
+  stateNow = digitalRead( BUTTON_HLT_L1 ); buttonHltL1State = stateNow == 0 && buttonHltL1StatePrev == 1; buttonHltL1StatePrev=stateNow;
+  stateNow = digitalRead( BUTTON_HLT_L2 ); buttonHltL2State = stateNow == 0 && buttonHltL2StatePrev == 1; buttonHltL2StatePrev=stateNow;
+  stateNow = digitalRead( BUTTON_HLT_L3 ); buttonHltL3State = stateNow == 0 && buttonHltL3StatePrev == 1; buttonHltL3StatePrev=stateNow;
+  
+  stateNow = digitalRead( BUTTON_HLT_R1 ); buttonHltR1State = stateNow == 0 && buttonHltR1StatePrev == 1; buttonHltR1StatePrev=stateNow;
+  stateNow = digitalRead( BUTTON_HLT_R2 ); buttonHltR2State = stateNow == 0 && buttonHltR2StatePrev == 1; buttonHltR2StatePrev=stateNow;
+  stateNow = digitalRead( BUTTON_HLT_R3 ); buttonHltR3State = stateNow == 0 && buttonHltR3StatePrev == 1; buttonHltR3StatePrev=stateNow;
 
+  if(started || buttonStartState){
+    started = true;
 
-
-  if(counter < 2000){
+  if(counter < max_cycles){
     delay(100);
 
     /*
@@ -152,19 +198,17 @@ void loop() {
     Serial.print(buttonL1State);
     Serial.println("--");*/
 
-    if(counter % 6 == 0 && counter < 2000) {
+    if(counter % 6 == 0 && counter < max_generating_cycles) {
         flipperGame->generateNewFragments();
     }
 
-    if(buttonL1State){
-      flipperGame->pressButtonLevel1();
-    }
-    flipperGame->pressButtonHLT_L1();
-    flipperGame->pressButtonHLT_L2();
-    flipperGame->pressButtonHLT_L3();
-    flipperGame->pressButtonHLT_R1();
-    flipperGame->pressButtonHLT_R2();
-    flipperGame->pressButtonHLT_R3();
+    if(buttonL1State){flipperGame->pressButtonLevel1();}
+    if(buttonHltL1State){flipperGame->pressButtonHLT_L1();}
+    if(buttonHltL2State){flipperGame->pressButtonHLT_L2();}
+    if(buttonHltL3State){flipperGame->pressButtonHLT_L3();}
+    if(buttonHltR1State){flipperGame->pressButtonHLT_R1();}
+    if(buttonHltR2State){flipperGame->pressButtonHLT_R2();}
+    if(buttonHltR3State){flipperGame->pressButtonHLT_R3();}
     flipperGame->doStep();
   } 
   
@@ -185,6 +229,7 @@ void loop() {
 
  
   counter++;
+  }
 
 }
 

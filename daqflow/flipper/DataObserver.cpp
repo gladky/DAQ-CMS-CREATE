@@ -57,12 +57,13 @@ string DataObserver::getState(Buffer* buffer)
 string DataObserver::getState(Storage* storage)
 {
     string result = "";
-    for (int i = 0; i < storage->getQueue()->queue.size(); i++ ) {
+    /*for (int i = 0; i < storage->getQueue()->queue.size(); i++ ) {
         Data* data = storage->getQueue()->queue[i];
         {
             result.append(data->getName());
         }
-    }
+    }*/
+    result.append(toString(storage->getQueue()->queue.size()));
     return result;
 }
 
