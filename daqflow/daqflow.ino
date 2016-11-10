@@ -137,10 +137,10 @@ void loop() {
 
 
 
-  if(counter < 590){
+  if(counter < 2000){
     delay(100);
 
-    
+    /*
     Serial.print("step-");
     Serial.print(counter);
     Serial.print("---------------------------------------");
@@ -150,9 +150,9 @@ void loop() {
     Serial.print(stateNow);
     Serial.print(":");
     Serial.print(buttonL1State);
-    Serial.println("--");
+    Serial.println("--");*/
 
-    if(counter % 6 == 0 && counter < 7) {
+    if(counter % 6 == 0 && counter < 2000) {
         flipperGame->generateNewFragments();
     }
 
@@ -166,17 +166,19 @@ void loop() {
     flipperGame->pressButtonHLT_R2();
     flipperGame->pressButtonHLT_R3();
     flipperGame->doStep();
-  } else{
-    delay(5000);
-    Serial.println("Finished test run");
+  } 
+  
+  //else{
+   // delay(5000);
+    //Serial.println("Finished test run");
 
-    Serial.println(flipperGame->getController()->observer->toString().c_str());
+    Serial.print(flipperGame->getController()->observer->toString().c_str());
     //cout << "There should be x events in storage: " << flipperGame->getStorage()->getQueue()->size() << endl;
-    Serial.println();
-    Serial.println("-----------------------");
-    delay(50000);
+    //Serial.println();
+    //Serial.println("-----------------------");
+    //delay(50000);
 
-  }
+  //}
 
 
   //strip.show();                     // Refresh strip

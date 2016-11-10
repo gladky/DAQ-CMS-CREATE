@@ -222,7 +222,10 @@ void FlowObserver::persist()
 
 string FlowObserver::toString()
 {
+    bool printHead = false;
     string sb = "";
+    
+    if(printHead){
     string stepHeading = fixedLengthString("step", WIDTH);
     sb.append("|");
     sb.append(stepHeading);
@@ -239,6 +242,7 @@ string FlowObserver::toString()
         }
     }
     sb.append("\n");
+    }
     int stepNumber = 0;
     for (int i =0; i< states.size(); i++ ) {
         vector<string> state = states[i];
@@ -254,6 +258,10 @@ string FlowObserver::toString()
             stepNumber++;
         }
     }
+
+    // RT observing
+    states.clear();
+
     return sb;
 }
 

@@ -29,9 +29,9 @@ FlipperObject* Dispatcher::getLink(int id)
 int Dispatcher::findAvailableTarget()
 {
 
-    Serial.print("Dispatcher::findAvailableTarget: about to ");
+    //Serial.print("Dispatcher::findAvailableTarget: about to ");
     if(valid) {
-        Serial.print("Dispatcher::findAvailableTarget: stil valid ");
+        //Serial.print("Dispatcher::findAvailableTarget: stil valid ");
     } else {
         result = -1;
         vector<int> ready;
