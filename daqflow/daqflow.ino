@@ -204,16 +204,23 @@ struct T_bufu {
   //visualization method for T_bufu
   void visualize(vector<int> progresses_vec, vector<Data*> events_vec) { //add T_event events[], despite in bufu we only need one event, stored in index 0 of the passed arrays
 
+    
     //input args
     int numEvents = progresses_vec.size();
+
+    if(numEvents == 0){
+      return;
+    }
     int progresses[numEvents];
     Data* events[numEvents];
 
     //fill arrays from vector
     for (int i = 0; i < numEvents; i++) {
+      //Serial.print(progresses_vec[i]);
       progresses[i] = progresses_vec[i];
       events[i] = events_vec[i];
     }
+    //Serial.println();
 
 
 
@@ -284,9 +291,13 @@ struct T_tier0 {
 
 
     //input args
-    int numEvents = progresses_vec.size();
+    int numEvents = events_vec.size();
     int progresses[numEvents];
     Data* events[numEvents];
+
+    if(numEvents == 0){
+      return;
+    }
 
     //fill arrays from vector
     for (int i = 0; i < numEvents; i++) {
@@ -461,11 +472,9 @@ struct T_link {
 
     //fill arrays from vector
     for (int i = 0; i < numEvents; i++) {
-      Serial.print(progresses_vec[i]);
       progresses[i] = progresses_vec[i];
       events[i] = events_vec[i];
     }
-    Serial.println();
 
     //bitmap-style map, but containing actual color codes in the place of ones
     uint32_t enhancedBitmap[len];
@@ -950,7 +959,7 @@ void loop() {
         Serial.print(buttonL1State);
         Serial.println("--");*/
 
-      if (counter % 6 == 0 && counter < max_generating_cycles) {
+      if (counter % 20 == 0 && counter < max_generating_cycles) {
         flipperGame->generateNewFragments();
       }
 
@@ -981,7 +990,55 @@ void loop() {
       //Serial.println(flipperGame->link11->getProgress());
       //Serial.printnl(flipperGame->link11->getQueue()->queue);
 
+
+      /* LINKS */
       link11.visualize(flipperGame->link11->getProgress(),flipperGame->link11->getQueue()->queue);
+      link12.visualize(flipperGame->link12->getProgress(),flipperGame->link12->getQueue()->queue);
+      link13.visualize(flipperGame->link13->getProgress(),flipperGame->link13->getQueue()->queue);
+      link14.visualize(flipperGame->link14->getProgress(),flipperGame->link14->getQueue()->queue);
+
+      
+      link21.visualize(flipperGame->link21->getProgress(),flipperGame->link21->getQueue()->queue);
+      link22.visualize(flipperGame->link22->getProgress(),flipperGame->link22->getQueue()->queue);
+      link23.visualize(flipperGame->link23->getProgress(),flipperGame->link23->getQueue()->queue);
+      link24.visualize(flipperGame->link24->getProgress(),flipperGame->link24->getQueue()->queue);
+
+      
+      link31.visualize(flipperGame->link31->getProgress(),flipperGame->link31->getQueue()->queue);
+      link32.visualize(flipperGame->link32->getProgress(),flipperGame->link32->getQueue()->queue);
+      link33.visualize(flipperGame->link33->getProgress(),flipperGame->link33->getQueue()->queue);
+      link34.visualize(flipperGame->link34->getProgress(),flipperGame->link34->getQueue()->queue);
+      link35.visualize(flipperGame->link35->getProgress(),flipperGame->link35->getQueue()->queue);
+      link36.visualize(flipperGame->link36->getProgress(),flipperGame->link36->getQueue()->queue);
+
+      
+      
+      link41.visualize(flipperGame->link41->getProgress(),flipperGame->link41->getQueue()->queue);
+      link42.visualize(flipperGame->link42->getProgress(),flipperGame->link42->getQueue()->queue);
+      link43.visualize(flipperGame->link43->getProgress(),flipperGame->link43->getQueue()->queue);
+      link44.visualize(flipperGame->link44->getProgress(),flipperGame->link44->getQueue()->queue);
+      link45.visualize(flipperGame->link45->getProgress(),flipperGame->link45->getQueue()->queue);
+      link46.visualize(flipperGame->link46->getProgress(),flipperGame->link46->getQueue()->queue);
+      link47.visualize(flipperGame->link47->getProgress(),flipperGame->link47->getQueue()->queue);
+      link48.visualize(flipperGame->link48->getProgress(),flipperGame->link48->getQueue()->queue);
+
+      /* BUFFERS */
+      buf1.visualize(flipperGame->getBuffer1()->getProgress(),flipperGame->getBuffer1()->getQueue()->queue);
+      buf2.visualize(flipperGame->getBuffer2()->getProgress(),flipperGame->getBuffer2()->getQueue()->queue);
+      buf3.visualize(flipperGame->getBuffer3()->getProgress(),flipperGame->getBuffer3()->getQueue()->queue);
+      buf4.visualize(flipperGame->getBuffer4()->getProgress(),flipperGame->getBuffer4()->getQueue()->queue);
+
+      /* BUFUS */
+      bufuL1.visualize(flipperGame->getBufuL1()->getProgress(),flipperGame->getBufuL1()->getQueue()->queue);
+      bufuL2.visualize(flipperGame->getBufuL2()->getProgress(),flipperGame->getBufuL2()->getQueue()->queue);
+      bufuL3.visualize(flipperGame->getBufuL3()->getProgress(),flipperGame->getBufuL3()->getQueue()->queue);
+
+      bufuR1.visualize(flipperGame->getBufuR1()->getProgress(),flipperGame->getBufuR1()->getQueue()->queue);
+      bufuR2.visualize(flipperGame->getBufuR2()->getProgress(),flipperGame->getBufuR2()->getQueue()->queue);
+      bufuR3.visualize(flipperGame->getBufuR3()->getProgress(),flipperGame->getBufuR3()->getQueue()->queue);
+
+      
+      tierZero.visualize(flipperGame->getStorage()->getProgress(),flipperGame->getStorage()->getQueue()->queue);
 
     } else{
       

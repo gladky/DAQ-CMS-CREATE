@@ -14,7 +14,7 @@
 #include "SoundPlayer.hpp"
 
 
-int FlipperGame::linkBoost =4;
+int FlipperGame::linkBoost =1;
 
 
 

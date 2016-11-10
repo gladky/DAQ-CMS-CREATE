@@ -88,7 +88,8 @@ vector<int> SimpleFifoQueue::getProgress()
 {
     vector<int> progress;
     if(queue.size() == 0) {
-        progress.push_back(0);
+        //progress.push_back(0);
+        return progress;
     }
     for (int i = 0; i < queue.size(); i++) {
         progress.push_back(queue[i]->getProgress());
