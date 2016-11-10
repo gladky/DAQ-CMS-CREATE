@@ -86,8 +86,8 @@
 Adafruit_DotStar strip = Adafruit_DotStar(
                            NUMPIXELS, DATAPIN, CLOCKPIN, DOTSTAR_BRG);
 
-                           
-std::vector<uint32_t> result_leds(NUMPIXELS,0);
+
+std::vector<uint32_t> result_leds(NUMPIXELS, 0);
 
 int BUTTON_START = 3;
 
@@ -134,13 +134,13 @@ void setup() {
   pinMode(BUTTON_HLT_R2, INPUT_PULLUP);
   pinMode(BUTTON_HLT_R3, INPUT_PULLUP);
 
-  
-  #if defined(__AVR_ATtiny85__) && (F_CPU == 16000000L)
-    clock_prescale_set(clock_div_1); // Enable 16 MHz on Trinket
-  #endif
+
+#if defined(__AVR_ATtiny85__) && (F_CPU == 16000000L)
+  clock_prescale_set(clock_div_1); // Enable 16 MHz on Trinket
+#endif
   strip.begin(); // Initialize pins for output
   strip.show();  // Turn all LEDs off ASAP
-  
+
   Serial.begin(9600);
   delay(2000);
 
@@ -151,17 +151,18 @@ void setup() {
 
   flipperGame = new FlipperGame();
 
-  
+
   //printModel();
 
   //model->start();
-  
+
   Serial.println("Model initialized");
 }
 
 int counter = 0;
-int max_cycles = 800;
+int max_cycles = 100;
 int max_generating_cycles = 800;
+int mainDelay = 20;
 
 bool started = false;
 bool finished = false;
@@ -169,66 +170,92 @@ bool finished = false;
 void loop() {
 
   int stateNow;
-  stateNow = digitalRead( BUTTON_START ); buttonStartState = stateNow == 0 && buttonStartStatePrev == 1; buttonStartStatePrev=stateNow;
-  stateNow = digitalRead( BUTTON_LEVEL_1 ); buttonL1State = stateNow == 0 && buttonL1StatePrev == 1; buttonL1StatePrev=stateNow;
-  
-  stateNow = digitalRead( BUTTON_HLT_L1 ); buttonHltL1State = stateNow == 0 && buttonHltL1StatePrev == 1; buttonHltL1StatePrev=stateNow;
-  stateNow = digitalRead( BUTTON_HLT_L2 ); buttonHltL2State = stateNow == 0 && buttonHltL2StatePrev == 1; buttonHltL2StatePrev=stateNow;
-  stateNow = digitalRead( BUTTON_HLT_L3 ); buttonHltL3State = stateNow == 0 && buttonHltL3StatePrev == 1; buttonHltL3StatePrev=stateNow;
-  
-  stateNow = digitalRead( BUTTON_HLT_R1 ); buttonHltR1State = stateNow == 0 && buttonHltR1StatePrev == 1; buttonHltR1StatePrev=stateNow;
-  stateNow = digitalRead( BUTTON_HLT_R2 ); buttonHltR2State = stateNow == 0 && buttonHltR2StatePrev == 1; buttonHltR2StatePrev=stateNow;
-  stateNow = digitalRead( BUTTON_HLT_R3 ); buttonHltR3State = stateNow == 0 && buttonHltR3StatePrev == 1; buttonHltR3StatePrev=stateNow;
+  stateNow = digitalRead( BUTTON_START ); buttonStartState = stateNow == 0 && buttonStartStatePrev == 1; buttonStartStatePrev = stateNow;
+  stateNow = digitalRead( BUTTON_LEVEL_1 ); buttonL1State = stateNow == 0 && buttonL1StatePrev == 1; buttonL1StatePrev = stateNow;
 
-  if(started || buttonStartState){
-    started = true;
+  stateNow = digitalRead( BUTTON_HLT_L1 ); buttonHltL1State = stateNow == 0 && buttonHltL1StatePrev == 1; buttonHltL1StatePrev = stateNow;
+  stateNow = digitalRead( BUTTON_HLT_L2 ); buttonHltL2State = stateNow == 0 && buttonHltL2StatePrev == 1; buttonHltL2StatePrev = stateNow;
+  stateNow = digitalRead( BUTTON_HLT_L3 ); buttonHltL3State = stateNow == 0 && buttonHltL3StatePrev == 1; buttonHltL3StatePrev = stateNow;
 
-  if(counter < max_cycles){
-    delay(100);
+  stateNow = digitalRead( BUTTON_HLT_R1 ); buttonHltR1State = stateNow == 0 && buttonHltR1StatePrev == 1; buttonHltR1StatePrev = stateNow;
+  stateNow = digitalRead( BUTTON_HLT_R2 ); buttonHltR2State = stateNow == 0 && buttonHltR2StatePrev == 1; buttonHltR2StatePrev = stateNow;
+  stateNow = digitalRead( BUTTON_HLT_R3 ); buttonHltR3State = stateNow == 0 && buttonHltR3StatePrev == 1; buttonHltR3StatePrev = stateNow;
 
-    /*
-    Serial.print("step-");
-    Serial.print(counter);
-    Serial.print("---------------------------------------");
-    Serial.print("step-");
-    Serial.print(counter);
-    Serial.print(", L1: ");
-    Serial.print(stateNow);
-    Serial.print(":");
-    Serial.print(buttonL1State);
-    Serial.println("--");*/
+  if (started || buttonStartState) {
 
-    if(counter % 6 == 0 && counter < max_generating_cycles) {
+    if(started == false){
+        Serial.println("Game started!");
+        started = true;
+        finished = false;
+    }
+    
+    if (counter < max_cycles) {
+
+      /*
+        Serial.print("step-");
+        Serial.print(counter);
+        Serial.print("---------------------------------------");
+        Serial.print("step-");
+        Serial.print(counter);
+        Serial.print(", L1: ");
+        Serial.print(stateNow);
+        Serial.print(":");
+        Serial.print(buttonL1State);
+        Serial.println("--");*/
+
+      if (counter % 6 == 0 && counter < max_generating_cycles) {
         flipperGame->generateNewFragments();
+      }
+
+      if (buttonL1State) {
+        flipperGame->pressButtonLevel1();
+      }
+      if (buttonHltL1State) {
+        flipperGame->pressButtonHLT_L1();
+      }
+      if (buttonHltL2State) {
+        flipperGame->pressButtonHLT_L2();
+      }
+      if (buttonHltL3State) {
+        flipperGame->pressButtonHLT_L3();
+      }
+      if (buttonHltR1State) {
+        flipperGame->pressButtonHLT_R1();
+      }
+      if (buttonHltR2State) {
+        flipperGame->pressButtonHLT_R2();
+      }
+      if (buttonHltR3State) {
+        flipperGame->pressButtonHLT_R3();
+      }
+      flipperGame->doStep();
+
+
+      //Serial.println(flipperGame->link11->getProgress());
+      //Serial.printnl(flipperGame->link11->getQueue()->queue);
+
+    } else{
+      
+      Serial.println("Game finished!");
+      for(int i = 0; i<20; i++){
+          flipperGame->doStep();
+          delay(mainDelay);
+      }
+      finished = true;
+      started = false;
+      counter = 0;
+      //flipperGame->
     }
 
-    if(buttonL1State){flipperGame->pressButtonLevel1();}
-    if(buttonHltL1State){flipperGame->pressButtonHLT_L1();}
-    if(buttonHltL2State){flipperGame->pressButtonHLT_L2();}
-    if(buttonHltL3State){flipperGame->pressButtonHLT_L3();}
-    if(buttonHltR1State){flipperGame->pressButtonHLT_R1();}
-    if(buttonHltR2State){flipperGame->pressButtonHLT_R2();}
-    if(buttonHltR3State){flipperGame->pressButtonHLT_R3();}
-    flipperGame->doStep();
-  } 
-  
-  //else{
-   // delay(5000);
-    //Serial.println("Finished test run");
-
     Serial.print(flipperGame->getController()->observer->toString().c_str());
-    //cout << "There should be x events in storage: " << flipperGame->getStorage()->getQueue()->size() << endl;
-    //Serial.println();
-    //Serial.println("-----------------------");
-    //delay(50000);
-
-  //}
 
 
-  //strip.show();                     // Refresh strip
 
- 
-  counter++;
+
+    //strip.show(); // Refresh strip
+
+    delay(mainDelay);
+    counter++;
   }
 
 }
