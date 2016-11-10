@@ -17,12 +17,12 @@ Clickable::Clickable(string name, int capacity, int progressStep, int timeoutSte
 
 bool Clickable::canSend()
 {
-    Serial.println("Clickable: can send, next enabling");
-    Serial.print("is enabled: ");
-    Serial.println(button->isEnabled());
+    //Serial.println("Clickable: can send, next enabling");
+    //Serial.print("is enabled: ");
+    //Serial.println(button->isEnabled());
     dispatch();
     if(!button->isEnabled() && !backpressure() && !accepted) {
-        Serial.println("Clickable: enabling button");
+        //Serial.println("Clickable: enabling button");
         button->enable();
     }
     bool pressed = button->isPressed();
@@ -31,7 +31,11 @@ bool Clickable::canSend()
         if(!accepted) {
             accepted = true;
             registerAcceptedSound(data->isInteresting());
-            this->button->disable();
+
+            /*Serial.print("Clickable::");
+            Serial.print(getName().c_str());
+            Serial.println(" accepted, disabling button");*/
+            button->disable();
         }
         bool canSend = IndividualPogressObject::canSend();
         return canSend;
@@ -40,7 +44,11 @@ bool Clickable::canSend()
         int timeoutProgress = data->getTimeOutProgress() + timeoutStep;
         data->setTimeOutProgress(timeoutProgress);
         if(timeoutProgress > 99) {
-            this->queue->poll();
+            queue->poll();
+
+            /*Serial.print("Clickable::");
+            Serial.print(getName().c_str());
+            Serial.println(" timeout over, disabling button");*/
             button->disable();
             registerMissedSound(data->isInteresting());
         }

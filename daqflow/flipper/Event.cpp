@@ -18,7 +18,7 @@ Event::Event(Data* f1, Data* f2, Data* f3, Data* f4)
 string Event::generateSimpleName(Data* d)
 {
     string name = "e";
-    name.append(d->getName());
+    //name.append(d->getName());
     return name;
 }
 

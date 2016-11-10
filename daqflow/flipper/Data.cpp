@@ -12,11 +12,15 @@ Data::Data(string name_, bool isFragment, bool isInteresting)
     isInteresting_ = isInteresting;
     name = name_;
 
-    if(isInteresting_ == true){
+    if(isInteresting_ == true && isFragment == true){
         name = "F";
     }
 
-    name.append(toString(id++));
+    if(isInteresting_ == true && isFragment == false){
+        name = "E";
+    }
+
+    //name.append(toString(id++));
     dispatched = false;
 }
 

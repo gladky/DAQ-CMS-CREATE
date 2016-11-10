@@ -15,7 +15,7 @@ Button::Button(string name, SoundPlayer* soundPlayer_):NamedObject(name)
 
 void Button::enable()
 {
-    Serial.println("Button enabled");
+    //Serial.println("Button enabled");
     enabled = true;
     pressed = false;
     disableRequest = false;
@@ -40,6 +40,8 @@ bool Button::isPressed()
 
 void Button::disable()
 {
+    
+    //Serial.println("Button:: disabling");
     disableRequest = true;
 }
 
@@ -50,6 +52,7 @@ bool Button::isEnabled()
 
 void Button::doStep()
 {
+    //Serial.println("Button:: doing step");
     if(disableRequest) {
         enabled = false;
         pressed = false;

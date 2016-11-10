@@ -133,7 +133,7 @@ void loop() {
     Serial.print("step-");
     Serial.println(counter);
 
-    if(counter % 6 == 0 && counter < 5) {
+    if(counter % 6 == 0 && counter < 7) {
         flipperGame->generateNewFragments();
     }
     flipperGame->pressButtonLevel1();

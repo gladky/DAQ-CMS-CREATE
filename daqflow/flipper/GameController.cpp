@@ -39,6 +39,8 @@ void GameController::doStep()
         observer->persist();
     }
 
+    /*Serial.print("GameController: doStep, buttons to do step: ");
+    Serial.println(buttons.size());*/
  
     for (int i = buttons.size()-1; i >=0; i-- ) {
         buttons[i]->doStep();
@@ -48,7 +50,7 @@ void GameController::doStep()
 }
 
 
-vector<Button*> GameController::getButtons()
+vector<Button*>& GameController::getButtons()
 {
     return buttons;
 }
