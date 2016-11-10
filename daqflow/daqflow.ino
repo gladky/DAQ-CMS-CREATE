@@ -89,11 +89,19 @@ Adafruit_DotStar strip = Adafruit_DotStar(
                            
 std::vector<uint32_t> result_leds(NUMPIXELS,0);
 
+int BUTTON_LEVEL_1 = 2;
+bool buttonL1State = false;
+bool buttonL1StatePrev = false;
 
 //Model *model;
 FlipperGame *flipperGame;
 
 void setup() {
+
+  //BUTTONS
+  pinMode(BUTTON_LEVEL_1, INPUT_PULLUP);
+
+  
   #if defined(__AVR_ATtiny85__) && (F_CPU == 16000000L)
     clock_prescale_set(clock_div_1); // Enable 16 MHz on Trinket
   #endif
@@ -123,20 +131,34 @@ int counter = 0;
 
 void loop() {
 
+  int stateNow = digitalRead( BUTTON_LEVEL_1 );
+  buttonL1State = stateNow == 0 && buttonL1StatePrev == 1;
+  buttonL1StatePrev=stateNow;
 
-  if(counter < 59){
+
+
+  if(counter < 590){
+    delay(100);
 
     
     Serial.print("step-");
     Serial.print(counter);
     Serial.print("---------------------------------------");
     Serial.print("step-");
-    Serial.println(counter);
+    Serial.print(counter);
+    Serial.print(", L1: ");
+    Serial.print(stateNow);
+    Serial.print(":");
+    Serial.print(buttonL1State);
+    Serial.println("--");
 
     if(counter % 6 == 0 && counter < 7) {
         flipperGame->generateNewFragments();
     }
-    flipperGame->pressButtonLevel1();
+
+    if(buttonL1State){
+      flipperGame->pressButtonLevel1();
+    }
     flipperGame->pressButtonHLT_L1();
     flipperGame->pressButtonHLT_L2();
     flipperGame->pressButtonHLT_L3();
