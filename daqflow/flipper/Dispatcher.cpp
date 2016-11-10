@@ -56,6 +56,7 @@ int Dispatcher::findAvailableTarget()
             result = choosen;
             valid = true;
         } else {
+            Serial.println("Beginning backpressure, ready = 0");
             if(backpressure == false) {
                 soundPlayer->register_(Backpressure);
             }

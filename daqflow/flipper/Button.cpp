@@ -15,6 +15,7 @@ Button::Button(string name, SoundPlayer* soundPlayer_):NamedObject(name)
 
 void Button::enable()
 {
+    Serial.println("Button enabled");
     enabled = true;
     pressed = false;
     disableRequest = false;

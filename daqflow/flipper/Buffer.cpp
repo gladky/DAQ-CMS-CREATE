@@ -21,6 +21,8 @@ Clickable( name, capacity,  progressStep, timeoutStep, button, soundPlayer)
 bool Buffer::backpressure()
 {
     bool backpressure = dispatcher->isBackpressure();
+    Serial.print("is backpressure: ");
+    Serial.println(backpressure);
     return backpressure;
 }
 

@@ -1,58 +1,27 @@
 // Generated from /cms.flipper/src/main/java/BUFU.java
-#include <BUFU.hpp>
+#include "BUFU.hpp"
 
-#include <Data.hpp>
-#include <FlipperObject.hpp>
-#include <Link.hpp>
-#include <Sound.hpp>
-#include <SoundPlayer.hpp>
-#include <java/lang/ClassCastException.hpp>
-#include <java/lang/NullPointerException.hpp>
-#include <java/lang/Object.hpp>
-#include <java/util/Iterator.hpp>
-#include <java/util/List.hpp>
+#include "Data.hpp"
+#include "FlipperObject.hpp"
+#include "Link.hpp"
+#include "Sound.hpp"
+#include "SoundPlayer.hpp"
 
-template<typename T, typename U>
-static T java_cast(U* u)
+
+BUFU::BUFU(string name, int progressStep, int timeoutStep, Button* button, SoundPlayer* soundPlayer)
+: Clickable(name, 1, progressStep, timeoutStep, button, soundPlayer)
 {
-    if(!u) return static_cast<T>(nullptr);
-    auto t = dynamic_cast<T>(u);
-    if(!t) throw new ::java::lang::ClassCastException();
-    return t;
-}
-
-template<typename T>
-static T* npc(T* t)
-{
-    if(!t) throw new ::java::lang::NullPointerException();
-    return t;
-}
-
-BUFU::BUFU(const ::default_init_tag&)
-    : super(*static_cast< ::default_init_tag* >(0))
-{
-    clinit();
-}
-
-BUFU::BUFU(::java::lang::String* name, int32_t progressStep, int32_t timeoutStep, Button* button, SoundPlayer* soundPlayer) 
-    : BUFU(*static_cast< ::default_init_tag* >(0))
-{
-    ctor(name,progressStep,timeoutStep,button,soundPlayer);
-}
-
-void BUFU::ctor(::java::lang::String* name, int32_t progressStep, int32_t timeoutStep, Button* button, SoundPlayer* soundPlayer)
-{
-    super::ctor(name, int32_t(1), progressStep, timeoutStep, button, soundPlayer);
+    ;
 }
 
 bool BUFU::canSend()
 {
-    auto basicCheck = super::canSend();
-    auto allLinksFree = true;
-    for (auto _i = npc(getSuccessors())->iterator(); _i->hasNext(); ) {
-        FlipperObject* successor = java_cast< FlipperObject* >(_i->next());
+    bool basicCheck = Clickable::canSend();
+    bool allLinksFree = true;
+    for(int i=0; i<getSuccessors().size(); i++){
+        FlipperObject* successor = getSuccessors()[i];
         {
-            auto linksReserved = checkLinksReserved(successor);
+            bool linksReserved = checkLinksReserved(successor);
             if(linksReserved) {
                 allLinksFree = false;
             }
@@ -67,24 +36,25 @@ bool BUFU::canSend()
 
 void BUFU::sendData()
 {
-    for (auto _i = npc(getSuccessors())->iterator(); _i->hasNext(); ) {
-        FlipperObject* successor = java_cast< FlipperObject* >(_i->next());
+
+    for(int i=0; i<getSuccessors().size(); i++){
+        FlipperObject* successor = getSuccessors()[i];
         {
             reserveLinks(successor);
         }
     }
-    super::sendData();
+    Clickable::sendData();
 }
 
 bool BUFU::checkLinksReserved(FlipperObject* successor)
 {
-    if(dynamic_cast< Link* >(successor) != nullptr) {
-        auto reserved = npc(successor)->isBusy();
+    if(Link* v = dynamic_cast< Link* >(successor)) {
+        bool reserved = successor->isBusy();
         if(reserved) {
             return true;
         } else {
-            for (auto _i = npc(npc(successor)->getSuccessors())->iterator(); _i->hasNext(); ) {
-                FlipperObject* next = java_cast< FlipperObject* >(_i->next());
+            for( int i = 0; i < successor->getSuccessors().size(); i++){
+                FlipperObject* next = successor->getSuccessors()[i];
                 {
                     return checkLinksReserved(next);
                 }
@@ -96,10 +66,11 @@ bool BUFU::checkLinksReserved(FlipperObject* successor)
 
 void BUFU::reserveLinks(FlipperObject* successor)
 {
-    if(dynamic_cast< Link* >(successor) != nullptr) {
-        npc(successor)->setBusy(true);
-        for (auto _i = npc(npc(successor)->getSuccessors())->iterator(); _i->hasNext(); ) {
-            FlipperObject* next = java_cast< FlipperObject* >(_i->next());
+    if(Link* v = dynamic_cast< Link* >(successor)) {
+        successor->setBusy(true);
+
+        for( int i = 0; i < successor->getSuccessors().size(); i++){
+            FlipperObject* next = successor->getSuccessors()[i];
             {
                 reserveLinks(next);
             }
@@ -110,37 +81,24 @@ void BUFU::reserveLinks(FlipperObject* successor)
 void BUFU::registerAcceptedSound(bool interesting)
 {
     if(interesting) {
-        npc(soundPlayer)->register_(Sound::AcceptedInterestingEvent);
+        soundPlayer->register_(AcceptedInterestingEvent);
     } else {
-        npc(soundPlayer)->register_(Sound::AcceptedNotInteresingEvent);
+        soundPlayer->register_(AcceptedNotInteresingEvent);
     }
 }
 
 void BUFU::registerMissedSound(bool interesting)
 {
     if(interesting) {
-        npc(soundPlayer)->register_(Sound::MissedInterestedEvent);
+        soundPlayer->register_(MissedInterestedEvent);
     } else {
-        npc(soundPlayer)->register_(Sound::MissedNotInterestingEvent);
+        soundPlayer->register_(MissedNotInterestingEvent);
     }
 }
 
 bool BUFU::insert(Data* data)
 {
-    npc(data)->setDispatched(false);
-    return super::insert(data);
-}
-
-extern java::lang::Class *class_(const char16_t *c, int n);
-
-java::lang::Class* BUFU::class_()
-{
-    static ::java::lang::Class* c = ::class_(u"BUFU", 4);
-    return c;
-}
-
-java::lang::Class* BUFU::getClass0()
-{
-    return class_();
+    data->setDispatched(false);
+    return Clickable::insert(data);
 }
 

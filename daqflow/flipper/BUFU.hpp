@@ -2,18 +2,17 @@
 
 #pragma once
 
-#include <Clickable.hpp>
+#include "Clickable.hpp"
+#include "FlipperObject.hpp"
+#include "Data.hpp"
+#include "Button.hpp"
+#include "SoundPlayer.hpp"
 
-struct default_init_tag;
 
 class BUFU
     : public Clickable
 {
 
-public:
-    typedef Clickable super;
-protected:
-    void ctor(::java::lang::String* name, int32_t progressStep, int32_t timeoutStep, Button* button, SoundPlayer* soundPlayer);
 
 public: /* protected */
     bool canSend() override;
@@ -31,14 +30,6 @@ public:
     bool insert(Data* data) override;
 
     // Generated
-    BUFU(::java::lang::String* name, int32_t progressStep, int32_t timeoutStep, Button* button, SoundPlayer* soundPlayer);
-protected:
-    BUFU(const ::default_init_tag&);
+    BUFU(string name, int progressStep, int timeoutStep, Button* button, SoundPlayer* soundPlayer);
 
-
-public:
-    static ::java::lang::Class *class_();
-
-private:
-    virtual ::java::lang::Class* getClass0();
 };

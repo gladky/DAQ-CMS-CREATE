@@ -17,8 +17,12 @@ Clickable::Clickable(string name, int capacity, int progressStep, int timeoutSte
 
 bool Clickable::canSend()
 {
+    Serial.println("Clickable: can send, next enabling");
+    Serial.print("is enabled: ");
+    Serial.println(button->isEnabled());
     dispatch();
     if(!button->isEnabled() && !backpressure() && !accepted) {
+        Serial.println("Clickable: enabling button");
         button->enable();
     }
     bool pressed = button->isPressed();

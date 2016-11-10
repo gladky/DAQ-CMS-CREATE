@@ -58,6 +58,9 @@
 #include "flipper/Buffer.hpp"
 #include "flipper/Buffer.cpp"
 
+#include "flipper/BUFU.hpp"
+#include "flipper/BUFU.cpp"
+
 #include "flipper/Button.hpp"
 #include "flipper/Button.cpp"
 
